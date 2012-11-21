@@ -28,10 +28,14 @@ This repository stores both the bridgesinbelize theme and the Definition theme. 
 
     cd /var/www/bridgesinbelize.org/wp-content/themes/
     git clone -b definition git@github.com:mattrude/wp-theme-bridgesinbelize.git definition
-    git clone -b bridgesinbelize git@github.com:mattrude/wp-theme-bridgesinbelize.git bridgesinbelize
+    git clone -b master git@github.com:mattrude/wp-theme-bridgesinbelize.git bridgesinbelize
+    
     cd /var/www/bridgesinbelize.org/wp-content/
     rm -rf plugins
     git clone -b plugins git@github.com:mattrude/wp-theme-bridgesinbelize.git plugins
+    cd plugins
+    git submodule init
+    git submodule update
 
 After installing the needed bits, restore the data from the `data` branch in this repostiory.
 
