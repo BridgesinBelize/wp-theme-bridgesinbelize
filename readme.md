@@ -2,7 +2,7 @@
 
 Here you will find the plugins currently used within on BRIDGE's in Belize website.
 
-This branch should be restored to the ``wp-content/plugins`` directory.
+This branch should be restored to the ``wp-content/plugins`` directory within the site.
 
 ## Plugin Types
 
@@ -12,8 +12,8 @@ There are 3 diffrent types of plugins within this repository, shell plugins, git
 
 These plugins are each maintatined by WordPress and interface directly with their servers. 
 
-* akismet
-* jetpack
+* akismet - Akismet is quite possibly the best way in the world to protect your blog from comment and trackback spam.
+* jetpack - Bring the power of the WordPress.com cloud to your self-hosted WordPress. Jetpack enables you to connect your blog to a WordPress.com account to use the powerful features normally only available to WordPress.com users.
 
 ### Git Submodules
 
