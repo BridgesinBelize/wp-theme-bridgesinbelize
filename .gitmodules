@@ -1,0 +1,9 @@
+[submodule "features-by-woothemes"]
+	path = features-by-woothemes
+	url = https://github.com/woothemes/features.git
+[submodule "testimonials-by-woothemes"]
+	path = testimonials-by-woothemes
+	url = https://github.com/woothemes/testimonials.git
+[submodule "members"]
+	path = members
+	url = https://github.com/justintadlock/members.git
