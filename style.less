@@ -1,0 +1,131 @@
+/*
+ * Theme Name: BRIDGEs in Belize
+ * Theme URI: https://github.com/mattrude/wp-theme-bridgesinbelize
+ * Description: The bridgesinbelize.org theme, a child theme of definition by WooThemes.
+ * Author: Matt Rude
+ * Author URI: http://mattrude.com
+ * License: GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
+ * Licence URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Template: definition
+ * Version: 0.1
+ */
+
+@import url(../definition/style.less);
+@import url(includes/fonts/fonts.less);
+@import url(../definition/css/layout.less);
+@import url(../definition/css/mixins.less);
+
+// VARIABLES
+
+// Colors
+@color_body: #686868; // Body Copy
+@color_links: #cd5f5f; // Links
+
+// Secondary/Contrast colors
+@buttons: #cd5f5f; // Main button color (orange)
+@buttons_2: #95cdc6; // Secondary button color (light blue)
+@buttons_3: #aed66e; // Third button color (green)
+
+// Borders
+@border_main: #e6e6e6; // The 1px grey rules used throughout the theme
+
+// Backgrounds
+@bg_light: #f9f9f9;
+@bg_dark: #a0c269;
+
+// Alerts
+@success: #89b93f;
+@info: #3c8bae;
+@error: #c84e45;
+
+// Fonts Colors
+@font-headers: #444444;
+@font-title: #ffffff;
+
+// Fonts
+@sans: "Lucida Sans", sans-serif;
+@serif: Ubuntu, serif; 
+
+// Google fonts - These are also defined in Theme Setup (theme-actions.php)
+@sans_google: "Titillium Web", sans-serif;
+
+// Paths
+@imagepath: '../definition/images';
+@fontpath: '../definition/includes/fonts';
+@local_fontpath: 'includes/fonts';
+
+/*
+ * Bridges in Belize minor changes
+ */
+.slide-content header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#featured.fade {
+    padding: 2.631em 1.618em 0!important;
+}
+
+.home div#content.col-full {
+    padding-top: 2em;
+}
+
+.contact-form textarea {
+    height: 300px !important;
+    width: 100% !important;
+}
+
+.slide-content header h1 {
+    color: white;
+    font-size: 2em;
+    padding: 0 10px;
+    background: rgb(0,0,0);
+    background: rgba(0,0,0,0.4);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.home #content .widget h2 {
+    font: normal 0px Arial, sans-serif;
+    color: #3E3E3E;
+    margin-bottom: 34px;
+}
+
+.home #content .features {
+}
+
+.home .features .feature.last {
+    margin: 0;
+}
+
+.home section.page-content p {
+    font-size: 1.5em;
+}
+
+.home section.page-content header h1 {
+    font-size: 0;
+}
+
+#footer .col-right p {
+    width: 0;
+    height: 0;
+    font-size: 0;
+}
+
+.status-publish .post-meta li, .type-page .post-meta li {
+    display: inline;
+    color: #757575;
+}
+
+/*
+ * Twitter Jetpack widget
+ */
+.widget_twitter ul.tweets li {
+    margin: 1em 0;
+}
+
+/*
+ * Jetpack imported styles
+ */
+

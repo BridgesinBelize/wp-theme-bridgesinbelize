@@ -1,0 +1,75 @@
+/**
+ * Fonts from Google Fonts.
+ * css from bridgesinbelize/fonts.less
+ */
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('@{local_fontpath}/ubuntu-Bold-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Ubuntu Italic'), local('Ubuntu-Italic'), url('@{local_fontpath}/ubuntu-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url('@{local_fontpath}/ubuntu.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('@{local_fontpath}/ubuntu-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu Condensed'), local('UbuntuCondensed-Regular'), url('@{local_fontpath}/ubuntu-Condensed-Regular.woff') format('woff');
+}
+
+#header .site-title a {
+    font:normal 35px/1em 'Ubuntu', arial, sans-serif;
+    color:@font-title;
+}
+body {
+    font:normal 14px/1.5em Arial, sans-serif;
+    color:@font-headers;
+}
+.nav a {
+    font:normal 13px/1.4em Arial, sans-serif;
+    color:@font-title;
+}
+.page header h1 {
+    font:normal 34px/1em 'Ubuntu', arial, sans-serif;
+    color:@font-headers;
+}
+.post header h1, .post header h1 a:link, .post header h1 a:visited {
+    font:bold 30px/1em Arial, sans-serif;
+    color:@font-headers;
+}
+.post-meta {
+    font:normal 12px/1em "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+    color:@font-headers;
+}
+.entry, .entry p {
+    font:normal 14px/1.5em Arial, sans-serif;
+    color:@font-headers;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Ubuntu, arial, sans-serif;
+}
+.widget h3 {
+    font:bold 16px/1em Georgia, serif;
+    color:@font-headers;
+}
+.widget h3.feature-title {
+    font:bold 16px/1em 'Ubuntu', serif;
+    color:@font-headers;
+}
