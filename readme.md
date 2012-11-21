@@ -2,7 +2,7 @@
 
 Here you will find the plugins currently used within on BRIDGE's in Belize website.
 
-This branch should be restored to the ''wp-content/plugins'' directory.
+This branch should be restored to the ``wp-content/plugins`` directory.
 
 There are 3 diffrent types of plugins within this repository, shell plugins, git submodules, & full plugins.
 
@@ -15,7 +15,7 @@ These plugins are each maintatined by WordPress and interface directly with thei
 
 ### Git Submodules
 
-These plugins are each stored on github and must be updated via git using ''git submodule init && git submodule update'', see 'Resoring Plugins Directory' below for more details.
+These plugins are each stored on github and must be updated via git using ``git submodule init && git submodule update``, see 'Resoring Plugins Directory' below for more details.
 
 * features-by-woothemes - Show off what features your company, product or service offers, using our shortcode, widget or template tag.
 * testimonials-by-woothemes - Show off what your customers or website users are saying about your business and how great they say you are, using our shortcode, widget or template tag.
