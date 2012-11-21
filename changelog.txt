@@ -1,0 +1,22 @@
+*** Definition Changelog ***
+
+2012.11.15 - version 1.1.0
+ * /css/login.less, 
+   /css/login.css - Make sure the login branding in the WooFramework and WooDojo can override the default login logo.
+ * /includes/specific-page-content.php - Display the sidebar when displaying specific page content on the homepage.
+ * /includes/theme-options.php - Add options to enable/disable the features and testimonials display on the homepage. Add options to customise the titles of "Features" and "Testimonials" on the homepage. Add custom field to slides to use the featured image as the slide background image instead.
+ * /includes/theme-actions.php - Add filter to ensure that the pagination of the homepage blog posts is more accurate, if the homepage is set to display blog posts.
+ * /includes/featured-slider.php - Added logic for the slide background image option.
+ * style.css - Added styling for the slide background image option.
+ * index.php - Add logic to enable/disable the "Features" and "Testimonials" sections on the homepage, as well as logic to customise the titles of each of the two sections.
+
+2012.11.12 - version 1.0.2
+ * style.less - Blockquote styling; Turned auto hyphens off for Firefox; WP Image alignment for slider content. '.entry' styling for homepage components.
+ * /css/layout.less - Testimonials sidebar styling
+ * /css/woocommerce.less - Show remove, thumbnail and prce columns in cart table.
+
+2012.10.25 - version 1.0.1
+ * /includes/theme-actions.php - Fix typo in the CHILD_THEME_URL constant's value.
+
+2012.10.24 - version 1.0
+ * First release!

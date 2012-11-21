@@ -1,0 +1,462 @@
+/*
+The styles in this stylesheet only apply to resolutions 768px and up
+
+CALCULATING DIMENSIONS:
+----------------------
+The layout is fluid. The site wrapper (.col-full) has a fixed pixel max-width.
+All subsequent dimensions are calculated based on that fixed pixel width, using the formula: target / context = result
+Credit - http://www.alistapart.com/articles/fluidgrids/
+
+-----
+INDEX
+-----
+
+1. Global dropdown styles
+2. Top Navigation
+3. Main navigation dropdown menus
+ -3.1 General dropdown menus
+4. Containers & Columns
+5. Footer widgets
+6. IE Fixes
+
+/*----------------------*/
+
+@import "mixins";
+
+/*----------------------*/
+
+@media only screen and (min-width: 768px) {
+
+	/* 1. GLOBAL DROPDOWN STYLES (these are purely for the dropdown layout and you should only edit the width of the dropdowns) */
+	ul.nav {
+	    position: relative;
+	    margin-bottom:0;
+	    li {
+	    	position: relative;
+	    	float: left;
+	    	zoom:1;
+	    	list-style: none;
+	    	a {
+	    		display: block;
+	    		padding:.53em 1em;
+	    	}
+	    	&.parent > a { // Styles applied to all parent list items
+	    		position: relative;
+	    		padding-right: 2em!important;
+	    		&:after  {
+	    			content: '';
+	    			position: absolute;
+	    			top: .9em; right: 1em;
+	    			display: block;
+	    			width: 0;
+	    			height: 0;
+	    			border: 3px solid #fff;
+	    			border-color: #fff transparent transparent transparent;
+	    		}
+	    	}
+	    }
+	    /* LEVEL 2 */
+	    ul {
+	    	width:11.089em;
+	    	visibility: hidden;
+	    	display: none;
+	    	position: absolute;
+	    	top:100%;
+	    	left: 0;
+	    	z-index: 9999;
+	    	margin:0;
+	    	li {
+	    		float: none;
+	    		a {
+	    			width: 100%;
+	    			display: inline-block;
+	    			.borderbox();
+	    		}
+	    		&.parent > a { // Styles applied to parent items in level 2
+	    			&:after  {
+	    				top: 1.2em;
+	    				border-color: transparent transparent transparent #fff;
+	    			}
+	    		}
+	    	}			
+	    }
+	    /* LEVEL 3 */
+	    ul ul {
+	    	left:100%;
+	    	top:0;
+	    	li {
+	    		&.parent { // Styles applied to parent items in level 3
+	    		}
+	    	}
+	    }
+	    li:hover > ul {
+	    	visibility: visible;
+	    	display: block;
+	    }
+	}
+	    	
+	/* 2. TOP NAVIGATION (Add top navigation presentational styles here) */
+	#top {
+	    #top-nav { 
+	    	display: block; 
+	    }
+	    ul.nav {
+	    	font-size:.857em; // this adjusts the scale of the entire navigation and everything just works like magic
+	    	> li { // The following styles are applied ONLY to the top level list items
+	    		> a {
+	    			.border_radius(0);
+	    			&:hover {
+	    				background: darken(@bg_dark, 30%);
+	    				text-decoration: none;
+	    			}
+	    		}
+	    		&:hover {
+	    			> a { 
+	    				background: darken(@bg_dark, 30%);
+	    			}
+	    		}
+	    	}
+	    	li  {
+	    		a  { text-decoration: none; }
+	    		&.current_page_item, &.current_page_parent, &.current-menu-ancestor, &.current-cat, &.li.current-menu-item {
+					> a { 
+						text-decoration: underline;
+					}
+				}
+				&.parent > a  {
+					&:after  {
+						top: 1.3em;
+					}
+				}
+			}
+	    	/* LEVEL 2 */
+	    	ul {
+	    		background: darken(@bg_dark, 30%);
+	    		li:hover {
+	    			> a {
+	    				text-decoration: underline;
+	    			}
+	    		}
+	    		li.parent > a  {
+					&:after  {
+						top: 1.1em;
+					}
+				}		
+	    	}
+	    	/* LEVEL 3 */
+	    	ul ul {
+	    	}
+	    	li:hover > ul {
+	    	}
+	    }
+	}
+	
+	/* 3. MAIN NAVIGATION DROPDOWN MENUS (Add main navigation presentational styles here) */
+	#navigation  {	
+	    display:block !important;
+	    margin: 0.53em 0 0;
+	    ul.nav {
+	    	> li { // The following styles are applied ONLY to the top level list items
+	    		margin: 0 0.53em 0 0;
+	    		> a {
+	    			.border_radius(5px);
+	    			&:hover {
+	    				background: darken(@bg_dark, 10%);
+	    				text-decoration: none;
+	    			}
+	    		}
+	    		&:hover {
+	    			> a  {
+	    				background: darken(@bg_dark, 10%);
+	    			}
+	    		}
+	    	}
+	    	li  {
+	    		a  {
+	    			padding: .236em 1em;
+	    			text-decoration: none;
+	    		}
+	    		&.current_page_item, &.current_page_parent, &.current-menu-ancestor, &.current-cat, &.li.current-menu-item {
+					> a { 
+						background: darken(@bg_dark, 15%);
+						text-decoration: none; 
+					}
+				}
+	    	}
+	    	/* LEVEL 2 */
+	    	ul {
+	    		background: darken(@bg_dark, 10%);
+	    		-webkit-border-radius: 0 5px 5px 5px;
+	    		   -moz-border-radius: 0 5px 5px 5px;
+	    		        border-radius: 0 5px 5px 5px;
+	    		margin-top: -4px;
+	    		padding-top: 2px;
+	    		> li  {
+	    			> a  {
+	    				font-size: 0.857em;
+	    				padding: 0.618em 1em;
+	    				&:hover {
+	    					text-decoration: none;
+	    					background: darken(@bg_dark, 15%);
+	    				}
+	    			}
+	    			&:hover {
+	    				> a  {
+	    					background: darken(@bg_dark, 15%);
+	    				}
+	    			}
+	    		}			
+	    	}
+	    	/* LEVEL 3 */
+	    	ul ul {
+	    		margin-top: 0;
+	    		left:100%; // reapply left 100% as we're offsetting the first child by 1px
+	    	}
+	    	li:hover > ul {
+	    	}
+	    }
+	    
+	}
+	// Hide the nav toggle link in desktop orientation
+	.nav-toggle { display: none; }
+	
+	/* 4. CONTAINERS & COLUMNS */
+	#header {
+		padding: 3.631em 1.618em 3.631em;
+		#logo  {
+			margin-bottom: 0;
+		}
+	    hgroup { 
+	        float: left;
+	        margin: 0 1.618em 0 0;
+	        h1, h2, h3 {
+	            float:none;
+	        }
+	    }
+	    ul.cart {
+	        li {
+	            a  {
+	            	background: darken(@bg_dark, 5%);
+	            }
+	        }
+	    }
+	    #navigation  {
+	    	float: left;
+	    	width: auto;
+	    	clear: none;
+	    }
+	    #searchform  {
+	    	margin-bottom: 0;
+	    }
+	    .search_main  {
+	    	float: right;
+	    	margin: 0.53em 0 0;
+	    }
+	}
+	#featured  {
+		.flexslider .slide-content {
+			float: left;
+			width: 48%;
+		}
+		.flexslider .slide-media {
+			float: right;
+			width: 48%;
+			margin: 0;
+		}
+		.flexslider.full-width-slide .has-video .slide-media {
+			float: none;
+			width: 100%;
+			height: auto;
+		}
+		.flexslider .no-image.no-video  {
+			.slide-content  {
+				width: 100%;
+			}
+		}
+	}
+	#main.fullwidth, .layout-full #main, .col-full { 
+	    max-width:75.998em; 
+	    margin:0 auto;
+	    width:100%; 
+	}
+	#main { 
+	    width: 62%; // golden ratio
+	} 
+	#sidebar { 
+	    margin-top: 0; 
+	    width: 34%;  // golden ratio 
+	}
+	.entry img { 
+	    max-width: 100%; 
+	}
+	.layout-full .entry img { 
+	    max-width: 100%; 
+	}
+	.layout-right-content {
+	    #main  { 
+	    	float: right; 
+	    }
+	    #sidebar  { 
+	    	float: left; 
+	    }
+	}
+	.layout-full #main  { 
+	    width: 100%; // full-width template
+	}
+	.col-left { 
+	    float: left; 
+	}
+	.col-right { 
+	    float: right; 
+	}
+	.page-template-template-contact-php {
+	    .location-twitter  {
+	    	.col-left  { 
+	    		float: left; 
+	    	}
+	    	#office-location { 
+	    	    width: 48%; 
+	    	    margin: 0;
+	    	}
+	    	.contact-social  {
+	    	    float: right; 
+	    	    width: 48%;
+	    	    #twitter  { 
+	    	    	margin: 0; 
+	    	    } 
+	    	}
+	    }
+	}
+	#connect { 
+		.related-posts {
+			border-top: 0;
+			border-left:1px solid @border_main;
+			margin-top: 0;
+			padding-top: 0;
+			padding-left:1em;
+		}
+	}
+	#main #connect {
+		.col-left, .col-right { 
+			width:48%; 
+		}
+	}
+	#post-author {
+		.profile-link  {
+			position: absolute;
+			top: 2em;
+			right: 1.618em;
+			margin-top: 0;
+			text-align: right;
+		}
+	}
+	/* Homepage Components */
+	.home  {
+		.features .feature, .testimonials .quote, .featured-products li.product  {
+		    margin: 0 3.75% 2.244em 0;
+		    clear: none;
+		    width: 30.75%;
+		    float: left;
+		}
+	}
+	#sidebar  {
+		.features .feature, .testimonials .quote, .featured-products li.product  {
+		    margin: 0 0 2.244em 0;
+		    clear: both;
+		    width: 100%;
+		    float: none;
+		}
+	}
+	
+	/* Comments Form */
+	#respond  {
+		#commentform  {	
+			.comment-form-author, .comment-form-email, .comment-form-url {
+				width: 30.75%;
+				float: left;
+				margin-right: 3.75%;
+			}
+			.comment-form-url {
+				margin-right:0;
+			}
+		}
+	}
+	
+	/* 5. FOOTER WIDGETS */
+	#footer-widgets {
+	    .block { 
+	    	margin-right:3.8%; 
+	    	float: left; 
+	    }
+	    &.col-1 {
+	    	.block { 
+	    		width: 100%; 
+	    		float: none; 
+	    	}
+	    	.footer-widget-1 { 
+	    		margin-right:0; 
+	    	}
+	    }
+	    &.col-2 {
+	    	.block { 
+	    		width: 48%; 
+	    	}
+	    	.footer-widget-2 { 
+	    		margin-right:0; 
+	    	}
+	    }
+	    &.col-3 {
+	    	.block { 
+	    		width: 30.75%; 
+	    	}
+	    	.footer-widget-3 { 
+	    		margin-right:0; 
+	    	}
+	    }
+	    &.col-4 {
+	    	.block { 
+	    		width: 22.05% 
+	    	}
+	    	.footer-widget-4 { 
+	    		margin-right:0; 
+	    	}
+	    }
+	    
+	}
+	/* Footer Nav */
+	#footer  {
+		.col-right  {
+			float: right;
+		}
+		.col-left  {
+			float: left;
+		}
+		#credit {
+			p { float: right; }
+		}
+	    .nav  {
+			float: right;
+			li  {
+				a  {
+					margin: 0 0 0 1em;
+					padding: 0;
+					color: darken(@color_body, 10%);
+				}
+			}
+		}
+	}
+	
+	/* 6. IE FIXES */
+	
+	.ie7 {
+	    #top-nav {
+	    	position: relative;
+	    	z-index: 9999999;
+	    }
+	    #header {
+	    	position: relative;
+	    	z-index: 9999999;
+	    }
+	}
+
+}
