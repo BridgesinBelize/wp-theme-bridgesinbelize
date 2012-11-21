@@ -4,9 +4,11 @@ Here you will find the plugins currently used within on BRIDGE's in Belize websi
 
 This branch should be restored to the ``wp-content/plugins`` directory.
 
+## Plugin Types
+
 There are 3 diffrent types of plugins within this repository, shell plugins, git submodules, & full plugins.
 
-### Shell Plguins
+### Shell Plugins
 
 These plugins are each maintatined by WordPress and interface directly with their servers. 
 
