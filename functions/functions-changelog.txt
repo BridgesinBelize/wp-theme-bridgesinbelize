@@ -1,5 +1,9 @@
 *** WooThemes Framework Changelog **
 
+2012.11.22 - version 5.5.1
+ * admin-functions.php - Adjust woo_image() to better calculate the height of an attached image, if no height is specified.
+ * admin-style.css - Updated styling of the "Upload" button for WordPress 3.5 compatibility.
+
 2012.11.05 - version 5.5.0
  * /classes/class-wp-app-store-installer.php - Remove WP App Store installer bridge.
  * admin-init.php - Remove call to WP App Store installer bridge.

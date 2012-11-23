@@ -180,7 +180,7 @@ function woo_image($args) {
 		if ( get_option( 'woo_pis_resize' ) == 'true' ) {
 
 			if ( 0 == $height ) {
-				$img_data = wp_get_attachment_image_src( $thumb_id, 'full' );
+				$img_data = wp_get_attachment_image_src( $thumb_id, array( intval( $width ), 9999 ) );
 				$height = $img_data[2];
 			}
 

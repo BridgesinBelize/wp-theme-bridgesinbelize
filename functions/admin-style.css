@@ -2,7 +2,7 @@
 /* WooThemes admin styles */
 /*-------------------------------------------------------------------------------------------*/
 
-/*UI SLIDER*/
+/* UI SLIDER */
 #woo_container .section-slider .controls .ui-slider  { float: left; margin: 0; top: 8px; width: 268px; border: 1px solid red; border: 1px solid #DDD; background: #EEE; color: #333;position: relative; text-align: left;height: .8em; }
 #woo_container .section-slider .controls .ui-slider .ui-slider-handle  { border: 1px solid #CCC; cursor: pointer; background: #F6F6F6; font-weight: bold; color: #1C94C4; outline: none; position: absolute; z-index: 2; width: 14px; height: 14px; cursor: pointer; top: -3px; margin-left: -7px; }
 #woo_container .section-slider .controls .woo-input  { float: right; width: 40px; }
@@ -49,11 +49,11 @@
 box-shadow: inset 1px 1px 0 rgba(255,255,255,.2), inset -1px -1px 0 rgba(255,255,255,.2);
 }
 
-#woo_container #header .logo  { float: left; margin: 24px 0 0 25px; height: 35px; }
-#woo_container #header .theme-info  { float: right; margin: 26px 25px 0 0; }
-#woo_container #header .theme-info span  { display: block; line-height: 15px; text-transform: uppercase; text-align: right; color: #4e4e4e; text-shadow: 1px 1px 0 #fff; }
-#woo_container #header .theme-info .theme  { font-size: 15px; font-weight: bold; }
-#woo_container #header .theme-info .framework  { font-size: 12px; }
+#woo_container #header .logo { float: left; margin: 24px 0 0 25px; height: 35px; }
+#woo_container #header .theme-info { float: right; margin: 26px 25px 0 0; }
+#woo_container #header .theme-info span { display: block; line-height: 15px; text-transform: uppercase; text-align: right; color: #4e4e4e; text-shadow: 1px 1px 0 #fff; }
+#woo_container #header .theme-info .theme { font-size: 15px; font-weight: bold; }
+#woo_container #header .theme-info .framework { font-size: 12px; }
 #woo_container #header .theme-info b { font-size: 11px; text-transform: none; color: #444; font-weight: 100; }
 
 #woo_container #support-links { height: 32px; padding: 0 0 0 15px; background-color: #d7e6f2; border-top: 1px solid #f1f6fa; border-bottom: 1px solid #a4bbcd; border-left: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; }
@@ -280,8 +280,11 @@ body.js #woo_container #woo-nav li.open .flyout-menu { display: none; }
 #woo_container .controls input:hover,#woo_container .controls select:hover,#woo_container .controls textarea:hover { color:#333; background: #fff;}
 
 #woo_container .controls input.upload { width:279px; padding-bottom:6px; }
-#woo_container .controls input.upload_button{ float:right; width:45px; border-color:#BBBBBB; cursor:pointer; height:16px; }
-#woo_container .controls input.upload_button:hover { border-color:#666666; color:#000; }
+#woo_container .controls input.upload_button { font-size: 12px; float: right; width: 55px; height: 28px; border-color: #BBBBBB; cursor: pointer; padding: 0; margin: 0; margin-top: 1px; padding-top: 1px; }
+#woo_container .controls input.upload_button:hover { border-color: #999999; color: #000000; }
+
+body.version-3-4-1 #woo_container .controls input.upload_button, 
+body.version-3-4-2 #woo_container .controls input.upload_button { height: 25px; }
 
 #woo_container .section-upload_min .controls input.upload_button { float: left; }
 
@@ -465,11 +468,6 @@ body.js #woo_container #woo-nav li.open .flyout-menu { display: none; }
 	
 }
 
-/*
-#woo_container .woo-uploaded-image { border:2px solid #dedede; -moz-border-radius: 3px; display:block;}
-#woo_container .woo-uploaded-image img {margin:5px;display:block}
-*/
-
 #woo_container .woo-save-popup { position:absolute; -moz-border-radius:12px; background:rgba(0,0,0,0.4); color:#fff; font-size:24px; text-align:center; display:none; z-index: 10; }
 
 #woo_container .woo-save-save { background:url(images/happy.png) 20px 50% no-repeat; padding:30px 30px 30px 70px}
@@ -491,17 +489,17 @@ body.js #woo_container #woo-nav li.open .flyout-menu { display: none; }
 -moz-box-shadow: inset 1px 1px 0 rgba(255,255,255,.2), inset -1px -1px 0 rgba(255,255,255,.2);
 box-shadow: inset 1px 1px 0 rgba(255,255,255,.2), inset -1px -1px 0 rgba(255,255,255,.2);
 }
-#wooform-reset { float:left; }
+#wooform-reset { float: left; }
 
-.hide {display:none}
+.hide { display: none; }
 
-.ajax-loading-img-top { margin: 8px 4px 0; float:left}
+.ajax-loading-img-top { margin: 8px 4px 0; float: left; }
 .ajax-loading-img-bottom {}
 
-.woo-option-image { max-width:340px; }
+.woo-option-image { max-width: 340px; }
 
-#woo_container .mini .controls select, #woo_container #content .section .mini .controls {width: 70px; }
-#woo_container .mini .controls input, #woo_container #content .mini .controls {width: 70px; }
+#woo_container .mini .controls select, #woo_container #content .section .mini .controls { width: 70px; }
+#woo_container .mini .controls input, #woo_container #content .mini .controls { width: 70px; }
 
 #woo_container #content .mini .explain { width:500px; }
 
@@ -699,18 +697,6 @@ body.js .item-order {
 #update-menu-item:active,
 #update-menu-item:focus { color: #eaf2fa !important; border-color: #13455b !important; }
 
-/* String Builder */
-.add_button { height: 50px;}
-.string_option { margin-bottom: 5px; padding: 7px 12px; font-size: 12px; background: #f7f7f7;
-	border: 1px solid #dfdfdf;
-	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	-khtml-border-radius: 6px;
-}
-.string_option span { font-weight: 700;}
-.string_option .delete { text-transform: uppercase; font-size:10px; float: right; color: red}
-
 /*-------------------------------------------------------------------------------------------*/
 /* Icons Option panel */
 /*-------------------------------------------------------------------------------------------*/
@@ -725,6 +711,7 @@ body.js .item-order {
   margin-left: 10px;
   padding: 16px 0 0 9px;
 }
+
 #woo_container #woo-nav ul li.general span.icon { background-image:url(images/option-icon-general.png); }
 #woo_container #woo-nav ul li.styling span.icon { background-image:url(images/option-icon-styling.png); }
 #woo_container #woo-nav ul li.typography span.icon { background-image:url(images/option-icon-typography.png); }
