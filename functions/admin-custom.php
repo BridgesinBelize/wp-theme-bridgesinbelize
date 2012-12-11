@@ -1,17 +1,15 @@
 <?php
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
 /**
  * Custom fields for WordPress write panels.
  *
  * Add custom fields to various post types "Add" and "Edit" screens within WordPress.
  * Also processes the custom fields as post meta when the post is saved.
  *
- * @category CustomFields
  * @package WordPress
  * @subpackage WooFramework
+ * @category Core
  * @author WooThemes
  * @since 1.0.0
  *
@@ -28,7 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 
 /**
- * woothemes_metabox_create function.
+ * woothemes_metabox_create()
+ *
+ * Create the markup for the meta box.
  *
  * @access public
  * @param object $post
@@ -86,10 +86,10 @@ function woothemes_metabox_create( $post, $callback ) {
     echo $output;
 } // End woothemes_metabox_create()
 
-/*-----------------------------------------------------------------------------------*/
-
 /**
- * woothemes_metabox_create_fields function.
+ * woothemes_metabox_create_fields()
+ *
+ * Create markup for custom fields based on the given arguments.
  * 
  * @access public
  * @since 5.3.0
@@ -210,7 +210,17 @@ function woothemes_metabox_create_fields ( $metaboxes, $callback, $token = 'gene
         	        $output .= "\t".'</tr>'."\n";
 
         	    }
+				
+				elseif ( $woo_metabox['type'] == 'time_masked' ) {
 
+        	        $output .= "\t".'<tr>';
+        	        $output .= "\t\t".'<th class="woo_metabox_names"><label for="' . esc_attr( $woo_id ) . '">' . $woo_metabox['label'] . '</label></th>'."\n";
+        	        $output .= "\t\t".'<td><input class="woo_input_time_masked" type="' . $woo_metabox['type'] . '" value="' . esc_attr( $woo_metaboxvalue ) . '" name="' . $woo_name . '" id="' . esc_attr( $woo_id ) . '"/>';
+        	        $output .= '<span class="woo_metabox_desc">' . $woo_metabox['desc'] . '</span></td>'."\n";
+        	        $output .= "\t".'</tr>'."\n";
+
+        	    }
+        	    
         	    elseif ( $woo_metabox['type'] == 'select' ) {
 
         	        $output .= "\t".'<tr class="' . $row_css_class . '">';
@@ -314,9 +324,9 @@ function woothemes_metabox_create_fields ( $metaboxes, $callback, $token = 'gene
 					 	if ( $woo_metaboxvalue == $key ) { $checked = ' checked'; $selected = 'woo-meta-radio-img-selected'; }
 					 }
 					 else {
-					 	if ($option['std'] == $key) { $checked = ' checked'; }
-						elseif ($i == 1) { $checked = ' checked'; $selected = 'woo-meta-radio-img-selected'; }
-						else { $checked=''; }
+					 	if ( isset( $option['std'] ) && $key == $option['std'] ) { $checked = ' checked'; }
+						elseif ( $i == 1 ) { $checked = ' checked'; $selected = 'woo-meta-radio-img-selected'; }
+						else { $checked = ''; }
 
 					 }
 
@@ -429,37 +439,42 @@ function woothemes_metabox_create_fields ( $metaboxes, $callback, $token = 'gene
 } // End woothemes_metabox_create_fields()
 
 /**
- * woothemes_metabox_handle function.
+ * woothemes_metabox_handle()
+ *
+ * Handle the saving of the custom fields.
  * 
  * @access public
+ * @param int $post_id
  * @return void
  */
-function woothemes_metabox_handle() {
+function woothemes_metabox_handle( $post_id ) {
     $pID = '';
     global $globals, $post;
+
+    if ( 'page' == $_POST['post_type'] ) {  
+        if ( ! current_user_can( 'edit_page', $post_id ) ) { 
+            return $post_id;
+        }
+    } else {  
+        if ( ! current_user_can( 'edit_post', $post_id ) ) { 
+            return $post_id;
+        }
+    }
 
     $woo_metaboxes = get_option( 'woo_custom_template', array() );
 
     // Sanitize post ID.
     if( isset( $_POST['post_ID'] ) ) {
-
 		$pID = intval( $_POST['post_ID'] );
-
-    } // End IF Statement
+    }
 
     // Don't continue if we don't have a valid post ID.
-    if ( $pID == 0 ) {
-
-    	return;
-
-    } // End IF Statement
+    if ( $pID == 0 ) return;
 
     $upload_tracking = array();
 
     if ( isset( $_POST['action'] ) && $_POST['action'] == 'editpost' ) {
-
         if ( ( get_post_type() != '' ) && ( get_post_type() != 'nav_menu_item' ) && wp_verify_nonce( $_POST['wooframework-custom-fields-nonce'], 'wooframework-custom-fields' ) ) {
-
             foreach ( $woo_metaboxes as $k => $woo_metabox ) { // On Save.. this gets looped in the header response and saves the values submitted
                 if( isset( $woo_metabox['type'] ) && ( in_array( $woo_metabox['type'], woothemes_metabox_fieldtypes() ) ) ) {
     				$var = $woo_metabox['name'];
@@ -469,38 +484,26 @@ function woothemes_metabox_handle() {
     			    $current_value = get_post_meta( $pID, $var, true );
 
     				if ( isset( $_POST[$var] ) ) {
-
     					// Sanitize the input.
     					$posted_value = '';
     					$posted_value = $_POST[$var];
 
     					 // If it doesn't exist, add the post meta.
     					if(get_post_meta( $pID, $var ) == "") {
-
     						add_post_meta( $pID, $var, $posted_value, true );
-
     					}
     					// Otherwise, if it's different, update the post meta.
     					elseif( $posted_value != get_post_meta( $pID, $var, true ) ) {
-
     						update_post_meta( $pID, $var, $posted_value );
-
     					}
     					// Otherwise, if no value is set, delete the post meta.
     					elseif($posted_value == "") {
-
     						delete_post_meta( $pID, $var, get_post_meta( $pID, $var, true ) );
-
     					} // End IF Statement
-
     				} elseif ( ! isset( $_POST[$var] ) && $woo_metabox['type'] == 'checkbox' ) {
-
     					update_post_meta( $pID, $var, 'false' );
-
     				} else {
-
     					delete_post_meta( $pID, $var, $current_value ); // Deletes check boxes OR no $_POST
-
     				} // End IF Statement
 
                 } else if ( $woo_metabox['type'] == 'timestamp' ) {
@@ -529,9 +532,7 @@ function woothemes_metabox_handle() {
     				$timestamp = mktime( $hour, $minute, $second, $month, $day, $year );
     				
     				update_post_meta( $pID, $var, $timestamp );
-                
                 } elseif( isset( $woo_metabox['type'] ) && $woo_metabox['type'] == 'upload' ) { // So, the upload inputs will do this rather
-
     				$id = $woo_metabox['name'];
     				$override['action'] = 'editpost';
 
@@ -541,48 +542,39 @@ function woothemes_metabox_handle() {
     			           $uploaded_file['option_name']  = $woo_metabox['label'];
     			           $upload_tracking[] = $uploaded_file;
     			           update_post_meta( $pID, $id, $uploaded_file['url'] );
-
     			    } elseif ( empty( $_FILES['attachement_'.$id]['name'] ) && isset( $_POST[ $id ] ) ) {
-
     			       	// Sanitize the input.
     					$posted_value = '';
     					$posted_value = $_POST[$id];
 
     			        update_post_meta($pID, $id, $posted_value);
-
     			    } elseif ( $_POST[ $id ] == '' )  {
-
     			    	delete_post_meta( $pID, $id, get_post_meta( $pID, $id, true ) );
-
     			    } // End IF Statement
 
     			} // End IF Statement
 
                    // Error Tracking - File upload was not an Image
                    update_option( 'woo_custom_upload_tracking', $upload_tracking );
-
                 } // End FOREACH Loop
-            } // End IF Statement
-        } // End IF Statement
+            }
+        }
 } // End woothemes_metabox_handle()
 
-/*-----------------------------------------------------------------------------------*/
-
 /**
- * woothemes_metabox_add function.
+ * woothemes_metabox_add()
+ *
+ * Add meta boxes for the WooFramework's custom fields.
  * 
  * @access public
  * @since 1.0.0
  * @return void
  */
-function woothemes_metabox_add() {
+function woothemes_metabox_add () {
 	$woo_metaboxes = get_option( 'woo_custom_template', array() );
-
     if ( function_exists( 'add_meta_box' ) ) {
-
     	if ( function_exists( 'get_post_types' ) ) {
     		$custom_post_list = get_post_types();
-
     		// Get the theme name for use in multiple meta boxes.
     		$theme_name = get_option( 'woo_themename' );
 
@@ -590,7 +582,7 @@ function woothemes_metabox_add() {
 
 				$settings = array(
 									'id' => 'woothemes-settings',
-									'title' => $theme_name . __( ' Custom Settings', 'woothemes' ),
+									'title' => sprintf( __( '%s Custom Settings', 'woothemes' ), $theme_name ), 
 									'callback' => 'woothemes_metabox_create',
 									'page' => $type,
 									'priority' => 'normal',
@@ -599,37 +591,33 @@ function woothemes_metabox_add() {
 
 				// Allow child themes/plugins to filter these settings.
 				$settings = apply_filters( 'woothemes_metabox_settings', $settings, $type, $settings['id'] );
-
 				add_meta_box( $settings['id'], $settings['title'], $settings['callback'], $settings['page'], $settings['priority'], $settings['callback_args'] );
-
-				//if(!empty($woo_metaboxes)) Temporarily Removed
+				// if(!empty($woo_metaboxes)) Temporarily Removed
 			}
     	} else {
-    		add_meta_box( 'woothemes-settings', $theme_name . ' Custom Settings', 'woothemes_metabox_create', 'post', 'normal' );
-        	add_meta_box( 'woothemes-settings', $theme_name . ' Custom Settings', 'woothemes_metabox_create', 'page', 'normal' );
+    		add_meta_box( 'woothemes-settings', sprintf( __( '%s Custom Settings', 'woothemes' ), $theme_name ), 'woothemes_metabox_create', 'post', 'normal' );
+        	add_meta_box( 'woothemes-settings', sprintf( __( '%s Custom Settings', 'woothemes' ), $theme_name ), 'woothemes_metabox_create', 'page', 'normal' );
     	}
-
     }
 } // End woothemes_metabox_add()
 
-/*-----------------------------------------------------------------------------------*/
-
 /**
- * woothemes_metabox_fieldtypes function.
- * 
- * @description Return a filterable array of supported field types.
+ * woothemes_metabox_fieldtypes()
+ *
+ * Return a filterable array of supported field types.
+ *
  * @access public
  * @author Matty
  * @return void
  */
 function woothemes_metabox_fieldtypes() {
-	return apply_filters( 'woothemes_metabox_fieldtypes', array( 'text', 'calendar', 'time', 'select', 'select2', 'radio', 'checkbox', 'textarea', 'images' ) );
+	return apply_filters( 'woothemes_metabox_fieldtypes', array( 'text', 'calendar', 'time', 'time_masked', 'select', 'select2', 'radio', 'checkbox', 'textarea', 'images' ) );
 } // End woothemes_metabox_fieldtypes()
 
-/*-----------------------------------------------------------------------------------*/
-
 /**
- * woothemes_uploader_custom_fields function.
+ * woothemes_uploader_custom_fields()
+ *
+ * Create markup for outputting the custom upload field as a custom field.
  * 
  * @access public
  * @param int $pID
@@ -639,27 +627,25 @@ function woothemes_metabox_fieldtypes() {
  * @return void
  */
 function woothemes_uploader_custom_fields( $pID, $id, $std, $desc ) {
-
-    // Start Uploader
-    $upload = get_post_meta( $pID, $id, true);
-	$href = cleanSource($upload);
+    $upload = get_post_meta( $pID, $id, true );
+	$href = cleanSource( $upload );
 	$uploader = '';
-    $uploader .= '<input class="woo_input_text" name="'.$id.'" type="text" value="'.esc_attr($upload).'" />';
+    $uploader .= '<input class="woo_input_text" name="' . $id . '" type="text" value="' . esc_attr( $upload ) . '" />';
     $uploader .= '<div class="clear"></div>'."\n";
-    $uploader .= '<input type="file" name="attachement_'.$id.'" />';
+    $uploader .= '<input type="file" name="attachement_' . $id . '" />';
     $uploader .= '<input type="submit" class="button button-highlighted" value="Save" name="save"/>';
     if ( $href )
-		$uploader .= '<span class="woo_metabox_desc">'.$desc.'</span></td>'."\n".'<td class="woo_metabox_image"><a href="'. $upload .'"><img src="'.get_template_directory_uri().'/functions/thumb.php?src='.$href.'&w=150&h=80&zc=1" alt="" /></a>';
+		$uploader .= '<span class="woo_metabox_desc">' . $desc . '</span></td>' . "\n" . '<td class="woo_metabox_image"><a href="' . $upload . '"><img src="' . get_template_directory_uri() . '/functions/thumb.php?src=' . $href . '&w=150&h=80&zc=1" alt="" /></a>';
 
 return $uploader;
 } // End woothemes_uploader_custom_fields()
 
-/*-----------------------------------------------------------------------------------*/
-
+if ( ! function_exists( 'woo_custom_enqueue' ) ) {
 /**
- * woo_custom_enqueue function.
+ * woo_custom_enqueue()
  * 
- * @description Enqueue JavaScript files used with the custom fields.
+ * Enqueue JavaScript files used with the custom fields.
+ *
  * @access public
  * @param string $hook
  * @since 2.6.0
@@ -676,13 +662,14 @@ function woo_custom_enqueue ( $hook ) {
   		wp_enqueue_script( 'woo-custom-fields' );
   	}
 } // End woo_custom_enqueue()
+}
 
-/*-----------------------------------------------------------------------------------*/
-
+if ( ! function_exists( 'woo_custom_enqueue_css' ) ) {
 /**
- * woo_custom_enqueue_css function.
- * 
- * @description Enqueue CSS files used with the custom fields.
+ * woo_custom_enqueue_css()
+ *
+ * Enqueue CSS files used with the custom fields.
+ *
  * @access public
  * @author Matty
  * @since 4.8.0
@@ -690,7 +677,6 @@ function woo_custom_enqueue ( $hook ) {
  */
 function woo_custom_enqueue_css () {
 	global $pagenow;
-	
 	wp_register_style( 'woo-custom-fields', get_template_directory_uri() . '/functions/css/woo-custom-fields.css' );
 	wp_register_style( 'jquery-ui-datepicker', get_template_directory_uri() . '/functions/css/jquery-ui-datepicker.css' );
 	
@@ -699,8 +685,7 @@ function woo_custom_enqueue_css () {
 		wp_enqueue_style( 'jquery-ui-datepicker' );
 	}
 } // End woo_custom_enqueue_css()
-
-/*-----------------------------------------------------------------------------------*/
+}
 
 /**
  * Specify action hooks for the functions above.

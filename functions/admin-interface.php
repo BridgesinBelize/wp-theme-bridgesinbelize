@@ -1055,7 +1055,14 @@ if ( ! function_exists( 'woothemes_machine' ) ) {
 				if ( $std != "" ) { $val = $std; }
 				$output .= '<input class="woo-input-time" name="'. esc_attr( $value['id'] ) .'" id="'. esc_attr( $value['id'] ) .'" type="text" value="'. esc_attr( $val ) .'" />';
 				break;
-				
+			
+			case 'time_masked':
+				$val = $value['std'];
+				$std = get_option( $value['id'] );
+				if ( $std != "" ) { $val = $std; }
+				$output .= '<input class="woo-input-time-masked" name="'. esc_attr( $value['id'] ) .'" id="'. esc_attr( $value['id'] ) .'" type="text" value="'. esc_attr( $val ) .'" />';
+				break;
+	
 			case 'textarea':
 				$cols = '8';
 				$ta_value = '';
@@ -1658,11 +1665,11 @@ if ( ! function_exists( 'woothemes_version_checker' ) ) {
 		set_transient( $theme_name . '_version_data', $latest_version_via_rss , 60*60*24 );
 
 		//Check if version is the latest - assume standard structure x.x.x
-		$pieces_rss = explode( '.', $latest_version_via_rss['version'] );
+		$pieces_rss = array();
+		if ( isset( $latest_version_via_rss['version'] ) ) $pieces_rss = explode( '.', $latest_version_via_rss['version'] );
 		$pieces_local = explode( '.', $local_version );
 
 		//account for null values in second position x.2.x
-
 		if( isset( $pieces_rss[0] ) && $pieces_rss[0] != 0 ) {
 			if ( ! isset( $pieces_rss[1] ) )
 				$pieces_rss[1] = '0';
@@ -1717,7 +1724,6 @@ if ( ! function_exists( 'woothemes_version_checker' ) ) {
 		} else {
 			$update_message = '';
 		}
-
 		return $update_message;
 	}
 } // End woothemes_version_checker()

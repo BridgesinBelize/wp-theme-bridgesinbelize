@@ -44,13 +44,12 @@
  */
  
  	setup_timefields: function () {
- 		if ( $( '.woo_input_time' ).length ) {
-	 		$( '.woo_input_time' ).each( function (){
+ 		if ( $( '.woo_input_time_masked' ).length ) {
+	 		$( '.woo_input_time_masked' ).each( function (){
 				$( '#' + $( this ).attr( 'id' )).mask( '99:99' );
 			});
 		}
- 	}, // End setup_timefields()
- 	
+ 	}, // End setup_timefields() 	
 /**
  * setup_wordcounters()
  *

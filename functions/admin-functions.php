@@ -58,6 +58,7 @@ TABLE OF CONTENTS
 - wooframework_add_wooseo_banner()
 - WooSidebars Deprecation Banner
 - wooframework_add_woosbm_banner()
+- Static Front Page Detection Banner
 - wooframework_get_theme_version_data()
 - wooframework_display_theme_version_data()
 -----------------------------------------------------------------------------------*/
@@ -992,7 +993,14 @@ function browser_body_class( $classes ) {
 	}
 	else $classes[] = 'unknown';
 
-	if($is_iphone) $classes[] = 'iphone';
+	if( $is_iphone ) $classes[] = 'iphone';
+
+	// Alternative style body class.
+	$style = get_option( 'woo_alt_stylesheet', 'default' );
+	$style = str_replace( '.css', '', $style );
+	if ( '' != $style ) {
+		$classes[] = 'alt-style-' . esc_attr( $style );
+	}
 	return $classes;
 } // End browser_body_class()
 
@@ -3079,6 +3087,32 @@ function wooframework_add_wootimthumb_banner () {
 	}
 	
 } // End wooframework_add_wootimthumb_banner()
+
+/*-----------------------------------------------------------------------------------*/
+/* Static Front Page Detection Banner */
+/*-----------------------------------------------------------------------------------*/
+
+if ( is_admin() && current_user_can( 'manage_options' ) && ( 0 < intval( get_option( 'page_on_front' ) ) ) ) {
+	add_action( 'wooframework_container_inside', 'wooframework_add_static_front_page_banner' );
+}
+
+/**
+ * Add a Static Front Page Detection banner on all WooThemes Options screens.
+ * @since 5.5.2
+ * @return void
+ */
+function wooframework_add_static_front_page_banner () {
+	if ( get_user_setting( 'wooframeworkhidebannerstaticfrontpage', '0' ) == '1' ) { return; }
+	$theme_data = wooframework_get_theme_version_data();
+	$close_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=wooframework_banner_close&banner=staticfrontpage' ), 'wooframework_banner_close' );
+	$html = '';
+	$html .= '<div id="staticfrontpage-banner" class="wooframework-banner">' . "\n";
+	$html .= '<span class="main">' . sprintf( __( 'You have setup a static front page in %1$sSettings > Reading%2$s. If you wish to use the %4$sHomepage%5$s theme options for %3$s, please set it to show "Your latest posts".', 'woothemes' ), '<strong><a href="' . esc_url( admin_url( 'options-reading.php' ) ) . '">', '</a></strong>', $theme_data['theme_name'], '<strong>', '</strong>' ) . '</span>' . "\n";
+	$html .= '<span class="close-banner"><a href="' . $close_url . '">' . __( 'Close', 'woothemes' ) . '</a></span>' . "\n";
+	$html .= '</div>' . "\n";
+	
+	echo $html;
+} // End wooframework_add_static_front_page_banner()
 
 /**
  * Get the version data for the currently active theme.

@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /*-----------------------------------------------------------------------------------*/
 function woo_version_init () {
 
-    $woo_framework_version = '5.5.1';
+    $woo_framework_version = '5.5.2';
 
     if ( get_option( 'woo_framework_version' ) != $woo_framework_version ) {
     	update_option( 'woo_framework_version', $woo_framework_version );

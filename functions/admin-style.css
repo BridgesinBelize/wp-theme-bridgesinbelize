@@ -42,6 +42,17 @@
 #presstrends-banner .close-banner:hover  { opacity: 1; }
 #presstrends-banner .close-banner a { display: block; width: 13px; height: 13px; text-indent: -9999px; }
 
+/* STATIC FRONT PAGE BANNER */
+#staticfrontpage-banner  { position: relative; margin: 0 0 2em; padding: 15px 15px 15px 15px; border: 1px solid #d9d9d9; background: #f5f5f5; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #fff; -moz-box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #fff; -webkit-box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #fff; }
+#staticfrontpage-banner span  { display: block; text-shadow: 1px 1px 0 #fff; font-size: 14px; line-height: 22px; color: #595959; }
+#staticfrontpage-banner span.main  { margin-top: 2px; font-weight: normal; font-size: 14px; }
+#staticfrontpage-banner span.subtext { font-size: 12px; }
+#staticfrontpage-banner .button-primary  { position: absolute; right: 20px; top: 27px; }
+#staticfrontpage-banner .close-banner  { position: absolute; top: 5px; right: 5px; display: block; width: 13px; height: 13px; background: url(images/ico-dojo-banner-close.png) no-repeat left top; opacity: 0.6; cursor: pointer; }
+#staticfrontpage-banner .close-banner:hover  { opacity: 1; }
+#staticfrontpage-banner .close-banner a { display: block; width: 13px; height: 13px; text-indent: -9999px; }
+
+
 #woo_container #header  { height: 80px; background: url(images/headertile.jpg) repeat-x left top; border: 1px solid #a4bbcd; border-top-left-radius: 15px; -moz-border-radius-topleft: 15px; -webkit-border-top-left-radius: 15px; -webkit-border-top-right-radius: 15px; border-top-right-radius: 15px; -moz-border-radius-topright: 15px;  
 /*INSET SHADOW*/
 -webkit-box-shadow: inset 1px 1px 0 rgba(255,255,255,.2), inset -1px -1px 0 rgba(255,255,255,.2);
