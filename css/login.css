@@ -13,19 +13,6 @@
     /* Opera 10.5 */
     transform: rotate(0);
     zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
   }
   50% {
     -webkit-transform: rotate(180deg);
@@ -41,120 +28,8 @@
     /* Opera 10.5 */
     transform: rotate(180deg);
     zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
   }
   to {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-  }
-}
-@-webkit-keyframes spin-360 {
-  from {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
-  }
-  to {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
   
@@ -179,7 +54,7 @@
   background: url(../images/logo.png) no-repeat center center;
 }
 body.login {
-  background-color: #a0c269;
+  background-color: #5381b5;
 }
 body.login p.message {
   margin-left: 0!important;
@@ -194,24 +69,8 @@ body.login p.message {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 0.327em;
-  border-radius: 0.327em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
   -webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
-  -webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
 
@@ -229,12 +88,7 @@ body.login #login_error {
 }
 #loginform {
   margin: 0;
-  border: 3px solid #88b048;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
+  border: 3px solid #406895;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -moz-background-clip: padding;
@@ -247,15 +101,11 @@ body.login #login_error {
 #loginform label {
   font-family: "Lucida Sans", sans-serif;
 }
-#loginform input[type=text], #loginform input[type=password] {
+#loginform input[type=text],
+#loginform input[type=password] {
   margin-top: .53em;
   padding: .236em .5em;
   border: 1px solid #e6e6e6;
-  -webkit-border-radius: 0.236em;
-  border-radius: 0.236em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 0.236em;
   border-radius: 0.236em;
   -moz-background-clip: padding;
@@ -278,22 +128,12 @@ body.login #login_error {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
   background: #f9f9f9;
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 }
-#loginform input[type=text]:focus, #loginform input[type=password]:focus {
+#loginform input[type=text]:focus,
+#loginform input[type=password]:focus {
   background: #fff;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -321,19 +161,22 @@ body.login #login_error {
 #backtoblog {
   float: left;
 }
-#login #nav, #login #backtoblog {
+#login #nav,
+#login #backtoblog {
   margin: 0;
   padding-left: 0;
   padding-right: 0;
 }
-#login #nav a, #login #backtoblog a {
+#login #nav a,
+#login #backtoblog a {
   color: #fff!important;
   text-shadow: none;
 }
-.submit .button-primary, #backtoblog a {
+.submit .button-primary,
+#backtoblog a {
   display: inline-block;
   padding: .236em .857em;
-  border: 1px solid #be3b3b;
+  border: 1px solid #ff8814;
   color: white!important;
   text-align: center;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
@@ -348,22 +191,11 @@ body.login #login_error {
   /* Inputs need pointers! */
 
   overflow: visible;
-  /* IE fix */
-
   width: auto;
   /* IE fix */
 
   line-height: 1.618em;
-  background: #cd5f5f;
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
+  background: #ffa247;
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
 
@@ -378,22 +210,17 @@ body.login #login_error {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
-.submit .button-primary:hover, #backtoblog a:hover {
+.submit .button-primary:hover,
+#backtoblog a:hover {
   text-decoration: none;
-  background: #be3b3b;
+  background: #ff8814;
 }
-.submit .button-primary:active, #backtoblog a:active {
-  border-color: #aa3535;
+.submit .button-primary:active,
+#backtoblog a:active {
+  border-color: #f97b00;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -403,10 +230,10 @@ body.login #login_error {
 }
 #backtoblog a {
   padding-top: 4px;
-  background: #aed66e;
-  border: 1px solid #98cb46;
+  background: #a4d157;
+  border: 1px solid #8dc035;
 }
 #backtoblog a:hover {
-  background: #98cb46;
+  background: #8dc035;
   color: #fff!important;
 }

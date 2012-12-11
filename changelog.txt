@@ -1,5 +1,12 @@
 *** Definition Changelog ***
 
+2012.11.27 - version 1.1.1
+ * /includes/theme-functions.php - Make sure to suppress filters when retrieving slides from the database. Adds basic WPML support to the featured slider. Adjust woo_featured_slider_loader() to load the slider if is_front_page() as well as if is_home().
+ * /includes/theme-js.php - Make woo_load_featured_slider_js() pluggable and load it on is_front_page() as well as is_home() to cater for a static front page.
+ * css/woocommerce.css - cart now works better on mobile devices
+ * style.css - blog images height fix
+             - slider pagination fix when using custom typography
+
 2012.11.15 - version 1.1.0
  * /css/login.less, 
    /css/login.css - Make sure the login branding in the WooFramework and WooDojo can override the default login logo.

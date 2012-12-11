@@ -657,6 +657,9 @@ table.cart {
 			margin: 0 0 0 .7em;
 		}
 	}
+	.product-remove, .product-thumbnail, .product-price {
+		display: none;
+	}
 	.actions {
 		text-align: right;
 		.coupon {
@@ -972,6 +975,11 @@ table.cart {
 	}
 
 	// Cart
+	table.cart {
+		.product-remove, .product-thumbnail, .product-price {
+			display: table-cell;
+		}
+	}
 	.cart-collaterals {
 		.clearfix;
 		.cross-sells, .cart_totals, .shipping_calculator {
