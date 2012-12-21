@@ -421,7 +421,7 @@ body.version-3-4-2 #woo_container .controls input.upload_button { height: 25px; 
 #woo_container .controls .woo-typography-unit { width:50px; float:left}
 #woo_container .controls .woo-typography-face { width:100px; float:left}
 #woo_container .controls .woo-typography-style { width:80px; float:left}
-#woo_container .controls .woo-typography-preview-button { float: left; margin: 3px 0 0 5px; }
+#woo_container .controls .woo-typography-preview-button { float: left; margin: 3px 0 0 5px; padding-top: 3px; }
 #woo_container .controls .woo-typography-preview-button span { background: transparent url(images/ico-preview.png) no-repeat center center; display: block; text-indent: -9999px; width: 14px; height: 16px; }
 #woo_container .controls .woo-typography-preview-button span.refresh { background-image: url(images/ico-refresh.png); }
 #woo_container .typography-preview-container { clear: both; }
