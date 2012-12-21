@@ -12,7 +12,7 @@
 /*  
 Theme Name: Definition
 Theme URI: http://www.woothemes.com/
-Version: 1.1.1
+Version: 1.3.0
 Description: Designed by <a href="http://www.woothemes.com">WooThemes</a>.
 Author: WooThemes
 Author URI: http://www.woothemes.com
@@ -341,19 +341,6 @@ sub {
     /* Opera 10.5 */
     transform: rotate(0);
     zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
   }
   50% {
     -webkit-transform: rotate(180deg);
@@ -395,34 +382,8 @@ sub {
     /* Opera 10.5 */
     transform: rotate(180deg);
     zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
   }
   to {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
   
@@ -624,14 +585,7 @@ table {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background: #f9f9f9;
-  box-shadow: 0 1px 2px 0 #ffffff;
-  -webkit-box-shadow: 0 1px 2px 0 #ffffff;
   box-shadow: 0 1px 2px 0 #ffffff;
   -webkit-box-shadow: 0 1px 2px 0 #ffffff;
   box-shadow: 0 1px 2px 0 #ffffff;
@@ -680,20 +634,6 @@ table thead th:first-child {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-top-left-radius: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-bottom-left-radius: 0;
   -webkit-border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -735,20 +675,6 @@ table thead th:last-child {
   -webkit-border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-border-top-right-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
@@ -825,20 +751,6 @@ table tbody tr:last-child td:first-child {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-bottom-left-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-border-top-right-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-top-right-radius: 0;
   -webkit-border-bottom-right-radius: 0;
   border-top-right-radius: 0;
@@ -880,20 +792,6 @@ table tbody tr:last-child td:last-child {
   -webkit-border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-border-bottom-left-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-border-top-left-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
@@ -961,11 +859,6 @@ ul.nav li a {
   padding: .5em 0;
   display: block;
   color: #fff!important;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   -moz-background-clip: padding;
@@ -1065,13 +958,6 @@ ul.nav li.li.current-menu-item > a {
   overflow: hidden;
   clear: both;
 }
-#header hgroup:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  clear: both;
-}
 #header hgroup h1, #header hgroup h2, #header hgroup h3 {
   float: left;
   clear: left;
@@ -1084,23 +970,6 @@ ul.nav li.li.current-menu-item > a {
   cursor: pointer;
   top: 0.857em;
   font-family: sans-serif;
-  background-color: #cd5f5f;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#cd5f5f), to(#bc4e4e));
-  /* Saf4+, Chrome */
-
-  background-image: -webkit-linear-gradient(top, #cd5f5f, #bc4e4e);
-  /* Chrome 10+, Saf5.1+, iOS 5+ */
-
-  background-image: -moz-linear-gradient(top, #cd5f5f, #bc4e4e);
-  /* FF3.6+ */
-
-  background-image: -ms-linear-gradient(top, #cd5f5f, #bc4e4e);
-  /* IE10 */
-
-  background-image: -o-linear-gradient(top, #cd5f5f, #bc4e4e);
-  /* Opera 11.10+ */
-
-  background-image: linear-gradient(to bottom, #cd5f5f, #bc4e4e);
   background-color: #cd5f5f;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#cd5f5f), to(#bc4e4e));
   /* Saf4+, Chrome */
@@ -1168,18 +1037,12 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   text-align: center;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 #9a2c2c;
   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 #9a2c2c;
 }
 #header .nav-toggle a {
   color: #fff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
@@ -1213,13 +1076,6 @@ ul.nav li.li.current-menu-item > a {
 }
 .home #content #sidebar .widget h3 {
   font-size: 1.387em;
-}
-.widget_woothemes_features:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  clear: both;
 }
 .widget_woothemes_features:after {
   content: "\0020";
@@ -1289,11 +1145,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 .testimonials .quote .quote-content {
   position: relative;
@@ -1301,11 +1152,6 @@ ul.nav li.li.current-menu-item > a {
   padding: .618em 1em;
   border: 1px solid #e6e6e6;
   background: #f9f9f9;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   -moz-background-clip: padding;
@@ -1474,11 +1320,6 @@ ul.nav li.li.current-menu-item > a {
   font-size: 100%;
   margin-right: .618em;
   font-weight: normal;
-  font-family: 'FontAwesome';
-  display: inline-block;
-  font-size: 100%;
-  margin-right: .618em;
-  font-weight: normal;
   content: '\f09e';
   color: #cd5f5f;
 }
@@ -1538,11 +1379,6 @@ ul.nav li.li.current-menu-item > a {
   font-size: 100%;
   margin-right: .618em;
   font-weight: normal;
-  font-family: 'FontAwesome';
-  display: inline-block;
-  font-size: 100%;
-  margin-right: .618em;
-  font-weight: normal;
   content: '\f075';
 }
 .post p.tags, .type-page p.tags {
@@ -1568,22 +1404,12 @@ ul.nav li.li.current-menu-item > a {
   font-size: 100%;
   margin-right: .618em;
   font-weight: normal;
-  font-family: 'FontAwesome';
-  display: inline-block;
-  font-size: 100%;
-  margin-right: .618em;
-  font-weight: normal;
   content: '\f02c';
 }
 .post img,
 .type-page img,
 .post img.thumbnail,
 .type-page img.thumbnail {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -moz-background-clip: padding;
@@ -1637,11 +1463,6 @@ ul.nav li.li.current-menu-item > a {
   padding: .327em 0;
   background: none;
   border: 0;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -moz-background-clip: padding;
@@ -1741,36 +1562,12 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) 3px 3px 3px #888888;
-  background-color: #f9f9f9;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#e0e0e0));
-  /* Saf4+, Chrome */
-
-  background-image: -webkit-linear-gradient(top, #f9f9f9, #e0e0e0);
-  /* Chrome 10+, Saf5.1+, iOS 5+ */
-
-  background-image: -moz-linear-gradient(top, #f9f9f9, #e0e0e0);
-  /* FF3.6+ */
-
-  background-image: -ms-linear-gradient(top, #f9f9f9, #e0e0e0);
-  /* IE10 */
-
-  background-image: -o-linear-gradient(top, #f9f9f9, #e0e0e0);
-  /* Opera 11.10+ */
-
-  background-image: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
   background-color: #f9f9f9;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#e0e0e0));
   /* Saf4+, Chrome */
@@ -1861,11 +1658,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 #post-author .profile-link {
   margin-top: .619em;
@@ -1876,11 +1668,6 @@ ul.nav li.li.current-menu-item > a {
   margin: 0 0 2.618em;
   padding: 1.618em;
   border: 1px solid #e6e6e6;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -moz-background-clip: padding;
@@ -1966,11 +1753,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 .widget #connect .fl, .widget #connect .fr {
   float: none;
@@ -2001,11 +1783,6 @@ ul.nav li.li.current-menu-item > a {
   text-decoration: underline;
 }
 .widget img {
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -moz-background-clip: padding;
@@ -2074,15 +1851,6 @@ ul.nav li.li.current-menu-item > a {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
   position: relative;
   border-color: #d2d2d2 #e6e6e6 #e6e6e6 #d2d2d2;
   border-width: 1px;
@@ -2103,25 +1871,11 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 0.236em;
-  border-radius: 0.236em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 #searchform .s, #searchform #s {
   line-height: 1.387;
   padding: .382em 2.618em .382em .857em;
   width: 100%;
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
 
@@ -2268,11 +2022,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   white-space: nowrap;
 }
 .widget .tagcloud a:hover {
@@ -2305,22 +2054,12 @@ ul.nav li.li.current-menu-item > a {
   font-size: 100%;
   margin-right: .618em;
   font-weight: normal;
-  font-family: 'FontAwesome';
-  display: inline-block;
-  font-size: 100%;
-  margin-right: .618em;
-  font-weight: normal;
   content: '\f054';
 }
 /* TWITTER */
 .widget_woo_twitter .back {
   padding: 1em;
   background: #f9f9f9;
-  -webkit-border-radius: 0.327em;
-  border-radius: 0.327em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 0.327em;
   border-radius: 0.327em;
   -moz-background-clip: padding;
@@ -2380,18 +2119,6 @@ ul.nav li.li.current-menu-item > a {
   margin: 0;
   border: none!important;
   list-style: none;
-}
-.widget_woodojo_tabs ul.nav-tabs:after,
-.woocommerce_tabs ul.nav-tabs:after,
-.widget_woodojo_tabs ul.tabs:after,
-.woocommerce_tabs ul.tabs:after,
-.widget_woodojo_tabs ul.nav:after,
-.woocommerce_tabs ul.nav:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  clear: both;
 }
 .widget_woodojo_tabs ul.nav-tabs:after,
 .woocommerce_tabs ul.nav-tabs:after,
@@ -2563,11 +2290,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 #comments .comment .comment-container:before {
   content: '';
@@ -2611,11 +2333,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 #comments .comment .comment-entry p {
   margin: 0 0 .857em;
@@ -2626,11 +2343,6 @@ ul.nav li.li.current-menu-item > a {
   font-weight: bold;
 }
 #comments .comment .reply a:before {
-  font-family: 'FontAwesome';
-  display: inline-block;
-  font-size: 100%;
-  margin-right: .618em;
-  font-weight: normal;
   font-family: 'FontAwesome';
   display: inline-block;
   font-size: 100%;
@@ -2744,11 +2456,6 @@ ul.nav li.li.current-menu-item > a {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background: #a0c269;
 }
 #archives .archives_list li {
@@ -2826,20 +2533,8 @@ h3.archive_year {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 /* 6.2 Contact Form */
-#contact-page:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  clear: both;
-}
 #contact-page:after {
   content: "\0020";
   display: block;
@@ -2994,16 +2689,9 @@ h3.archive_year {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 0.236em;
-  border-radius: 0.236em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 .image-gallery-item img:hover {
   border: 1px solid #c6c6c6;
-  box-shadow: 0 1px 0.327em 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 0.327em 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 0.327em 0px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 0.327em 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 0.327em 0px rgba(0, 0, 0, 0.2);
@@ -3163,11 +2851,6 @@ html[xmlns] .flexslider .slides {
   font-size: 100%;
   margin-right: .618em;
   font-weight: normal;
-  font-family: 'FontAwesome';
-  display: inline-block;
-  font-size: 100%;
-  margin-right: .618em;
-  font-weight: normal;
   font-size: 30px !important;
 }
 .flex-direction-nav .flex-next {
@@ -3226,11 +2909,6 @@ html[xmlns] .flexslider .slides {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 .flex-control-paging li a.flex-active, .flex-control-paging li a:hover {
   text-align: center;
@@ -3247,11 +2925,6 @@ html[xmlns] .flexslider .slides {
   margin: 0;
   padding: 0;
   background: #a0c269;
-  -webkit-border-radius: 400px;
-  border-radius: 400px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   -webkit-border-radius: 400px;
   border-radius: 400px;
   -moz-background-clip: padding;
@@ -3355,11 +3028,6 @@ input[type=email] {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 0.236em;
-  border-radius: 0.236em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   font-size: 1em;
   /* Make inputs the same size as normal text */
 
@@ -3395,18 +3063,7 @@ input[type=email] {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
   background: #f9f9f9;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
@@ -3484,15 +3141,6 @@ button.button,
   box-sizing: border-box;
   /* Opera/IE 8+ */
 
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
   -webkit-border-radius: 4px;
   border-radius: 4px;
   -moz-background-clip: padding;
@@ -3508,13 +3156,6 @@ button.button,
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
@@ -3812,11 +3453,6 @@ p.woo-sc-box.rounded, div.woo-sc-box.rounded {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
 }
 p.woo-sc-box.alert, div.woo-sc-box.alert {
   border-color: #f0baa2;
@@ -3882,13 +3518,6 @@ ul.gform_fields li {
   overflow: hidden;
   clear: both;
 }
-.ginput_container:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  clear: both;
-}
 .ginput_container label {
   display: block;
 }
@@ -3928,627 +3557,6 @@ img.ui-datepicker-trigger {
 /* 7.3 IE specific styling */
 .ie8 .widget_woo_blogauthorinfo .avatar {
   width: auto;
-}
-/* LAYOUT RELATED STYLES */
-/*
-The styles in this stylesheet only apply to resolutions 768px and up
-
-CALCULATING DIMENSIONS:
-----------------------
-The layout is fluid. The site wrapper (.col-full) has a fixed pixel max-width.
-All subsequent dimensions are calculated based on that fixed pixel width, using the formula: target / context = result
-Credit - http://www.alistapart.com/articles/fluidgrids/
-
------
-INDEX
------
-
-1. Global dropdown styles
-2. Top Navigation
-3. Main navigation dropdown menus
- -3.1 General dropdown menus
-4. Containers & Columns
-5. Footer widgets
-6. IE Fixes
-
-/*----------------------*/
-@-webkit-keyframes spin-360 {
-  from {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
-  }
-  to {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
-  }
-}
-/*----------------------*/
-@media only screen and (min-width: 768px) {
-  /* 1. GLOBAL DROPDOWN STYLES (these are purely for the dropdown layout and you should only edit the width of the dropdowns) */
-  ul.nav {
-    position: relative;
-    margin-bottom: 0;
-    /* LEVEL 2 */
-  
-    /* LEVEL 3 */
-  
-  }
-  ul.nav li {
-    position: relative;
-    float: left;
-    zoom: 1;
-    list-style: none;
-  }
-  ul.nav li a {
-    display: block;
-    padding: .53em 1em;
-  }
-  ul.nav li.parent > a {
-    position: relative;
-    padding-right: 2em!important;
-  }
-  ul.nav li.parent > a:after {
-    content: '';
-    position: absolute;
-    top: .9em;
-    right: 1em;
-    display: block;
-    width: 0;
-    height: 0;
-    border: 3px solid #fff;
-    border-color: #fff transparent transparent transparent;
-  }
-  ul.nav ul {
-    width: 11.089em;
-    visibility: hidden;
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 9999;
-    margin: 0;
-  }
-  ul.nav ul li {
-    float: none;
-  }
-  ul.nav ul li a {
-    width: 100%;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    /* Safari/Chrome, other WebKit */
-  
-    -moz-box-sizing: border-box;
-    /* Firefox, other Gecko */
-  
-    box-sizing: border-box;
-    /* Opera/IE 8+ */
-  
-    -webkit-box-sizing: border-box;
-    /* Safari/Chrome, other WebKit */
-  
-    -moz-box-sizing: border-box;
-    /* Firefox, other Gecko */
-  
-    box-sizing: border-box;
-    /* Opera/IE 8+ */
-  
-    -webkit-box-sizing: border-box;
-    /* Safari/Chrome, other WebKit */
-  
-    -moz-box-sizing: border-box;
-    /* Firefox, other Gecko */
-  
-    box-sizing: border-box;
-    /* Opera/IE 8+ */
-  
-    -webkit-box-sizing: border-box;
-    /* Safari/Chrome, other WebKit */
-  
-    -moz-box-sizing: border-box;
-    /* Firefox, other Gecko */
-  
-    box-sizing: border-box;
-    /* Opera/IE 8+ */
-  
-  }
-  ul.nav ul li.parent > a:after {
-    top: 1.2em;
-    border-color: transparent transparent transparent #fff;
-  }
-  ul.nav ul ul {
-    left: 100%;
-    top: 0;
-  }
-  ul.nav li:hover > ul {
-    visibility: visible;
-    display: block;
-  }
-  /* 2. TOP NAVIGATION (Add top navigation presentational styles here) */
-  #top #top-nav {
-    display: block;
-  }
-  #top ul.nav {
-    font-size: .857em;
-    /* LEVEL 2 */
-  
-    /* LEVEL 3 */
-  
-  }
-  #top ul.nav > li > a {
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-  }
-  #top ul.nav > li > a:hover {
-    background: #50682a;
-    text-decoration: none;
-  }
-  #top ul.nav > li:hover > a {
-    background: #50682a;
-  }
-  #top ul.nav li a {
-    text-decoration: none;
-  }
-  #top ul.nav li.current_page_item > a,
-  #top ul.nav li.current_page_parent > a,
-  #top ul.nav li.current-menu-ancestor > a,
-  #top ul.nav li.current-cat > a,
-  #top ul.nav li.li.current-menu-item > a {
-    text-decoration: underline;
-  }
-  #top ul.nav li.parent > a:after {
-    top: 1.3em;
-  }
-  #top ul.nav ul {
-    background: #50682a;
-  }
-  #top ul.nav ul li:hover > a {
-    text-decoration: underline;
-  }
-  #top ul.nav ul li.parent > a:after {
-    top: 1.1em;
-  }
-  /* 3. MAIN NAVIGATION DROPDOWN MENUS (Add main navigation presentational styles here) */
-  #navigation {
-    display: block !important;
-    margin: 0.53em 0 0;
-  }
-  #navigation ul.nav {
-    /* LEVEL 2 */
-  
-    /* LEVEL 3 */
-  
-  }
-  #navigation ul.nav > li {
-    margin: 0 0.53em 0 0;
-  }
-  #navigation ul.nav > li > a {
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-  }
-  #navigation ul.nav > li > a:hover {
-    background: #88b048;
-    text-decoration: none;
-  }
-  #navigation ul.nav > li:hover > a {
-    background: #88b048;
-  }
-  #navigation ul.nav li a {
-    padding: .236em 1em;
-    text-decoration: none;
-  }
-  #navigation ul.nav li.current_page_item > a,
-  #navigation ul.nav li.current_page_parent > a,
-  #navigation ul.nav li.current-menu-ancestor > a,
-  #navigation ul.nav li.current-cat > a,
-  #navigation ul.nav li.li.current-menu-item > a {
-    background: #7a9e40;
-    text-decoration: none;
-  }
-  #navigation ul.nav ul {
-    background: #88b048;
-    -webkit-border-radius: 0 5px 5px 5px;
-    -moz-border-radius: 0 5px 5px 5px;
-    border-radius: 0 5px 5px 5px;
-    margin-top: -4px;
-    padding-top: 2px;
-  }
-  #navigation ul.nav ul > li > a {
-    font-size: 0.857em;
-    padding: 0.618em 1em;
-  }
-  #navigation ul.nav ul > li > a:hover {
-    text-decoration: none;
-    background: #7a9e40;
-  }
-  #navigation ul.nav ul > li:hover > a {
-    background: #7a9e40;
-  }
-  #navigation ul.nav ul ul {
-    margin-top: 0;
-    left: 100%;
-  }
-  .nav-toggle {
-    display: none;
-  }
-  /* 4. CONTAINERS & COLUMNS */
-  #header {
-    padding: 3.631em 1.618em 3.631em;
-  }
-  #header #logo {
-    margin-bottom: 0;
-  }
-  #header hgroup {
-    float: left;
-    margin: 0 1.618em 0 0;
-  }
-  #header hgroup h1, #header hgroup h2, #header hgroup h3 {
-    float: none;
-  }
-  #header ul.cart li a {
-    background: #95bb57;
-  }
-  #header #navigation {
-    float: left;
-    width: auto;
-    clear: none;
-  }
-  #header #searchform {
-    margin-bottom: 0;
-  }
-  #header .search_main {
-    float: right;
-    margin: 0.53em 0 0;
-  }
-  #featured .flexslider .slide-content {
-    float: left;
-    width: 48%;
-  }
-  #featured .flexslider .slide-media {
-    float: right;
-    width: 48%;
-    margin: 0;
-  }
-  #featured .flexslider.full-width-slide .has-video .slide-media {
-    float: none;
-    width: 100%;
-    height: auto;
-  }
-  #featured .flexslider .no-image.no-video .slide-content {
-    width: 100%;
-  }
-  #main.fullwidth, .layout-full #main, .col-full {
-    max-width: 75.998em;
-    margin: 0 auto;
-    width: 100%;
-  }
-  #main {
-    width: 62%;
-  }
-  #sidebar {
-    margin-top: 0;
-    width: 34%;
-  }
-  .entry img {
-    max-width: 100%;
-  }
-  .layout-full .entry img {
-    max-width: 100%;
-  }
-  .layout-right-content #main {
-    float: right;
-  }
-  .layout-right-content #sidebar {
-    float: left;
-  }
-  .layout-full #main {
-    width: 100%;
-  }
-  .col-left {
-    float: left;
-  }
-  .col-right {
-    float: right;
-  }
-  .page-template-template-contact-php .location-twitter .col-left {
-    float: left;
-  }
-  .page-template-template-contact-php .location-twitter #office-location {
-    width: 48%;
-    margin: 0;
-  }
-  .page-template-template-contact-php .location-twitter .contact-social {
-    float: right;
-    width: 48%;
-  }
-  .page-template-template-contact-php .location-twitter .contact-social #twitter {
-    margin: 0;
-  }
-  #connect .related-posts {
-    border-top: 0;
-    border-left: 1px solid #e6e6e6;
-    margin-top: 0;
-    padding-top: 0;
-    padding-left: 1em;
-  }
-  #main #connect .col-left, #main #connect .col-right {
-    width: 48%;
-  }
-  #post-author .profile-link {
-    position: absolute;
-    top: 2em;
-    right: 1.618em;
-    margin-top: 0;
-    text-align: right;
-  }
-  /* Homepage Components */
-  .home .features .feature, .home .testimonials .quote, .home .featured-products li.product {
-    margin: 0 3.75% 2.244em 0;
-    clear: none;
-    width: 30.75%;
-    float: left;
-  }
-  #sidebar .features .feature, #sidebar .testimonials .quote, #sidebar .featured-products li.product {
-    margin: 0 0 2.244em 0;
-    clear: both;
-    width: 100%;
-    float: none;
-  }
-  /* Comments Form */
-  #respond #commentform .comment-form-author, #respond #commentform .comment-form-email, #respond #commentform .comment-form-url {
-    width: 30.75%;
-    float: left;
-    margin-right: 3.75%;
-  }
-  #respond #commentform .comment-form-url {
-    margin-right: 0;
-  }
-  /* 5. FOOTER WIDGETS */
-  #footer-widgets .block {
-    margin-right: 3.8%;
-    float: left;
-  }
-  #footer-widgets.col-1 .block {
-    width: 100%;
-    float: none;
-  }
-  #footer-widgets.col-1 .footer-widget-1 {
-    margin-right: 0;
-  }
-  #footer-widgets.col-2 .block {
-    width: 48%;
-  }
-  #footer-widgets.col-2 .footer-widget-2 {
-    margin-right: 0;
-  }
-  #footer-widgets.col-3 .block {
-    width: 30.75%;
-  }
-  #footer-widgets.col-3 .footer-widget-3 {
-    margin-right: 0;
-  }
-  #footer-widgets.col-4 .block {
-    width: 22.05%;
-  }
-  #footer-widgets.col-4 .footer-widget-4 {
-    margin-right: 0;
-  }
-  /* Footer Nav */
-  #footer .col-right {
-    float: right;
-  }
-  #footer .col-left {
-    float: left;
-  }
-  #footer #credit p {
-    float: right;
-  }
-  #footer .nav {
-    float: right;
-  }
-  #footer .nav li a {
-    margin: 0 0 0 1em;
-    padding: 0;
-    color: #4f4f4f;
-  }
-  /* 6. IE FIXES */
-  .ie7 #top-nav {
-    position: relative;
-    z-index: 9999999;
-  }
-  .ie7 #header {
-    position: relative;
-    z-index: 9999999;
-  }
 }
 /**
  * Fonts from Google Fonts.
@@ -4691,19 +3699,6 @@ INDEX
     /* Opera 10.5 */
     transform: rotate(0);
     zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
   }
   50% {
     -webkit-transform: rotate(180deg);
@@ -4745,34 +3740,8 @@ INDEX
     /* Opera 10.5 */
     transform: rotate(180deg);
     zoom: 1;
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
   }
   to {
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
   
@@ -4893,15 +3862,6 @@ INDEX
     box-sizing: border-box;
     /* Opera/IE 8+ */
   
-    -webkit-box-sizing: border-box;
-    /* Safari/Chrome, other WebKit */
-  
-    -moz-box-sizing: border-box;
-    /* Firefox, other Gecko */
-  
-    box-sizing: border-box;
-    /* Opera/IE 8+ */
-  
   }
   ul.nav ul li.parent > a:after {
     top: 1.2em;
@@ -4927,11 +3887,6 @@ INDEX
   
   }
   #top ul.nav > li > a {
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
     -webkit-border-radius: 0;
     border-radius: 0;
     -moz-background-clip: padding;
@@ -4992,11 +3947,6 @@ INDEX
     margin: 0 0.53em 0 0;
   }
   #navigation ul.nav > li > a {
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -moz-background-clip: padding;
@@ -5289,34 +4239,8 @@ INDEX
     /* Opera 10.5 */
     transform: rotate(0);
     zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
   }
   50% {
-    -webkit-transform: rotate(180deg);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(180deg);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-  
-    -o-transform: rotate(180deg);
-    /* Opera 10.5 */
-    transform: rotate(180deg);
-    zoom: 1;
     -webkit-transform: rotate(180deg);
     /* Saf3.1+, Chrome */
   
@@ -5397,19 +4321,6 @@ INDEX
     /* Opera 10.5 */
     transform: rotate(0);
     zoom: 1;
-    -webkit-transform: rotate(0);
-    /* Saf3.1+, Chrome */
-  
-    -moz-transform: rotate(0);
-    /* FF3.5+ */
-  
-    -ms-transform: rotate(0);
-    /* IE9 */
-  
-    -o-transform: rotate(0);
-    /* Opera 10.5 */
-    transform: rotate(0);
-    zoom: 1;
   }
 }
 /*
@@ -5436,11 +4347,12 @@ form.contact-form div {
 form.contact-form label {
   width: 150px;
   display: inline-block;
+  font-size: 16px;
 }
 form.contact-form label span {
-  font-size: 12px;
-  color: #ededed;
-  margin: 0 2px;
+  font-size: 10px;
+  color: #e6e6e6;
+  margin: 0 5px;
 }
 .slide-content header h1 {
   color: white;
