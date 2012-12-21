@@ -8,24 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /*-----------------------------------------------------------------------------------*/
 
 function woothemes_framework_settings_page() {
-    $themename =  get_option( 'woo_themename' );
     $manualurl =  get_option( 'woo_manual' );
 	$shortname =  'framework_woo';
-
-    // Framework Version in Backend Head
-    $woo_framework_version = get_option( 'woo_framework_version' );
-
-    // Version in Backend Header
-	if ( function_exists( 'wp_get_theme' ) ) {
-		$theme_data = wp_get_theme();
-		$local_version = $theme_data->Version;
-		if ( is_child_theme() ) {
-			$local_version = $theme_data->parent()->Version;
-		}
-	} else {
-		$theme_data = get_theme_data( get_template_directory() . '/style.css' );
-		$local_version = $theme_data['Version'];
-	}
 
     //GET themes update RSS feed and do magic
 	include_once(ABSPATH . WPINC . '/feed.php' );
