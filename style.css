@@ -5433,6 +5433,15 @@ INDEX
 form.contact-form div {
   padding: 5px 0;
 }
+form.contact-form label {
+  width: 150px;
+  display: inline-block;
+}
+form.contact-form label span {
+  font-size: 12px;
+  color: #ededed;
+  margin: 0 2px;
+}
 .slide-content header h1 {
   color: white;
   font-size: 2em;
