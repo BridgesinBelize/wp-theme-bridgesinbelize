@@ -23,8 +23,7 @@ jQuery(document).ready(function(){
 	// Coupon button class
 	jQuery('.coupon input.button').addClass('alt-1');
   	
-  	// Avoid widows in headings
-  	jQuery("article header h1 a, .single article header h1, .product_title, .page-title, h1.title a, .product a h3").each(function(){var wordArray=jQuery(this).text().split(" ");var finalTitle="";for(i=0;i<=wordArray.length-1;i++){finalTitle+=wordArray[i];if(i==(wordArray.length-2)){finalTitle+="&nbsp;"}else{finalTitle+=" "}}jQuery(this).html(finalTitle)});
+  	
   	
   	// Show/hide the main navigation
   	jQuery('.nav-toggle').click(function() {

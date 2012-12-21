@@ -38,7 +38,12 @@ $args['meta_query'][] = array( 'key' => '_stock_status', 'value' => array( 'outo
 
 $count = 0;
 $loop = new WP_Query( $args );
-while ( $loop->have_posts() ) : $loop->the_post(); $_product = &new WC_Product( $loop->post->ID ); $count++;
+if ( function_exists( 'get_product' ) ) {
+	$_product = get_product( $loop->post->ID );
+} else { 
+	$_product = new WC_Product( $loop->post->ID );
+}
+while ( $loop->have_posts() ) : $loop->the_post(); $_product; $count++;
 ?>
 
 			<li class="product<?php if( ($count % 3) == 0 ) { echo ' last'; } ?>">

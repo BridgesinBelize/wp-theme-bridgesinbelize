@@ -390,7 +390,7 @@ function express_newPost($args) {
 	$attachments = $content_struct['attachments'];
 	if (is_array($attachments)) {
 		foreach ($attachments as $attachment_ID) {
-			$attachment_post = get_post($attachment_ID,ARRAY_A);
+			$attachment_post = wp_get_single_post($attachment_ID,ARRAY_A);
 			extract($attachment_post, EXTR_SKIP);
 			$post_parent = $post_ID;
 			$postdata = compact('ID', 'post_parent', 'post_content', 'post_title', 'post_category', 'post_status', 'post_excerpt');
@@ -439,7 +439,7 @@ function express_editPost($args) {
 	$attachments = $content_struct['attachments'];
 	if (is_array($attachments)) {
 		foreach ($attachments as $attachment_ID) {
-			$attachment_post = get_post($attachment_ID,ARRAY_A);
+			$attachment_post = wp_get_single_post($attachment_ID,ARRAY_A);
 			extract($attachment_post, EXTR_SKIP);
 			$post_parent = $post_ID;
 			$postdata = compact('ID', 'post_parent', 'post_content', 'post_title', 'post_category', 'post_status', 'post_excerpt');

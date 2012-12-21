@@ -6,9 +6,9 @@ jQuery( document ).ready( function ( e ) {
 				imageTitle = jQuery( this ).next().text();
 			}
 			
-			jQuery( this ).attr( 'rel', 'lightbox' ).attr( 'title', imageTitle );
+			jQuery( this ).attr( 'rel', 'prettyPhoto[gallery]' ).attr( 'title', imageTitle );
 		});
 		
-		jQuery( 'a[rel^="lightbox"]' ).prettyPhoto({social_tools: false});
+		jQuery( 'a[rel^="prettyPhoto[gallery]"]' ).prettyPhoto({social_tools: false});
 	}
 });

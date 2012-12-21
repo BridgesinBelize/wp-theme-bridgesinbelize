@@ -22,8 +22,10 @@ if ( ! function_exists( 'wp' ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) && base
 				'homepage_content_type' => 'posts', 
 				'homepage_enable_features' => 'true', 
 				'homepage_enable_testimonials' => 'true', 
-				'homepage_features_title' => sprintf( __( 'What features does %s offer?', 'woothemes' ), get_bloginfo( 'name' ) ), 
-				'homepage_testimonials_title' => sprintf( __( 'What people think of %s', 'woothemes' ), get_bloginfo( 'name' ) )
+				'homepage_features_title' => '', 
+				'homepage_testimonials_title' => '', 
+				'homepage_number_of_features' => 3, 
+				'homepage_number_of_testimonials' => 3, 
 				);
 					
 	$settings = woo_get_dynamic_values( $settings );
@@ -47,11 +49,11 @@ if ( ! function_exists( 'wp' ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) && base
 			}
 
 			if ( 'true' == $settings['homepage_enable_features'] ) {
-				do_action( 'woothemes_features', array( 'title' => $settings['homepage_features_title'] ) );
+				do_action( 'woothemes_features', array( 'title' => $settings['homepage_features_title'], 'limit' => $settings['homepage_number_of_features'] ) );
 			}
 
 			if ( 'true' == $settings['homepage_enable_testimonials'] ) {
-				do_action( 'woothemes_testimonials', array( 'title' => $settings['homepage_testimonials_title'] ) );
+				do_action( 'woothemes_testimonials', array( 'title' => $settings['homepage_testimonials_title'], 'limit' => $settings['homepage_number_of_testimonials'] ) );
 			}
 
 			if ( is_woocommerce_activated() && 'true' == $settings['homepage_enable_featured_products'] ) {

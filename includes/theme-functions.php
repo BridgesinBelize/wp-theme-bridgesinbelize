@@ -640,7 +640,7 @@ if ( ! function_exists( 'woo_featured_slider_loader' ) ) {
 function woo_featured_slider_loader () {
 	$settings = woo_get_dynamic_values( array( 'featured' => 'true' ) );
 
-	if ( is_home() && ( $settings['featured'] == 'true' ) ) {
+	if ( ( is_home() || is_front_page() ) && ( $settings['featured'] == 'true' ) ) {
 		get_template_part( 'includes/featured', 'slider' );
 	}
 } // End woo_featured_slider_loader()
@@ -656,7 +656,7 @@ if ( ! function_exists( 'woo_featured_slider_get_slides' ) ) {
 function woo_featured_slider_get_slides ( $args ) {
 	$defaults = array( 'limit' => '5', 'order' => 'DESC', 'term' => '0' );
 	$args = wp_parse_args( (array)$args, $defaults );
-	$query_args = array( 'post_type' => 'slide' );
+	$query_args = array( 'post_type' => 'slide', 'suppress_filters' => false );
 	if ( in_array( strtoupper( $args['order'] ), array( 'ASC', 'DESC' ) ) ) {
 		$query_args['order'] = strtoupper( $args['order'] );
 	}

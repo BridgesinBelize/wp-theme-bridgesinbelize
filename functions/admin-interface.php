@@ -268,11 +268,26 @@ if ( ! function_exists( 'woo_reset_options' ) ) {
 
 if ( ! function_exists( 'woothemes_options_page' ) ) {
 	function woothemes_options_page() {
-		global $pagenow;
 
 		$options =  get_option( 'woo_template' );
+		$themename =  get_option( 'woo_themename' );
 		$shortname =  get_option( 'woo_shortname' );
 		$manualurl =  get_option( 'woo_manual' );
+
+		// Framework Version in Backend Header
+		$woo_framework_version = get_option( 'woo_framework_version' );
+
+		// Version in Backend Header
+		if ( function_exists( 'wp_get_theme' ) ) {
+			$theme_data = wp_get_theme();
+			$local_version = $theme_data->Version;
+			if ( is_child_theme() ) {
+				$local_version = $theme_data->parent()->Version;
+			}
+		} else {
+			$theme_data = get_theme_data( get_template_directory() . '/style.css' );
+			$local_version = $theme_data['Version'];
+		}
 
 		//GET themes update RSS feed and do magic
 		include_once( ABSPATH . WPINC . '/feed.php' );
@@ -282,6 +297,8 @@ if ( ! function_exists( 'woothemes_options_page' ) ) {
 
 		//add filter to make the rss read cache clear every 4 hours
 		//add_filter( 'wp_feed_cache_transient_lifetime', create_function( '$a', 'return 14400;' ) );
+
+		global $pagenow;
 ?>
 <div class="wrap" id="woo_container">
 <?php
@@ -300,13 +317,14 @@ if ( ! function_exists( 'woothemes_options_page' ) ) {
     <form action="" enctype="multipart/form-data" id="wooform" method="post">
     <?php
 		// Add nonce for added security.
-		if ( function_exists( 'wp_nonce_field' ) ) { wp_nonce_field( 'wooframework-theme-options-update' ); }
+		if ( function_exists( 'wp_nonce_field' ) ) { wp_nonce_field( 'wooframework-theme-options-update' ); } // End IF Statement
 
 		$woo_nonce = '';
 
-		if ( function_exists( 'wp_create_nonce' ) ) { $woo_nonce = wp_create_nonce( 'wooframework-theme-options-update' ); }
+		if ( function_exists( 'wp_create_nonce' ) ) { $woo_nonce = wp_create_nonce( 'wooframework-theme-options-update' ); } // End IF Statement
 
 		if ( $woo_nonce == '' ) {} else {
+
 ?>
     	<input type="hidden" name="_ajax_nonce" value="<?php echo $woo_nonce; ?>" />
     <?php
@@ -1328,17 +1346,13 @@ if ( ! function_exists( 'woothemes_machine' ) ) {
 				/* Font Weight */
 				$val = $default['style'];
 				if ( $typography_stored['style'] != "" ) { $val = $typography_stored['style']; }
-				$thin = ''; $thinitalic = ''; $normal = ''; $italic = ''; $bold = ''; $bolditalic = '';
-				if( $val == '300' ) { $thin = 'selected="selected"'; }
-				if( $val == '300 italic' ) { $thinitalic = 'selected="selected"'; }
+				$normal = ''; $italic = ''; $bold = ''; $bolditalic = '';
 				if( $val == 'normal' ) { $normal = 'selected="selected"'; }
 				if( $val == 'italic' ) { $italic = 'selected="selected"'; }
 				if( $val == 'bold' ) { $bold = 'selected="selected"'; }
 				if( $val == 'bold italic' ) { $bolditalic = 'selected="selected"'; }
 
 				$output .= '<select class="woo-typography woo-typography-style" name="'. esc_attr( $value['id'].'_style' ) . '" id="'. esc_attr( $value['id'].'_style' ) . '">';
-				$output .= '<option value="300" '. $thin .'>Thin</option>';
-				$output .= '<option value="300 italic" '. $thinitalic .'>Thin/Italic</option>';
 				$output .= '<option value="normal" '. $normal .'>Normal</option>';
 				$output .= '<option value="italic" '. $italic .'>Italic</option>';
 				$output .= '<option value="bold" '. $bold .'>Bold</option>';

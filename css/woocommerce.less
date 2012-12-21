@@ -312,6 +312,7 @@ p.stars {
 	}
 }
 .woocommerce_info {
+	clear:both; 
 	&:before {
 		content: "\f05a";
 		color: @info;
@@ -357,6 +358,10 @@ p.stars {
 .quantity {
 	width:3.9em;
 	position: relative;
+	/* Disable input[type=number] buttons until the world is ready */
+	input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+		display:none;
+	}
 	.qty {
 		.borderbox;
 		width:2.618em;
@@ -392,6 +397,7 @@ p.stars {
 }
 ul.products {
 	.clearfix;
+	clear:both;
 	margin-left: 0!important;
 	list-style: none;
 	position: relative;

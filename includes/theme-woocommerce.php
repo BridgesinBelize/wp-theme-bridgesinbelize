@@ -104,7 +104,6 @@ if ( ! function_exists( 'woocommerce_theme_before_content' ) ) {
 		}
 		?>
 		<!-- #content Starts -->
-		<?php woo_content_before(); ?>
 	    <div id="content" class="col-full <?php if ( ! is_single() ) { echo esc_attr( $columns ); } ?>">
 			
 	        <!-- #main Starts -->
@@ -237,6 +236,22 @@ if ( ! function_exists( 'wooframework_layout_body_class' ) ) {
 		$wc_classes[] = $layout;
 		return $wc_classes;		
 	} // End woocommerce_layout_body_class()
+}
+
+// If theme lightbox is enabled, disable the WooCommerce lightbox and make product images prettyPhoto galleries
+add_action( 'wp_footer', 'woocommerce_prettyphoto' );
+function woocommerce_prettyphoto() {
+	global $woo_options;
+	if ( $woo_options[ 'woo_enable_lightbox' ] == "true" ) {
+		update_option( 'woocommerce_enable_lightbox', false );
+		?>
+			<script>
+				jQuery(document).ready(function(){
+					jQuery('.images a').attr('rel', 'prettyPhoto[product-gallery]');
+				});
+			</script>
+		<?php
+	}
 }
 
 // Ensure cart contents update when products are added to the cart via AJAX

@@ -608,6 +608,14 @@ $options[] = array( 'name' => __( 'Posts Category', 'woothemes' ),
 $options[] = array( 'name' => __( 'Features', 'woothemes' ),
                     'type' => 'subheading' );
 
+$options[] = array( 'name' => __( 'Number of Features', 'woothemes' ),
+                    'desc' => __( 'Select the number of features to display on the homepage.', 'woothemes' ),
+                    'id' => $shortname . '_homepage_number_of_features',
+                    'std' => '3',
+                    'type' => 'select2',
+                    'options' => $woo_numbers
+                  );
+
 $options[] = array( 'name' => __( 'Title', 'woothemes' ),
                         'desc' => __( 'Title text for the "Features" section on the homepage.', 'woothemes' ),
                         'id' => $shortname . '_homepage_features_title',
@@ -616,6 +624,14 @@ $options[] = array( 'name' => __( 'Title', 'woothemes' ),
 
 $options[] = array( 'name' => __( 'Testimonials', 'woothemes' ),
                     'type' => 'subheading' );
+
+$options[] = array( 'name' => __( 'Number of Testimonials', 'woothemes' ),
+                    'desc' => __( 'Select the number of testimonials to display on the homepage.', 'woothemes' ),
+                    'id' => $shortname . '_homepage_number_of_testimonials',
+                    'std' => '3',
+                    'type' => 'select2',
+                    'options' => $woo_numbers
+                  );
 
 $options[] = array( 'name' => __( 'Title', 'woothemes' ),
                         'desc' => __( 'Title text for the "Testimonials" section on the homepage.', 'woothemes' ),
