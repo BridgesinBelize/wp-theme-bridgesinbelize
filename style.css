@@ -1,7 +1,7 @@
 /*  
 Theme Name: Definition
 Theme URI: http://www.woothemes.com/
-Version: 1.3.0
+Version: 1.3.1
 Description: Designed by <a href="http://www.woothemes.com">WooThemes</a>.
 Author: WooThemes
 Author URI: http://www.woothemes.com
@@ -276,19 +276,23 @@ sub {
 .fix:before,
 .fix:after,
 .col-full:before,
-.col-full:after {
+.col-full:after,
+.clear:before,
+.clear:after {
   content: "\0020";
   display: block;
   height: 0;
   overflow: hidden;
 }
 .fix:after,
-.col-full:after {
+.col-full:after,
+.clear:after {
   clear: both;
 }
 /* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
 .fix,
-.col-full {
+.col-full,
+.clear {
   zoom: 1;
 }
 /*-------------------------------------------------------------------------------------------*/
@@ -1609,25 +1613,32 @@ ul.nav li.li.current-menu-item > a {
 }
 /* WOOTABS */
 .widget_woodojo_tabs,
-.woocommerce_tabs {
+.woocommerce_tabs,
+.woocommerce-tabs {
   clear: both;
 }
 .widget_woodojo_tabs ul.nav-tabs,
 .woocommerce_tabs ul.nav-tabs,
+.woocommerce-tabs ul.nav-tabs,
 .widget_woodojo_tabs ul.tabs,
 .woocommerce_tabs ul.tabs,
+.woocommerce-tabs ul.tabs,
 .widget_woodojo_tabs ul.nav,
-.woocommerce_tabs ul.nav {
+.woocommerce_tabs ul.nav,
+.woocommerce-tabs ul.nav {
   margin: 0;
   border: none!important;
   list-style: none;
 }
 .widget_woodojo_tabs ul.nav-tabs:after,
 .woocommerce_tabs ul.nav-tabs:after,
+.woocommerce-tabs ul.nav-tabs:after,
 .widget_woodojo_tabs ul.tabs:after,
 .woocommerce_tabs ul.tabs:after,
+.woocommerce-tabs ul.tabs:after,
 .widget_woodojo_tabs ul.nav:after,
-.woocommerce_tabs ul.nav:after {
+.woocommerce_tabs ul.nav:after,
+.woocommerce-tabs ul.nav:after {
   content: "\0020";
   display: block;
   height: 0;
@@ -1636,20 +1647,26 @@ ul.nav li.li.current-menu-item > a {
 }
 .widget_woodojo_tabs ul.nav-tabs li,
 .woocommerce_tabs ul.nav-tabs li,
+.woocommerce-tabs ul.nav-tabs li,
 .widget_woodojo_tabs ul.tabs li,
 .woocommerce_tabs ul.tabs li,
+.woocommerce-tabs ul.tabs li,
 .widget_woodojo_tabs ul.nav li,
-.woocommerce_tabs ul.nav li {
+.woocommerce_tabs ul.nav li,
+.woocommerce-tabs ul.nav li {
   float: left;
   margin-bottom: 0;
   display: block;
 }
 .widget_woodojo_tabs ul.nav-tabs li a,
 .woocommerce_tabs ul.nav-tabs li a,
+.woocommerce-tabs ul.nav-tabs li a,
 .widget_woodojo_tabs ul.tabs li a,
 .woocommerce_tabs ul.tabs li a,
+.woocommerce-tabs ul.tabs li a,
 .widget_woodojo_tabs ul.nav li a,
-.woocommerce_tabs ul.nav li a {
+.woocommerce_tabs ul.nav li a,
+.woocommerce-tabs ul.nav li a {
   border-bottom: 0;
   background: rgba(230, 230, 230, 0.5);
   border: 1px solid #e6e6e6;
@@ -1665,44 +1682,59 @@ ul.nav li.li.current-menu-item > a {
 }
 .widget_woodojo_tabs ul.nav-tabs li a:hover,
 .woocommerce_tabs ul.nav-tabs li a:hover,
+.woocommerce-tabs ul.nav-tabs li a:hover,
 .widget_woodojo_tabs ul.tabs li a:hover,
 .woocommerce_tabs ul.tabs li a:hover,
+.woocommerce-tabs ul.tabs li a:hover,
 .widget_woodojo_tabs ul.nav li a:hover,
-.woocommerce_tabs ul.nav li a:hover {
+.woocommerce_tabs ul.nav li a:hover,
+.woocommerce-tabs ul.nav li a:hover {
   color: #557fae !important;
 }
 .widget_woodojo_tabs ul.nav-tabs li:last-child a,
 .woocommerce_tabs ul.nav-tabs li:last-child a,
+.woocommerce-tabs ul.nav-tabs li:last-child a,
 .widget_woodojo_tabs ul.tabs li:last-child a,
 .woocommerce_tabs ul.tabs li:last-child a,
+.woocommerce-tabs ul.tabs li:last-child a,
 .widget_woodojo_tabs ul.nav li:last-child a,
-.woocommerce_tabs ul.nav li:last-child a {
+.woocommerce_tabs ul.nav li:last-child a,
+.woocommerce-tabs ul.nav li:last-child a {
   border-right-width: 1px;
 }
 .widget_woodojo_tabs ul.nav-tabs li.active,
 .woocommerce_tabs ul.nav-tabs li.active,
+.woocommerce-tabs ul.nav-tabs li.active,
 .widget_woodojo_tabs ul.tabs li.active,
 .woocommerce_tabs ul.tabs li.active,
+.woocommerce-tabs ul.tabs li.active,
 .widget_woodojo_tabs ul.nav li.active,
-.woocommerce_tabs ul.nav li.active {
+.woocommerce_tabs ul.nav li.active,
+.woocommerce-tabs ul.nav li.active {
   position: relative;
 }
 .widget_woodojo_tabs ul.nav-tabs li.active a,
 .woocommerce_tabs ul.nav-tabs li.active a,
+.woocommerce-tabs ul.nav-tabs li.active a,
 .widget_woodojo_tabs ul.tabs li.active a,
 .woocommerce_tabs ul.tabs li.active a,
+.woocommerce-tabs ul.tabs li.active a,
 .widget_woodojo_tabs ul.nav li.active a,
-.woocommerce_tabs ul.nav li.active a {
+.woocommerce_tabs ul.nav li.active a,
+.woocommerce-tabs ul.nav li.active a {
   position: relative;
   background: #fff;
   color: #557fae !important;
 }
 .widget_woodojo_tabs ul.nav-tabs li.active a:after,
 .woocommerce_tabs ul.nav-tabs li.active a:after,
+.woocommerce-tabs ul.nav-tabs li.active a:after,
 .widget_woodojo_tabs ul.tabs li.active a:after,
 .woocommerce_tabs ul.tabs li.active a:after,
+.woocommerce-tabs ul.tabs li.active a:after,
 .widget_woodojo_tabs ul.nav li.active a:after,
-.woocommerce_tabs ul.nav li.active a:after {
+.woocommerce_tabs ul.nav li.active a:after,
+.woocommerce-tabs ul.nav li.active a:after {
   content: "";
   display: block;
   position: absolute;
@@ -1713,30 +1745,35 @@ ul.nav li.li.current-menu-item > a {
   background: #fff;
 }
 .widget_woodojo_tabs .tab-pane,
-.woocommerce_tabs .tab-pane {
+.woocommerce_tabs .tab-pane,
+.woocommerce-tabs .tab-pane {
   margin-top: 0;
   background: #fff;
   border: 1px solid #e6e6e6;
   padding: .53em;
 }
 .widget_woodojo_tabs .tab-pane ul li,
-.woocommerce_tabs .tab-pane ul li {
+.woocommerce_tabs .tab-pane ul li,
+.woocommerce-tabs .tab-pane ul li {
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: .857em;
   padding: 0 0 1em;
 }
 .widget_woodojo_tabs .tab-pane ul li:last-child,
-.woocommerce_tabs .tab-pane ul li:last-child {
+.woocommerce_tabs .tab-pane ul li:last-child,
+.woocommerce-tabs .tab-pane ul li:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
   border-bottom: none;
 }
 .widget_woodojo_tabs .tabs-below ul.nav-tabs li a,
-.woocommerce_tabs .tabs-below ul.nav-tabs li a {
+.woocommerce_tabs .tabs-below ul.nav-tabs li a,
+.woocommerce-tabs .tabs-below ul.nav-tabs li a {
   border-width: 0 1px 1px!important;
 }
 .widget_woodojo_tabs .tabs-below ul.nav-tabs li.active a:after,
-.woocommerce_tabs .tabs-below ul.nav-tabs li.active a:after {
+.woocommerce_tabs .tabs-below ul.nav-tabs li.active a:after,
+.woocommerce-tabs .tabs-below ul.nav-tabs li.active a:after {
   display: none;
 }
 /*-------------------------------------------------------------------------------------------*/

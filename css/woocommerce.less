@@ -72,7 +72,7 @@ p.stars {
 	}
 }
 
-.creat-account  {
+.create-account  {
 	clear: both;
 }
 
@@ -280,7 +280,7 @@ p.stars {
 }
 
 // Messages / notifications
-.woocommerce_message, .woocommerce_info, .woocommerce_error {
+.woocommerce_message, .woocommerce_info, .woocommerce_error, .woocommerce-message, .woocommerce-error, .woocommerce-info {
 	margin-left: 0!important;
 	padding:1em 1em 1em 2.618em;
 	border:1px solid @border_main;
@@ -305,20 +305,20 @@ p.stars {
 		list-style: none;
 	}
 }
-.woocommerce_message {
+.woocommerce_message, .woocommerce-message {
 	&:before {
 		content: "\f05d";
 		color: @success;
 	}
 }
-.woocommerce_info {
+.woocommerce_info, .woocommerce-info {
 	clear:both; 
 	&:before {
 		content: "\f05a";
 		color: @info;
 	}
 }
-.woocommerce_error {
+.woocommerce_error, .woocommerce-error {
 	&:before {
 		content: "\f05c";
 		color: @error;
@@ -460,10 +460,18 @@ ul.products {
 				display: block;
 			}
 		}
+		.added_to_cart {
+			position: absolute;
+			top:50%;
+			right:-1px;
+			background: #fff;
+			padding:.5em 1em;
+			.border_radius_left(2px);
+		}
 	}
 }
 
-.woocommerce_result_count  {
+.woocommerce_result_count, .woocommerce-result-count  {
 	margin: 0 0 .53em;
 }
 
@@ -475,7 +483,7 @@ ul.products {
 		text-align: left;
 		padding:0;
 	}
-	.woocommerce_ordering {
+	.woocommerce_ordering, .woocommerce-ordering {
 		width:30.75%;
 		float: right;
 		text-align: right;
@@ -530,7 +538,7 @@ ul.products {
 			}
 		}
 	}
-	.woocommerce_tabs  {
+	.woocommerce_tabs, .woocommerce-tabs {
 		margin: 0 0 2.618em;
 		ul.tabs  {
 			li  {
@@ -694,6 +702,14 @@ table.cart {
 	#coupon_code  {
 		position: relative;
 		top: 1px;
+	}
+}
+
+#shipping_method {
+	list-style: none;
+	margin:0 !important;
+	li {
+		list-style: none;
 	}
 }
 
@@ -911,11 +927,11 @@ table.cart {
 		}
 	}
 	
-	.woocommerce_result_count  {
+	.woocommerce_result_count, .woocommerce-result-count  {
 		float: left;
 		margin: 0 0 1.618em;
 	}
-	.woocommerce_ordering  {
+	.woocommerce_ordering, .woocommerce-ordering {
 		float: right;
 	}
 	
