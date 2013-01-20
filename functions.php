@@ -11,6 +11,7 @@ function jetpack_deregister_styles() {
     wp_deregister_style( 'jetpack-widgets' );
     wp_deregister_style( 'sharedaddy' );
     wp_deregister_style( 'sharing' );
+    wp_deregister_style( 'woo-layout' );
 }
 add_action( 'wp_print_styles', 'jetpack_deregister_styles', 100 );
 
