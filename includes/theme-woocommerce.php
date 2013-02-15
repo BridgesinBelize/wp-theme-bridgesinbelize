@@ -1,6 +1,12 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/*-----------------------------------------------------------------------------------*/
+/* This theme supports WooCommerce, woo! */
+/*-----------------------------------------------------------------------------------*/
+
+add_theme_support( 'woocommerce' );
+
 global $woo_options;
 
 // Disable WooCommerce styles
@@ -51,7 +57,7 @@ add_action( 'wp_head','wooframework_tab_check' );
 if ( ! function_exists( 'wooframework_tab_check' ) ) {
 	function wooframework_tab_check() {
 		global $woo_options;
-		if ( isset( $woo_options['woocommerce_product_tabs'] ) && 'false' == $woo_options['woocommerce_product_tabs'] ) { 
+		if ( isset( $woo_options['woocommerce_product_tabs'] ) && 'false' == $woo_options['woocommerce_product_tabs'] ) {
 			remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 		}
 	} // End wooframework_tab_check()
@@ -62,7 +68,7 @@ add_action( 'wp_head','wooframework_related_products' );
 if ( ! function_exists( 'wooframework_related_products' ) ) {
 	function wooframework_related_products() {
 		global $woo_options;
-		if ( isset( $woo_options['woocommerce_related_products'] ) &&  'false' == $woo_options['woocommerce_related_products'] ) { 
+		if ( isset( $woo_options['woocommerce_related_products'] ) &&  'false' == $woo_options['woocommerce_related_products'] ) {
 			remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 		}
 	} // End wooframework_related_products()
@@ -74,7 +80,7 @@ add_filter( 'woocommerce_placeholder_img_src', 'wooframework_wc_placeholder_img_
 if ( ! function_exists( 'wooframework_wc_placeholder_img_src' ) ) {
 	function wooframework_wc_placeholder_img_src( $src ) {
 		global $woo_options;
-		if ( isset( $woo_options['woo_placeholder_url'] ) && '' != $woo_options['woo_placeholder_url'] ) {   
+		if ( isset( $woo_options['woo_placeholder_url'] ) && '' != $woo_options['woo_placeholder_url'] ) {
 			$src = $woo_options['woo_placeholder_url'];
 		}
 		else {
@@ -105,11 +111,11 @@ if ( ! function_exists( 'woocommerce_theme_before_content' ) ) {
 		?>
 		<!-- #content Starts -->
 	    <div id="content" class="col-full <?php if ( ! is_single() ) { echo esc_attr( $columns ); } ?>">
-			
+
 	        <!-- #main Starts -->
 	        <?php woo_main_before(); ?>
 	        <div id="main" class="col-left">
-	        
+
 	    <?php
 	} // End woocommerce_theme_before_content()
 }
@@ -118,10 +124,10 @@ if ( ! function_exists( 'woocommerce_theme_before_content' ) ) {
 if ( ! function_exists( 'woocommerce_theme_after_content' ) ) {
 	function woocommerce_theme_after_content() {
 		?>
-		
+
 			</div><!-- /#main -->
 	        <?php woo_main_after(); ?>
-	    
+
 	    </div><!-- /#content -->
 		<?php woo_content_after(); ?>
 	    <?php
@@ -141,14 +147,14 @@ add_action( 'woo_main_after', 'woocommerce_get_sidebar', 10 );
 if ( ! function_exists( 'woocommerce_get_sidebar' ) ) {
 	function woocommerce_get_sidebar() {
 		if ( is_home() ) return;
-		
+
 		global $woo_options;
-		
+
 		// Display the sidebar if full width option is disabled on archives
 		if ( isset( $woo_options['woocommerce_archives_fullwidth'] ) && 'false' == $woo_options['woocommerce_archives_fullwidth'] && is_archive( array( 'product' ) ) ) {
 			get_sidebar('shop');
 		}
-		
+
 		// Don't display the sidebar on the full width template
 		if ( is_singular() && ! is_page_template( 'template-fullwidth.php' ) ) {
 			get_sidebar( 'shop' );
@@ -162,7 +168,7 @@ if ( ! function_exists( 'woocommerce_get_sidebar' ) ) {
 if ( ! function_exists( 'woocommerce_get_sidebar' ) ) {
 	function woocommerce_get_sidebar() {
 		global $woo_options;
-		
+
 		if ( ! is_woocommerce() ) {
 			get_sidebar();
 		} elseif ( isset( $woo_options['woocommerce_archives_fullwidth'] ) && 'false' == $woo_options['woocommerce_archives_fullwidth'] && ( is_woocommerce() || is_product() ) ) {
@@ -190,16 +196,16 @@ function woocommerceframework_pagination() {
 if ( ! function_exists( 'woocommerceframework_add_search_fragment' ) ) {
 function woocommerceframework_add_search_fragment ( $settings ) {
 	$settings['add_fragment'] = '&post_type=product';
-	
-	return $settings;	
+
+	return $settings;
 } // End woocommerceframework_add_search_fragment()
 }
 
 if ( ! function_exists( 'woocommerceframework_woo_pagination_defaults' ) ) {
 function woocommerceframework_woo_pagination_defaults ( $settings ) {
 	$settings['use_search_permastruct'] = false;
-	
-	return $settings;	
+
+	return $settings;
 } // End woocommerceframework_woo_pagination_defaults()
 }
 
@@ -224,17 +230,17 @@ add_filter( 'body_class','wooframework_layout_body_class', 10 );		// Add layout 
 if ( ! function_exists( 'wooframework_layout_body_class' ) ) {
 	function wooframework_layout_body_class( $wc_classes ) {
 		global $woo_options;
-		
+
 		$layout = '';
-		
+
 		// Add woocommerce-fullwidth class if full width option is enabled
 		if ( isset( $woo_options['woocommerce_archives_fullwidth'] ) && 'true' == $woo_options['woocommerce_archives_fullwidth'] && ( is_shop() || is_product_category() ) ) {
 			$layout = 'layout-full';
 		}
-		
-		// Add classes to body_class() output 
+
+		// Add classes to body_class() output
 		$wc_classes[] = $layout;
-		return $wc_classes;		
+		return $wc_classes;
 	} // End woocommerce_layout_body_class()
 }
 

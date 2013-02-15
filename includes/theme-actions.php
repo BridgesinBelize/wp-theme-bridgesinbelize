@@ -617,6 +617,18 @@ function woo_filter_homepage_blog_posts_query ( $query ) {
 add_filter( 'pre_get_posts', 'woo_filter_homepage_blog_posts_query' );
 
 /*-----------------------------------------------------------------------------------*/
+/* Add fixing DIV to checkout page for new account registration */
+/*-----------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'woo_fix_new_registration_layout_on_checkout' ) ) {
+function woo_fix_new_registration_layout_on_checkout () {
+	echo '<div class="fix"></div>';
+} // End woo_filter_homepage_blog_posts_query()
+}
+
+add_action( 'woocommerce_before_checkout_registration_form' , 'woo_fix_new_registration_layout_on_checkout' , 100 );
+
+/*-----------------------------------------------------------------------------------*/
 /* END */
 /*-----------------------------------------------------------------------------------*/
 ?>

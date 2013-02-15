@@ -15,15 +15,15 @@ global $woocommerce;
 $settings = array(
 				'homepage_number_of_products' => 5
 				);
-					
+
 $settings = woo_get_dynamic_values( $settings );
 
 ?>
 
 <div class="featured-products widget">
-	
+
 	<h2><?php _e( 'Featured Products', 'woothemes' ); ?></h2>
-	
+
 	<ul class="products">
 <?php
 $i = 0;
@@ -41,7 +41,7 @@ $loop = new WP_Query( $args );
 while ( $loop->have_posts() ) : $loop->the_post(); $_product; $count++;
 if ( function_exists( 'get_product' ) ) {
 	$_product = get_product( $loop->post->ID );
-} else { 
+} else {
 	$_product = new WC_Product( $loop->post->ID );
 }
 ?>
@@ -58,20 +58,20 @@ if ( has_post_thumbnail( $loop->post->ID ) ) {
 ?>
 
 				<h3><?php the_title(); ?></h3>
-				
+
 				<span class="price"><?php echo $_product->get_price_html(); ?></span>
-				
+
 				<section class="entry">
-					<?php the_excerpt(); ?>
+					<?php woocommerce_template_single_excerpt(); ?>
 				</section>
 
 				<?php woocommerce_template_loop_add_to_cart( $loop->post, $_product ); ?>
-				
+
 				</a>
 
 			</li>
 	<?php endwhile; ?>
 
 	</ul><!--/.featured-1-->
-	
+
 </div>
