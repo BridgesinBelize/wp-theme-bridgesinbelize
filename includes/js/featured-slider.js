@@ -6,7 +6,7 @@ jQuery( window ).load( function() {
    	jQuery( '#featured-slider' ).flexslider({
      		animation: woo_localized_data.animation,
      		controlsContainer: woo_localized_data.controlsContainer,
-        smoothHeight: woo_localized_data.smoothHeight,
+        	smoothHeight: woo_localized_data.smoothHeight,
      		directionNav: woo_localized_data.directionNav,
    			controlNav: woo_localized_data.controlNav,
    			manualControls: woo_localized_data.manualControls,

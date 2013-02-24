@@ -1,8 +1,34 @@
 *** Definition Changelog ***
 
+2013.02.19 - version 1.3.4
+ * /css/layout.css - Full width slider desktop layout tweak
+
+2013.02.11 - version 1.3.3
+ * style.css - Fixed nav toggle icon not displaying on Android devices.  (Use @font-face icon instead of ASCII char)
+ 			 - Adjusted slider arrow on mobile resolutions.
+ * header.php - Removed ASCII char.
+ * includes/theme-woocommerce.php - added WooCommerce support flag
+
+2013.02.01 - version 1.3.2
+ * style.css - Adjusted full-width slide for mobile devices, fixed layout of checkboxes on checkout page & added styling for WooCommerce demo store banner
+ * /css/layout.css - Adjusted full-width slide for mobile devices, fixed layout of checkboxes on checkout page & added styling for WooCommerce demo store banner
+ * includes/featured-products.php - Product excerpt now uses woocommerce_template_single_excerpt();
+ * includes/theme-actions.php - Fixed new registration text layout on checkout page
+
+2013.01.14 - version 1.3.1
+ * /inclues/featured-products.php - Fixes featured product price bug
+ * /includes/js/jquery.flexslider-min.js - Upgrade FlexSlider to the latest version.
+ * /css/woocommerce.less,
+   /css/woocommerce.css - Amend ".creat-account" to ".create-account". Fixes visual bug when creating an account on checkout. Add support for WooCommerce 2.0 CSS classes.
+ * style.less,
+   style.css - Adds ".clear" to the styling for ".fix". Fixes visual bug on WooCommerce address editing screens.
+
 2012.12.20 - version 1.3.0
  * /includes/theme-options.php - Add theme options to control how many features and testimonials display on the homepage.
  * index.php - Add logic to determine how many features and testimonials display on the homepage.
+
+2012.12.18 - version 1.2.1
+ * style.css - fixed max width on images with caption
 
 2012.12.06 - version 1.2.0
  * woocommerce.css - Styling preparation for WooCommerce 2.0
@@ -23,7 +49,7 @@
              - slider pagination fix when using custom typography
 
 2012.11.15 - version 1.1.0
- * /css/login.less, 
+ * /css/login.less,
    /css/login.css - Make sure the login branding in the WooFramework and WooDojo can override the default login logo.
  * /includes/specific-page-content.php - Display the sidebar when displaying specific page content on the homepage.
  * /includes/theme-options.php - Add options to enable/disable the features and testimonials display on the homepage. Add options to customise the titles of "Features" and "Testimonials" on the homepage. Add custom field to slides to use the featured image as the slide background image instead.

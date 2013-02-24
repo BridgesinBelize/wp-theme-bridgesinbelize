@@ -302,6 +302,19 @@ INDEX
   #featured .flexslider .no-image.no-video .slide-content {
     width: 100%;
   }
+  #featured-slider.flexslider .has-slide-background {
+    position: relative;
+  }
+  #featured-slider.flexslider .has-slide-background .slide-background {
+    z-index: 1;
+  }
+  #featured-slider.flexslider .has-slide-background .slide-content {
+    width: 48%;
+    position: absolute;
+    bottom: 2em;
+    left: 2em;
+    padding: 1em 2em;
+  }
   #main.fullwidth,
   .layout-full #main,
   .col-full {
