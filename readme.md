@@ -9,8 +9,8 @@ To restore this site, first start by [installing WordPress](http://codex.wordpre
 
 ### Primary Packets
 
-* [WordPress](http://wordpress.org) - v3.5 - The main [Content Management System](http://en.wikipedia.org/wiki/Content_management_system) the site is running on.
-* [Definition](http://www.woothemes.com/products/definition/) - v1.1.0 - The parent theme for the site, controls meny of the fuctions within the site, this theme is part of this repository.
+* [WordPress](http://wordpress.org) - v3.5+ - The main [Content Management System](http://en.wikipedia.org/wiki/Content_management_system) the site is running on.
+* [Definition](http://www.woothemes.com/products/definition/) - v1.3.4+ - The parent theme for the site, controls meny of the fuctions within the site, this theme is part of this repository.
 * [Bridges in Belize](https://github.com/mattrude/wp-theme-bridgesinbelize) - v0.1 - The look and feel of the site actual site.
 
 ### Secondary Packets (plugins)
