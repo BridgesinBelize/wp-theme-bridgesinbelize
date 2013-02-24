@@ -63,7 +63,7 @@ INDEX:
 8. MISC
 -8.1 Forms
 -8.2 Gravity forms
--8.3 IE specific styling 
+-8.3 IE specific styling
 
 -------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------*/
@@ -531,13 +531,13 @@ dl dd {
   font-family: 'Social';
   font-weight: normal;
   font-style: normal;
-  src: url('../definition/includes/fonts/social.eot');
-  src: url('../definition/includes/fonts/social.eot?#iefix') format('embedded-opentype'), url('../definition/includes/fonts/social.woff') format('woff'), url('../definition/includes/fonts/social.ttf') format('truetype'), url('../definition/includes/fonts/social.svg#WebSymbolsRegular') format('svg');
+  src: url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/social.eot');
+  src: url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/social.eot?#iefix') format('embedded-opentype'), url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/social.woff') format('woff'), url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/social.ttf') format('truetype'), url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/social.svg#WebSymbolsRegular') format('svg');
 }
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../definition/includes/fonts/fontawesome-webfont.eot');
-  src: url('../definition/includes/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../definition/includes/fonts/fontawesome-webfont.woff') format('woff'), url('../definition/includes/fonts/fontawesome-webfont.ttf') format('truetype'), url('../definition/includes/fonts/fontawesome-webfont.svg#FontAwesome') format('svg');
+  src: url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/fontawesome-webfont.eot');
+  src: url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/fontawesome-webfont.woff') format('woff'), url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/fontawesome-webfont.ttf') format('truetype'), url('//bridgesinbelize.org/wp-content/themes/definition/includes/fonts/fontawesome-webfont.svg#FontAwesome') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -820,6 +820,9 @@ table tfoot td {
   background: #f9f9f9;
   border-bottom: 1px solid #e6e6e6;
 }
+#featured .col-full {
+  max-width: 70em;
+}
 #featured .slide-media {
   margin-bottom: 2.618em;
 }
@@ -940,12 +943,49 @@ ul.nav li.li.current-menu-item > a {
 }
 #header .nav-toggle {
   float: right;
-  width: 1.618em;
-  height: 1.618em;
   position: relative;
   cursor: pointer;
   top: 0.857em;
   font-family: sans-serif;
+}
+#header .nav-toggle:after {
+  font-family: 'FontAwesome';
+  display: inline-block;
+  font-size: 100%;
+  margin-left: .618em;
+  font-weight: normal;
+  font-family: 'FontAwesome';
+  display: inline-block;
+  font-size: 100%;
+  margin-left: .618em;
+  font-weight: normal;
+  font-family: 'FontAwesome';
+  display: inline-block;
+  font-size: 100%;
+  margin-left: .618em;
+  font-weight: normal;
+  content: "\f0c9";
+  color: #fff;
+  height: 1.5em;
+  width: 1.5em;
+  padding: .202em;
+  text-align: center;
+  line-height: 1.75;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   background-color: #cd5f5f;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#cd5f5f), to(#bc4e4e));
   /* Saf4+, Chrome */
@@ -1249,6 +1289,17 @@ ul.nav li.li.current-menu-item > a {
 }
 #footer-widgets a {
   color: #353535;
+}
+p.demo_store {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 1em 0;
+  background: #ebdd75;
+  color: #827513;
+  z-index: 999999;
 }
 /* 2.8 Breadcrumbs */
 #breadcrumbs {
@@ -2833,7 +2884,7 @@ html[xmlns] .flexslider .slides {
   *height: 0;
 }
 .flex-direction-nav a {
-  width: 30px;
+  width: 14px;
   height: 35px;
   margin: -20px 0 0;
   display: block;
@@ -2863,13 +2914,13 @@ html[xmlns] .flexslider .slides {
   font-size: 30px !important;
 }
 .flex-direction-nav .flex-next {
-  right: -62px;
+  right: -30px;
 }
 .flex-direction-nav .flex-next:before {
   content: '\f054';
 }
 .flex-direction-nav .flex-prev {
-  left: -52px;
+  left: -30px;
 }
 .flex-direction-nav .flex-prev:before {
   content: '\f053';
@@ -2974,40 +3025,53 @@ html[xmlns] .flexslider .slides {
   cursor: default;
 }
 @media screen and (max-width: 1100px) {
-  .flex-direction-nav .flex-prev {
-    left: 0;
-    top: auto;
-    bottom: -4px;
-  }
-  .flex-direction-nav .flex-next {
-    right: -18px;
-    top: auto;
-    bottom: -4px;
-  }
-  .flex-direction-nav a:before {
-    font-size: 20px;
-  }
-  .no-pagination .flex-direction-nav a {
-    bottom: -35px;
-  }
-  #featured.fade .flex-direction-nav .flex-prev, #featured.fade .flex-direction-nav .flex-next {
-    bottom: -5em;
+  #featured {
+    overflow: hidden;
+    padding-left: 3em;
+    padding-right: 3em;
   }
 }
 /* 7.3 Content Styles */
-#featured-slider .has-slide-background .slide-background {
+#featured-slider.flexslider .has-slide-background .slide-background {
   z-index: 1;
 }
-#featured-slider .has-slide-background .slide-content {
-  position: absolute;
+#featured-slider.flexslider .has-slide-background .slide-content {
+  width: 100%;
   z-index: 2;
-  bottom: 2em;
-  left: 2em;
   padding: 1em 2em;
-  background: rgba(0, 0, 0, 0.7);
+  background: #000;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+}
+#featured-slider.flexslider .has-slide-background .slide-content h1 {
   color: #fff;
 }
-#featured-slider .has-slide-background .slide-content h1 {
+#featured-slider.flexslider .has-slide-background .slide-content p {
   color: #fff;
 }
 /*-------------------------------------------------------------------------------------------*/
@@ -3487,6 +3551,21 @@ p.woo-sc-box.normal, div.woo-sc-box.normal {
   border-color: #e6e6e6;
   background-color: #f9f9f9;
 }
+#terms {
+  float: left;
+  width: auto;
+  margin: 5px;
+}
+#shiptobilling-checkbox {
+  float: left;
+  width: auto;
+  margin: 5px;
+}
+input#createaccount {
+  float: left;
+  width: auto;
+  margin: 5px;
+}
 /* 8.2 Gravity forms */
 ul.gform_fields li {
   list-style: none;
@@ -3575,31 +3654,31 @@ img.ui-datepicker-trigger {
   font-family: 'Ubuntu';
   font-style: italic;
   font-weight: 700;
-  src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('includes/fonts/ubuntu-Bold-Italic.woff') format('woff');
+  src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('//bridgesinbelize.org/wp-content/themes/bridgesinbelize/includes/fonts/ubuntu-Bold-Italic.woff') format('woff');
 }
 @font-face {
   font-family: 'Ubuntu';
   font-style: italic;
   font-weight: 400;
-  src: local('Ubuntu Italic'), local('Ubuntu-Italic'), url('includes/fonts/ubuntu-Italic.woff') format('woff');
+  src: local('Ubuntu Italic'), local('Ubuntu-Italic'), url('//bridgesinbelize.org/wp-content/themes/bridgesinbelize/includes/fonts/ubuntu-Italic.woff') format('woff');
 }
 @font-face {
   font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 400;
-  src: local('Ubuntu'), url('includes/fonts/ubuntu.woff') format('woff');
+  src: local('Ubuntu'), url('//bridgesinbelize.org/wp-content/themes/bridgesinbelize/includes/fonts/ubuntu.woff') format('woff');
 }
 @font-face {
   font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 700;
-  src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('includes/fonts/ubuntu-Bold.woff') format('woff');
+  src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('//bridgesinbelize.org/wp-content/themes/bridgesinbelize/includes/fonts/ubuntu-Bold.woff') format('woff');
 }
 @font-face {
   font-family: 'Ubuntu Condensed';
   font-style: normal;
   font-weight: 400;
-  src: local('Ubuntu Condensed'), local('UbuntuCondensed-Regular'), url('includes/fonts/ubuntu-Condensed-Regular.woff') format('woff');
+  src: local('Ubuntu Condensed'), local('UbuntuCondensed-Regular'), url('//bridgesinbelize.org/wp-content/themes/bridgesinbelize/includes/fonts/ubuntu-Condensed-Regular.woff') format('woff');
 }
 #header .site-title a {
   font: normal 35px/1em 'Ubuntu', arial, sans-serif;
@@ -4063,6 +4142,19 @@ INDEX
   #featured .flexslider .no-image.no-video .slide-content {
     width: 100%;
   }
+  #featured-slider.flexslider .has-slide-background {
+    position: relative;
+  }
+  #featured-slider.flexslider .has-slide-background .slide-background {
+    z-index: 1;
+  }
+  #featured-slider.flexslider .has-slide-background .slide-content {
+    width: 48%;
+    position: absolute;
+    bottom: 2em;
+    left: 2em;
+    padding: 1em 2em;
+  }
   #main.fullwidth, .layout-full #main, .col-full {
     max-width: 75.998em;
     margin: 0 auto;
@@ -4401,6 +4493,9 @@ form.contact-form label span {
 .post .post-meta li a.post-edit-link {
   color: #cd5f5f;
 }
+#searchform {
+  width: 90%;
+}
 /****************************************
  * Twitter Jetpack widget
  ***************************************/
@@ -4617,6 +4712,7 @@ a.sd-button:hover span {
 	font-size: 90%;
 	color: #666;
 	margin-left: 5px;
+	line-height: 1;
 }
 
 /* @noflip */
