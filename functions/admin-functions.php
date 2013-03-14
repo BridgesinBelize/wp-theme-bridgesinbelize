@@ -913,7 +913,7 @@ function cleanSource( $src ) {
 
 /*-----------------------------------------------------------------------------------*/
 /* Show image in RSS feed */
-/* Original code by Justin Tadlock http://justintadlock.com */
+/* Original code by Justin Tadlock */
 /*-----------------------------------------------------------------------------------*/
 if ( get_option( 'woo_rss_thumb' ) == 'true' ) {
 	if ( get_option( 'rss_use_excerpt' ) ) 
@@ -3108,7 +3108,7 @@ function wooframework_add_static_front_page_banner () {
 	$close_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=wooframework_banner_close&banner=staticfrontpage' ), 'wooframework_banner_close' );
 	$html = '';
 	$html .= '<div id="staticfrontpage-banner" class="wooframework-banner">' . "\n";
-	$html .= '<span class="main">' . sprintf( __( 'You have setup a static front page in %1$sSettings > Reading%2$s. If you wish to use the %4$sHomepage%5$s theme options for %3$s, please set it to show "Your latest posts".', 'woothemes' ), '<strong><a href="' . esc_url( admin_url( 'options-reading.php' ) ) . '">', '</a></strong>', $theme_data['theme_name'], '<strong>', '</strong>' ) . '</span>' . "\n";
+	$html .= '<span class="main">' . sprintf( __( 'You have setup a static front page in %1$sSettings > Reading%2$s.  Please set it to show "Your latest posts" if you want to display the default homepage in %3$s.', 'woothemes' ), '<strong><a href="' . esc_url( admin_url( 'options-reading.php' ) ) . '">', '</a></strong>', $theme_data['theme_name'], '<strong>', '</strong>' ) . '</span>' . "\n";
 	$html .= '<span class="close-banner"><a href="' . $close_url . '">' . __( 'Close', 'woothemes' ) . '</a></span>' . "\n";
 	$html .= '</div>' . "\n";
 	
@@ -3183,4 +3183,28 @@ function wooframework_display_theme_version_data ( $echo = true ) {
 	if ( true == $echo ) { echo $html; } else { return $html; }
 } // End wooframework_display_theme_version_data()
 }
+
+if ( ! function_exists( 'wooframework_load_google_fonts' ) ) {
+function wooframework_load_google_fonts() {
+	global $woo_used_google_fonts;
+
+	if( $woo_used_google_fonts && is_array( $woo_used_google_fonts ) ) {
+		$fonts = '';
+		$c = 0;
+		foreach( $woo_used_google_fonts as $font ) {
+			if( $c > 0 ) {
+				$fonts .= '|';
+			} else {
+				++$c;
+			}
+			$fonts .= $font;
+		}
+
+		if( '' != $fonts ) {
+			woo_shortcode_typography_loadgooglefonts( $fonts , 'woo-used-google-fonts' );
+		}
+	}
+} // End wooframework_load_google_fonts()
+}
+add_action( 'wp_footer' , 'wooframework_load_google_fonts' );
 ?>

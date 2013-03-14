@@ -15,7 +15,8 @@ $settings = array(
 				'homepage_posts_category' => '', 
 				'thumb_w' => 100, 
 				'thumb_h' => 100, 
-				'thumb_align' => 'alignleft'
+				'thumb_align' => 'alignleft',
+				'homepage_posts_layout' => 'layout-full'
 				);
 					
 $settings = woo_get_dynamic_values( $settings );
@@ -33,7 +34,7 @@ if ( 0 < intval( $settings['homepage_posts_category'] ) ) {
 }
 ?>
 
-<section class="blog-posts widget fix">
+<section class="blog-posts widget fix  <?php echo esc_attr( $settings['homepage_posts_layout'] ); ?>">
 	<div id="main" class="col-left">
 <?php woo_loop_before(); ?>
 
@@ -64,6 +65,10 @@ if ( 0 < intval( $settings['homepage_posts_category'] ) ) {
 <?php woo_pagenav(); ?>
 <?php wp_reset_query(); ?>
 	</div><!--/.col-left-->
-<?php get_sidebar(); ?>
+	<?php
+		if ( $settings['homepage_posts_layout'] != 'layout-full' )  {
+			get_sidebar();
+		}
+	?>
 </section>
 <div class="fix"></div>

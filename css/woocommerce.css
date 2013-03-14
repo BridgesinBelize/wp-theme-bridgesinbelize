@@ -935,8 +935,8 @@ table.cart #coupon_code {
 #reviews .comment .star-rating {
   margin: 0;
   position: absolute;
-  top: 30px;
-  right: 20px;
+  top: 0;
+  right: 0;
 }
 #reviews .add_review {
   clear: both;

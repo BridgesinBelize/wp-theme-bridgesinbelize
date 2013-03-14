@@ -15,7 +15,8 @@ $settings = array(
 				'thumb_single' => 'false', 
 				'single_w' => 200, 
 				'single_h' => 200, 
-				'thumb_single_align' => 'alignright'
+				'thumb_single_align' => 'alignright',
+				'homepage_posts_layout' => 'layout-full'
 				);
 					
 $settings = woo_get_dynamic_values( $settings );
@@ -25,7 +26,7 @@ if ( 0 < intval( $settings['homepage_page_id'] ) ) {
 $query = new WP_Query( 'page_id=' . intval( $settings['homepage_page_id'] ) );
 ?>
 
-<section class="page-content component">	
+<section class="page-content component  <?php echo esc_attr( $settings['homepage_posts_layout'] ); ?>">	
 <?php woo_loop_before(); ?>
 
 <?php
@@ -47,7 +48,13 @@ $query = new WP_Query( 'page_id=' . intval( $settings['homepage_page_id'] ) );
 <?php the_content(); ?>
 <?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'woothemes' ), 'after' => '</div>' ) ); ?>
 	</div><!--/.col-left-->
-<?php get_sidebar(); ?>
+	
+	<?php
+		if ( $settings['homepage_posts_layout'] != 'layout-full' )  {
+			get_sidebar();
+		}
+	?>
+	
 </section>
 				
 <?php the_tags( '<p class="tags">'.__( 'Tags: ', 'woothemes' ), ', ', '</p>' ); ?>

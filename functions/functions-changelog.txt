@@ -1,5 +1,12 @@
 *** WooThemes Framework Changelog **
 
+2013.03.05 - version 5.5.5
+ * admin-functions.php - Improved function to process all used Google fonts and output single link tag for all of them
+
+2013.02.06 - version 5.5.4
+ * admin-shortcodes.php - Added global variable for storing used Google fonts and removed preg_match for custom typography in each post
+ * admin-functions.php - Added function to process all used Google fonts and output single link tag for all of them
+
 2012.12.20 - version 5.5.3
  * admin-interface.php - Added Thin and Thin/Italic to typography options.
  * admin-style.css - Fixed styling of typography preview button.
@@ -9,6 +16,7 @@
  * admin-express-functions.php, 
    admin-express-functions-deprecated.php - Replace deprecated calls to wp_get_single_post() with get_post().
  * admin-functions.php - Use wp_get_image_editor() for image resizing if using vt_resize() with WordPress 3.5.
+ * thumb.php - TimThumb version 2.8.11
 
 2012.12.06 - version 5.5.2
  * admin-setup.php - Updated docblocking to standard formatting. Overall code clean-up and optimisation. Fixed "undefined index 'id'" notice in PHP 5.4.x.

@@ -604,6 +604,16 @@ $options[] = array( 'name' => __( 'Posts Category', 'woothemes' ),
                     'type' => 'select2',
                     'options' => $woo_categories
                   );
+                  
+$options[] = array( 'name' => __( 'Blog Posts / Content Layout', 'woothemes' ),
+    				'desc' => __( 'Select which layout you want for the content area on the homepage.', 'woothemes' ),
+    				'id' => $shortname . '_homepage_posts_layout',
+    				'std' => 'layout-full',
+    				'type' => 'images',
+    				'options' => array(
+    					'layout-full' => $url . '1c.png',
+    					'layout-left-content' => $url . '2cl.png',
+    					'layout-right-content' => $url . '2cr.png' ));
 
 $options[] = array( 'name' => __( 'Features', 'woothemes' ),
                     'type' => 'subheading' );

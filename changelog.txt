@@ -1,5 +1,14 @@
 *** Definition Changelog ***
 
+2013.03.11 - version 1.3.6
+ * /css/woocommerce.css - Fixed product review rating styling.
+ * /includes/theme-options.php - Add layout option for homepage blog posts / page content section.
+ * /includes/blog-posts.php - Add layout option for homepage blog posts / page content section.
+ * /includes/specific-page-content.php - Add layout option for homepage blog posts / page content section.
+
+2013.02.25 - version 1.3.5
+ * includes/theme-woocommerce.php - WooCommerce 2.0 pagination preparation
+
 2013.02.19 - version 1.3.4
  * /css/layout.css - Full width slider desktop layout tweak
 

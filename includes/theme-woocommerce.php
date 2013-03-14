@@ -180,8 +180,15 @@ if ( ! function_exists( 'woocommerce_get_sidebar' ) ) {
 }
 
 // Remove pagination (we're using the WooFramework default pagination)
+// < 2.0
 remove_action( 'woocommerce_pagination', 'woocommerce_pagination', 10 );
 add_action( 'woocommerce_pagination', 'woocommerceframework_pagination', 10 );
+
+//  2.0 +
+if ( version_compare( WOOCOMMERCE_VERSION, '2.0', '>=' ) ) {
+	remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
+	add_action( 'woocommerce_after_shop_loop', 'woocommerceframework_pagination', 10 );
+}
 
 if ( ! function_exists( 'woocommerceframework_pagination' ) ) {
 function woocommerceframework_pagination() {

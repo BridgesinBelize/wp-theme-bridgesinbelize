@@ -1651,7 +1651,7 @@ add_shortcode( 'abbr', 'woo_shortcode_abbreviation' );
 /*-----------------------------------------------------------------------------------*/
 
 function woo_shortcode_typography ( $atts, $content = null ) {
-	global $google_fonts;
+	global $google_fonts, $woo_used_google_fonts;
 
 	// Get just the names of the Google fonts.
 	$google_font_names = array();
@@ -1689,6 +1689,15 @@ function woo_shortcode_typography ( $atts, $content = null ) {
 	// Run checks to make sure it's an allowed font stack.
 	if ( in_array( $font, $fonts_whitelist ) || in_array( $font, $google_font_names ) ) {
 		if ( in_array( $font, $google_font_names ) ) {
+
+			// Set up global array of used Google fonts for processing later
+			if( ! $woo_used_google_fonts ) { $woo_used_google_fonts = array(); }
+
+			// Add to array of used Google fonts
+			if ( ! in_array( $font, $woo_used_google_fonts ) ) {
+				$woo_used_google_fonts[] = $font;
+			} // End IF Statement
+
 			$font = "'" . $font . "'";
 		} // End IF Statement
 	} else {
@@ -1704,20 +1713,20 @@ add_shortcode( 'typography', 'woo_shortcode_typography' );
 
 add_action( 'wp_head', 'woo_shortcode_typography_loadgooglefonts', 0 );
 
-function woo_shortcode_typography_loadgooglefonts ( $font = '' ) {
-	// If a specific font is requested, just enqueue that font.
-	$variations = array(
-						'Raleway' => ':100',
-						'Coda' => ':800',
-						'UnifrakturCook' => ':bold',
-						'Allan' => ':bold',
-						'Sniglet' => ':800',
-						'Cabin' => ':bold',
-						'Corben' => ':bold',
-						'Buda' => ':light'
-						);
-
+function woo_shortcode_typography_loadgooglefonts ( $font = false , $id = false ) {
 	if ( $font ) {
+		// If a specific font is requested, just enqueue that font.
+		$variations = array(
+							'Raleway' => ':100',
+							'Coda' => ':800',
+							'UnifrakturCook' => ':bold',
+							'Allan' => ':bold',
+							'Sniglet' => ':800',
+							'Cabin' => ':bold',
+							'Corben' => ':bold',
+							'Buda' => ':light'
+							);
+
 		$f = $font;
 
 		$f = str_replace( ' ', '+', $f );
@@ -1728,48 +1737,11 @@ function woo_shortcode_typography_loadgooglefonts ( $font = '' ) {
 			$f_include = $f . $variations[$f];
 		} // End IF Statement
 
-		echo "<link rel='stylesheet' id='" . 'woo-googlefont-' . sanitize_title( $f ) . "'  href='" . esc_url( 'http'. ( is_ssl() ? 's' : '' ) .'://fonts.googleapis.com/css?family=' . $f_include ) . '' . "' type='text/css' media='screen' />" . "\n";
-	} else {
-		global $google_fonts, $post;
+		if( ! $id ) {
+			$id = 'woo-googlefont-' . sanitize_title( $f );
+		}
 
-		// Add variations for specific fonts that need variation on inclusion.
-
-		// Get just the names of the Google fonts.
-		$google_font_names = array();
-
-		if ( count( $google_fonts ) ) {
-			foreach ( $google_fonts as $g ) {
-				$google_font_names[] = $g['name'];
-			} // End FOREACH Loop
-		} // End IF Statement
-
-		$_pattern = '/\[typography font="(.*?)" size="(.*?)" size_format="(.*?)"(.*?)\](.*?)\[\/typography\]/i'; // 1. font, 2, size, 3, color.
-		$_string = '';
-		if ( $post ) { $_string = $post->post_content; } // End IF Statement
-
-		preg_match_all($_pattern, $_string, $_matches );
-
-		$used_google_fonts = array();
-
-		foreach ( $_matches[1] as $f ) {
-			if ( in_array( $f, $google_font_names ) && ! in_array( $f, $used_google_fonts ) ) {
-				$used_google_fonts[] = $f;
-			} // End IF Statement
-		} // End FOREACH Loop
-
-		if ( count( $used_google_fonts ) ) {
-			foreach ( $used_google_fonts as $f ) {
-				$f = str_replace( ' ', '+', $f );
-
-				$f_include = $f;
-
-				if ( in_array( $f, array_keys( $variations ) ) ) {
-					$f_include = $f . $variations[$f];
-				} // End IF Statement
-
-				wp_enqueue_style( 'woo-googlefont-' . sanitize_title( $f ), 'http'. ( is_ssl() ? 's' : '' ) .'://fonts.googleapis.com/css?family=' . $f_include . '', array(), '3.6', 'screen' );
-			} // End FOREACH Loop
-		} // End IF Statement
+		wp_enqueue_style( $id , 'http'. ( is_ssl() ? 's' : '' ) .'://fonts.googleapis.com/css?family=' . $f_include . '' , array() , '3.6' , 'screen' );
 	} // End IF Statement
 } // End woo_shortcode_typography_loadgooglefonts()
 
