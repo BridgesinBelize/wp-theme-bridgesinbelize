@@ -1,4 +1,4 @@
-# Bridges in Belize WordPress Theme
+# The Bridges in Belize WordPress Theme
 The BRIDGEs in Belize [WordPress](http://wordpress.org) theme is a [child theme](http://codex.wordpress.org/Child_Themes) of [Definition](http://www.woothemes.com/products/definition/) by [WooThemes](http://www.woothemes.com/).  To build the site correctly, you must install the definition theme, and the bridgesinbelize theme, both included in this repository.
 
 ## Current Site Setup
@@ -10,7 +10,7 @@ To restore this site, first start by [installing WordPress](http://codex.wordpre
 ### Primary Packets
 
 * [WordPress](http://wordpress.org) - v3.5+ - The main [Content Management System](http://en.wikipedia.org/wiki/Content_management_system) the site is running on.
-* [Definition](http://www.woothemes.com/products/definition/) - v1.3.4+ - The parent theme for the site, controls meny of the fuctions within the site, this theme is part of this repository.
+* [Definition](http://www.woothemes.com/products/definition/) - v1.3.6+ - The parent theme for the site, controls meny of the fuctions within the site, this theme is part of this repository.
 * [Bridges in Belize](https://github.com/mattrude/wp-theme-bridgesinbelize) - v0.1 - The look and feel of the site actual site.
 
 ### Secondary Packets (plugins)
@@ -55,7 +55,7 @@ The BRIDGEs in Belize WordPress theme is free software; you may redistribute it 
                   GNU GENERAL PUBLIC LICENSE
                      Version 2, June 1991
     
-    Copyright (C) 2012 Matt Rude <matt@mattrude.com>
+    Copyright (C) 2012-2013 Matt Rude <matt@mattrude.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
