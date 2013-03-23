@@ -29,7 +29,6 @@ add_action( 'wp_print_styles', 'jetpack_deregister_styles', 100 );
  * @author Matt Rude (mattrude.com)
  * @since version 0.1
  */
-
 function mdr_remove_script_version( $src ){
     $parts = explode( '?', $src );
     return $parts[0];
