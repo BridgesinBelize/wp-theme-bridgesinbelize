@@ -1,4 +1,8 @@
 <?php
+/**
+ * Specific Page Content file from WooThemes
+ * @package bridgesinbelize
+ */
 if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Page Content Component
