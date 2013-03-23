@@ -25,6 +25,8 @@ add_action( 'wp_print_styles', 'jetpack_deregister_styles', 100 );
  * resources in WordPress.  This will not affect all plugins,
  * but will affect plugins built correctly.
  *
+ * @param string $src The location of the script to remove the version from.
+ * 
  * @package bridgesinbelize
  * @author Matt Rude (mattrude.com)
  * @since version 0.1
