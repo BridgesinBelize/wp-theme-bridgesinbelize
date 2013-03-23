@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * This is the Main Function file for the Bridges in Belize theme
+ * @package bridgesinbelize
+ */
 /**
  * Deregister the JetPake Widgets css
  *
