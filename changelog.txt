@@ -1,5 +1,9 @@
 *** Definition Changelog ***
 
+2013.03.25 - version 1.3.7
+ * /includes/theme-js.php - Fixed boolean options for slider settings
+ * /includes/js/featured-slider.js - Fixed boolean options for slider settings
+
 2013.03.11 - version 1.3.6
  * /css/woocommerce.css - Fixed product review rating styling.
  * /includes/theme-options.php - Add layout option for homepage blog posts / page content section.
