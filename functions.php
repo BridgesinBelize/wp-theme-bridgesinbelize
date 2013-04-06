@@ -4,7 +4,11 @@
  * @package bridgesinbelize
  */
 /**
- * Deregister the JetPake Widgets css
+ * Deregister the JetPack Widgets css
+ *
+ * Deregister all JetPack CSS for Wdigets so we may use our own for
+ * styling reasons.  These CSS files have been brought into the main
+ * style.less & style.css files.
  *
  * @package bridgesinbelize
  * @author Matt Rude (mattrude.com)
