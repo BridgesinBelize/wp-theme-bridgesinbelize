@@ -48,6 +48,8 @@ This theme uses [less](http://lesscss.org/) to compile it's style sheets (style.
     ../../plugins/jetpack/modules/sharedaddy/sharing.css >> style.css && \
     cat ../../plugins/jetpack/modules/widgets/widgets.css >> style.css
 
+* For more information on the diffrent functions within this theme, please see the themes [phpDoc](http://phpdoc.mattrude.com/wp-theme-bridgesinbelize/) page.
+
 ## License
 
 The BRIDGEs in Belize WordPress theme is free software; you may redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation (http://www.fsf.org/).
