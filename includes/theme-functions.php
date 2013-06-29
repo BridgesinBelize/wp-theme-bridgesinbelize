@@ -732,7 +732,7 @@ function woo_header_search() {
 	global $woo_options;
 	if ( isset( $woo_options['woo_enable_header_search'] ) && 'true' == $woo_options['woo_enable_header_search'] ) {
 		if ( is_woocommerce_activated() && isset( $woo_options['woo_header_search_scope'] ) && 'products' == $woo_options['woo_header_search_scope'] ) {
-			the_widget('WooCommerce_Widget_Product_Search', 'title=' );
+			the_widget('WC_Widget_Product_Search', 'title=' );
 		} else {
 			get_search_form();
 		}

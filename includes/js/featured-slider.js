@@ -7,8 +7,6 @@ jQuery( window ).load( function() {
     if ( 'true' == woo_localized_data.touch ) { woo_localized_data.touch = true; } else { woo_localized_data.touch = false; }
     if ( 'true' == woo_localized_data.smoothHeight ) { woo_localized_data.smoothHeight = true; } else { woo_localized_data.smoothHeight = false; }
 
-console.log(woo_localized_data);
-
    	jQuery( '#featured-slider' ).flexslider({
      		animation: woo_localized_data.animation,
      		controlsContainer: woo_localized_data.controlsContainer,

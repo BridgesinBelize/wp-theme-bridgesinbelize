@@ -254,7 +254,10 @@ if ( ! function_exists( 'woo_custom_typography' ) ) {
 					$output .= '.page header h1 { '.woo_generate_font_css($woo_options[ 'woo_font_page_title' ]).' }' . "\n";
 			
 				if ( isset( $woo_options['woo_font_post_title'] ) && $woo_options['woo_font_post_title'] )
-					$output .= '.post header h1, .post header h1 a:link, .post header h1 a:visited { '.woo_generate_font_css($woo_options[ 'woo_font_post_title' ]).' }' . "\n";	
+					$output .= '.post header h1 { '.woo_generate_font_css($woo_options[ 'woo_font_post_title' ]).' }' . "\n";	
+
+				if ( isset( $woo_options['woo_font_post_title_link'] ) && $woo_options['woo_font_post_title_link'] )
+					$output .= '.post header h1 a:link, .post header h1 a:visited { '.woo_generate_font_css($woo_options[ 'woo_font_post_title_link' ]).' }' . "\n";	
 			
 				if ( isset( $woo_options['woo_font_post_meta'] ) && $woo_options['woo_font_post_meta'] )
 					$output .= '.post-meta { '.woo_generate_font_css($woo_options[ 'woo_font_post_meta' ]).' }' . "\n";	
@@ -263,10 +266,7 @@ if ( ! function_exists( 'woo_custom_typography' ) ) {
 					$output .= '.entry, .entry p { '.woo_generate_font_css($woo_options[ 'woo_font_post_entry' ], '1.5').' } h1, h2, h3, h4, h5, h6 { font-family: '.stripslashes($woo_options[ 'woo_font_page_title' ]['face']).', arial, sans-serif; }'  . "\n";	
 			
 				if ( isset( $woo_options['woo_font_widget_titles'] ) && $woo_options['woo_font_widget_titles'] )
-					$output .= '.widget h3 { '.woo_generate_font_css($woo_options[ 'woo_font_widget_titles' ]).' }'  . "\n";
-					
-				if ( isset( $woo_options['woo_font_widget_titles'] ) && $woo_options['woo_font_widget_titles'] )
-					$output .= '.widget h3 { '.woo_generate_font_css($woo_options[ 'woo_font_widget_titles' ]).' }'  . "\n";
+					$output .= '.widget h3, .home #content #sidebar .widget h3 { '.woo_generate_font_css($woo_options[ 'woo_font_widget_titles' ]).' }'  . "\n";
 					
 				// Component titles
 				if ( isset( $woo_options['woo_font_component_titles'] ) && $woo_options['woo_font_component_titles'] )

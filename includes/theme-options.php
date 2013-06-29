@@ -362,6 +362,12 @@ $options[] = array( 'name' => __( 'Post Title', 'woothemes' ) ,
     				'std' => array( 'size' => '1.7', 'unit' => 'em', 'face' => 'Titillium Web', 'style' => '', 'color' => '#2F2F2F' ),
     				'type' => 'typography' );
 
+$options[] = array( 'name' => __( 'Post Title Link', 'woothemes' ) ,
+                    'desc' => __( 'Change the post title.', 'woothemes' ) ,
+                    'id' => $shortname . '_font_post_title_link',
+                    'std' => array( 'size' => '1', 'unit' => 'em', 'face' => 'Titillium Web', 'style' => '', 'color' => '#2F2F2F' ),
+                    'type' => 'typography' );
+
 $options[] = array( 'name' => __( 'Post Meta', 'woothemes' ),
     				'desc' => __( 'Change the post meta.', 'woothemes' ) ,
     				'id' => $shortname . '_font_post_meta',
