@@ -105,4 +105,31 @@ function mdr_restore_woo_stylesheet() {
 
 add_action( 'after_setup_theme', 'mdr_restore_woo_stylesheet' );
 
+function custom_excerpt_length( $length ) {
+    return 20;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+/**
+ * Blog posts on main page
+ *
+ * @package bridgesinbelize
+ * @author Matt Rude (mattrude.com)
+ * @since version 0.2.0
+ */
+function mdr_new_blog_posts() {
+    if (have_posts()) { ?>
+        <div id="home-blog" class="feature">
+            <h3 class="feature-title"><a href="/blog">Recent Posts</a></h3>
+            <?php query_posts("posts_per_page=5");
+            while (have_posts()) : the_post(); ?>
+                <li>
+                    <a href="<?php the_permalink() ?>" rel="bookmark" title="Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+                    <?php the_excerpt(); ?>
+                </li>
+            <?php endwhile; ?>
+        </div>
+    <?php }
+}
+
 ?>
