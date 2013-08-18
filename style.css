@@ -4524,10 +4524,11 @@ form.contact-form label span {
 }
 #home-blog {
   float: left;
-  width: 30%;
+  width: 33%;
 }
 #home-blog h2 {
   border-bottom: 1px dotted #e6e6e6;
+  margin-bottom: 34px;
 }
 #home-blog h3 a {
   color: #020202;
