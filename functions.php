@@ -106,7 +106,7 @@ function mdr_restore_woo_stylesheet() {
 add_action( 'after_setup_theme', 'mdr_restore_woo_stylesheet' );
 
 function custom_excerpt_length( $length ) {
-    return 20;
+    return 30;
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
@@ -120,6 +120,7 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 function mdr_new_blog_posts() {
     if (have_posts()) { ?>
         <div id="home-blog" class="feature">
+            <h2></h2>
             <h3 class="feature-title"><a href="/blog">Recent Posts</a></h3>
             <?php query_posts("posts_per_page=5");
             while (have_posts()) : the_post(); ?>
