@@ -86,7 +86,7 @@ body.login #login_error {
   border: none;
   text-align: center;
 }
-#loginform {
+body.login #loginform {
   margin: 0;
   border: 3px solid #406895;
   -webkit-border-radius: 5px;
@@ -98,11 +98,11 @@ body.login #login_error {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-#loginform label {
+body.login #loginform label {
   font-family: "Lucida Sans", sans-serif;
 }
-#loginform input[type=text],
-#loginform input[type=password] {
+body.login #loginform input[type=text],
+body.login #loginform input[type=password] {
   margin-top: .53em;
   padding: .236em .5em;
   border: 1px solid #e6e6e6;
@@ -132,48 +132,48 @@ body.login #login_error {
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 }
-#loginform input[type=text]:focus,
-#loginform input[type=password]:focus {
+body.login #loginform input[type=text]:focus,
+body.login #loginform input[type=password]:focus {
   background: #fff;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
-#loginform .forgetmenot {
+body.login #loginform .forgetmenot {
   text-transform: uppercase;
 }
-#loginform .forgetmenot label {
+body.login #loginform .forgetmenot label {
   position: relative;
   top: .53em;
   font-size: 0.857em;
 }
-#nav {
+body.login #nav {
   float: right;
   padding-top: 20px;
 }
-#nav a {
+body.login #nav a {
   text-decoration: none!important;
 }
-#nav a:hover {
+body.login #nav a:hover {
   color: #fff!important;
   text-decoration: underline!important;
 }
-#backtoblog {
+body.login #backtoblog {
   float: left;
 }
-#login #nav,
-#login #backtoblog {
+body.login #login #nav,
+body.login #login #backtoblog {
   margin: 0;
   padding-left: 0;
   padding-right: 0;
 }
-#login #nav a,
-#login #backtoblog a {
+body.login #login #nav a,
+body.login #login #backtoblog a {
   color: #fff!important;
   text-shadow: none;
 }
-.submit .button-primary,
-#backtoblog a {
+body.login .submit .button-primary,
+body.login #backtoblog a {
   display: inline-block;
   padding: .236em .857em;
   border: 1px solid #ff8814;
@@ -213,13 +213,13 @@ body.login #login_error {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
-.submit .button-primary:hover,
-#backtoblog a:hover {
+body.login .submit .button-primary:hover,
+body.login #backtoblog a:hover {
   text-decoration: none;
   background: #ff8814;
 }
-.submit .button-primary:active,
-#backtoblog a:active {
+body.login .submit .button-primary:active,
+body.login #backtoblog a:active {
   border-color: #f97b00;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -228,12 +228,12 @@ body.login #login_error {
   -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15);
 }
-#backtoblog a {
+body.login #backtoblog a {
   padding-top: 4px;
   background: #a4d157;
   border: 1px solid #8dc035;
 }
-#backtoblog a:hover {
+body.login #backtoblog a:hover {
   background: #8dc035;
   color: #fff!important;
 }

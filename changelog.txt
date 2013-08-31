@@ -1,5 +1,19 @@
 *** Definition Changelog ***
 
+2013.07.08 - version 1.3.10
+ * style.css - 'overflow: hidden' for slider arrows (fixes Safari text overflow bug.)
+ * /includes/js/featured-slider.js - Add "useCSS: false" to disable CSS animations for Flexslider (they cause a video player related bug in Firefox)
+
+2013.05.30 - version 1.3.9
+ * includes/theme-actions.php - Fixed homepage widgets in Typography settings.
+
+2013.04.25 - version 1.3.8 
+ * css/woocommerce.css - Removed bullets from "Order Details" page.
+ * includes/theme-functions.php - Fixed product search form in the header.
+ * includes/theme-options.php - Added separated option for the Post Title Link in the "Typography" options.
+ * includes/theme-actions.php - Added separated option for the Post Title Link in the "Typography" options.
+ * includes/js/featured-slider.js - Removed console.log as the slider was not loading in IE8.
+
 2013.03.25 - version 1.3.7
  * /includes/theme-js.php - Fixed boolean options for slider settings
  * /includes/js/featured-slider.js - Fixed boolean options for slider settings

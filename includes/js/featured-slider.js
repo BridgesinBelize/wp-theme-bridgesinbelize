@@ -20,6 +20,7 @@ jQuery( window ).load( function() {
      		animationDuration: woo_localized_data.animationDuration,
         touch: woo_localized_data.touch,
         pauseOnHover: woo_localized_data.pauseOnHover, 
-        pauseOnAction: woo_localized_data.pauseOnAction
+        pauseOnAction: woo_localized_data.pauseOnAction,
+        useCSS: false
    	});
 });
