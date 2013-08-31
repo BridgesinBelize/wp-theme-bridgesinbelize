@@ -1,4 +1,4 @@
-# The Bridges in Belize WordPress Theme
+# The BRIDGEs in Belize Theme
 The BRIDGEs in Belize [WordPress](http://wordpress.org) theme is a [child theme](http://codex.wordpress.org/Child_Themes) of [Definition](http://www.woothemes.com/products/definition/) by [WooThemes](http://www.woothemes.com/).  To build the site correctly, you must install the definition theme, and the bridgesinbelize theme, both included in this repository.
 
 ## Current Site Setup
