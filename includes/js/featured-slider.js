@@ -16,11 +16,11 @@ jQuery( window ).load( function() {
    			manualControls: woo_localized_data.manualControls,
      		slideshow: woo_localized_data.slideshow,
      		pauseOnHover: woo_localized_data.pauseOnHover,
-     		slideshowSpeed: woo_localized_data.slideshowSpeed,
-     		animationDuration: woo_localized_data.animationDuration,
-        touch: woo_localized_data.touch,
-        pauseOnHover: woo_localized_data.pauseOnHover, 
-        pauseOnAction: woo_localized_data.pauseOnAction,
-        useCSS: false
+     		slideshowSpeed: parseInt( woo_localized_data.slideshowSpeed ),
+     		animationSpeed: parseInt( woo_localized_data.animationDuration ),
+            touch: woo_localized_data.touch,
+            pauseOnHover: woo_localized_data.pauseOnHover, 
+            pauseOnAction: woo_localized_data.pauseOnAction,
+            useCSS: false
    	});
 });

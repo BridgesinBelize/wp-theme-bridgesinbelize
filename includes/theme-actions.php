@@ -553,7 +553,12 @@ add_filter( 'get_search_form', 'woo_customise_search_form' );
 
 if ( ! function_exists( 'woo_login_screen_styles' ) ) {
 function woo_login_screen_styles () {
-	wp_enqueue_style( 'woo-login', get_template_directory_uri() . '/css/login.css', array(), '1.0.0' );
+	if ( is_child_theme() && file_exists( trailingslashit( get_stylesheet_directory() ) .  '/css/login.css' ) ) {
+		$file_path = get_stylesheet_directory_uri() . '/css/login.css';
+	} else {
+		$file_path = get_template_directory_uri() . '/css/login.css';
+	}
+	wp_enqueue_style( 'woo-login', $file_path, array(), '1.0.0' );
 } // End woo_login_screen_styles()
 }
 

@@ -10,7 +10,13 @@ add_theme_support( 'woocommerce' );
 global $woo_options;
 
 // Disable WooCommerce styles
-define( 'WOOCOMMERCE_USE_CSS', false );
+if ( version_compare( WOOCOMMERCE_VERSION, "2.1" ) >= 0 ) {
+	// WooCommerce 2.1 or above is active
+	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
+} else {
+	// WooCommerce is less than 2.1
+	define( 'WOOCOMMERCE_USE_CSS', false );
+}
 
 // Load WooCommerce stylsheet
 if ( ! is_admin() ) { add_action( 'wp_enqueue_scripts', 'woo_load_woocommerce_css', 20 ); }
