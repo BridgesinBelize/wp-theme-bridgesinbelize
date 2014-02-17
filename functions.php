@@ -106,7 +106,7 @@ function mdr_restore_woo_stylesheet() {
 add_action( 'after_setup_theme', 'mdr_restore_woo_stylesheet' );
 
 function custom_excerpt_length( $length ) {
-    return 30;
+    return 50;
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
