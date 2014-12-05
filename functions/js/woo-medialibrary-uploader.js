@@ -16,7 +16,7 @@
   
     removeFile: function () {
      
-     $( '.mlu_remove').live( 'click', function(event) { 
+     $(document).on( 'click', '.mlu_remove', function(event) { 
         $(this).hide();
         $(this).parents().parents().children( '.upload').attr( 'value', '' );
         $(this).parents( '.screenshot').slideUp();
@@ -66,7 +66,7 @@
           formID,
           btnContent = true;
       // On Click
-      $( 'input.upload_button').live( "click", function () {
+      $(document).on( "click", 'input.upload_button', function () {
         formfield = $(this).prev( 'input').attr( 'name' );
         formID = $(this).attr( 'rel' );
         

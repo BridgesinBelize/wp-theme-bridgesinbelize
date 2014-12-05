@@ -43,7 +43,7 @@ if ( ! function_exists( 'woo_themeoptions_redirect' ) ) {
  * @return void
  */
 function woo_themeoptions_redirect () {
-	header( 'Location: ' . admin_url( 'admin.php?page=woothemes&activated=true' ) );
+	header( 'Location: ' . admin_url( 'admin.php?page=wf-about&activated=true' ) );
 } // End woo_themeoptions_redirect()
 }
 
@@ -85,39 +85,8 @@ function woo_option_setup () {
 	$woo_array = array();
 	add_option( 'woo_options', $woo_array );
 
-	$template = get_option( 'woo_template' );
-	$saved_options = get_option( 'woo_options' );
+	$woo_array = WF()->settings->get_all();
 
-	foreach ( (array) $template as $option ) {
-		if ( $option['type'] != 'heading' ) {
-			$id = isset( $option['id'] ) ? $option['id'] : NULL;
-			$std = isset( $option['std'] ) ? $option['std'] : NULL;
-			$db_option = get_option( $id );
-			if ( empty( $db_option ) ) {
-				if ( is_array( $option['type'] ) ) {
-					foreach ( $option['type'] as $child ) {
-						if ( ! isset( $child['id'] ) ) continue; // Make sure we have an ID value.
-
-						$c_id = $child['id'];
-						$c_std = isset( $child['std'] ) ? $child['std'] : '';
-						$db_option = get_option( $c_id );
-						if ( ! empty( $db_option ) ) {
-							update_option( $c_id, $db_option );
-							$woo_array[$id] = $db_option;
-						} else {
-							$woo_array[$c_id] = $c_std;
-						}
-					}
-				} else {
-					update_option( $id, $std );
-					$woo_array[$id] = $std;
-				}
-			} else { //So just store the old values over again.
-				$woo_array[$id] = $db_option;
-			}
-		}
-	}
-	
 	// Allow child themes/plugins to filter here.
 	$woo_array = apply_filters( 'woo_options_array', $woo_array );
 	update_option( 'woo_options', $woo_array );
@@ -158,7 +127,7 @@ function woothemes_wp_head() {
 		woo_shortcode_stylesheet();
 	// Output custom.css
 	if ( function_exists( 'woo_output_custom_css' ) )
-		woo_output_custom_css();	
+		woo_output_custom_css();
 	do_action( 'woothemes_wp_head_after' );
 } // End woothemes_wp_head()
 }
@@ -209,7 +178,9 @@ if ( ! function_exists( 'woo_output_custom_favicon' ) ) {
  * @return void
  */
 function woo_output_custom_favicon () {
-	$favicon = apply_filters( 'woo_custom_favicon', get_option( 'woo_custom_favicon', '' ) );
+	$favicon = get_option( 'woo_custom_favicon', '' );
+	if ( is_ssl() ) $favicon = str_replace( 'http://', 'https://', $favicon );
+	$favicon = apply_filters( 'woo_custom_favicon', $favicon );
 	if( '' != $favicon ) echo "\n" . '<!-- Custom Favicon -->' . "\n" . '<link rel="shortcut icon" href="' .  esc_url( $favicon )  . '"/>' . "\n";
 } // End woo_output_custom_favicon()
 }
@@ -228,7 +199,7 @@ function woo_load_textdomain () {
 } // End woo_load_textdomain()
 }
 
-add_action( 'init', 'woo_load_textdomain', 10 );
+add_action( 'after_setup_theme', 'woo_load_textdomain', 10 );
 
 if ( ! function_exists( 'woo_head_css' ) ) {
 /**
@@ -281,11 +252,17 @@ if ( ! function_exists( 'woo_output_custom_css' ) ) {
  * @return void
  */
 function woo_output_custom_css() {
-	$theme_dir = get_template_directory_uri();	
-	if ( is_child_theme() && file_exists( get_stylesheet_directory() . '/custom.css' ) )
-		$theme_dir = get_stylesheet_directory_uri();
+	// If "custom.css" exists in the parent theme, load it.
+	if ( file_exists( get_template_directory() . '/custom.css' ) ) {
+		echo "\n" . '<!-- Custom Stylesheet -->' . "\n" . '<link href="'. esc_url( get_template_directory_uri() . '/custom.css' ) . '" rel="stylesheet" type="text/css" />' . "\n";
+	}
 
-	echo "\n" . '<!-- Custom Stylesheet -->' . "\n" . '<link href="'. esc_url( $theme_dir . '/custom.css' ) . '" rel="stylesheet" type="text/css" />' . "\n";
+	// If we're using a child theme, and "custom.css" exists within the child theme, load it as well.
+	if ( is_child_theme() && file_exists( get_stylesheet_directory() . '/custom.css' ) ) {
+		if ( file_exists( get_stylesheet_directory() . '/custom.css' ) ) {
+			echo "\n" . '<!-- Custom Stylesheet In Child Theme -->' . "\n" . '<link href="'. esc_url( get_stylesheet_directory_uri() . '/custom.css' ) . '" rel="stylesheet" type="text/css" />' . "\n";
+		}
+	}
 } // End woo_output_custom_css()
 }
 
@@ -317,7 +294,7 @@ if ( ! function_exists( 'woo_comment_reply' ) ) {
  * @return void
  */
 function woo_comment_reply() {
-	if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
+	if ( is_singular() && comments_open() ) wp_enqueue_script( 'comment-reply' );
 } // End woo_comment_reply()
 }
 

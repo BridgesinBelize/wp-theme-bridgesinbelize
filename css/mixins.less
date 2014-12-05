@@ -1,4 +1,5 @@
 // VARIABLES
+@desktop: 960px;
 // Colors
 @color_body: #959595; // Body Copy
 @color_links: #557fae; // Links
@@ -39,6 +40,30 @@
     font-size:100%;
     margin-right:.618em;
     font-weight: normal;
+}
+.iconbefore(@glyph: "\f179") {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    speak: none;
+    width: 1.5em;
+    display: inline-block;
+    line-height: 1;
+    content: @glyph;
+}
+
+.iconafter(@glyph: "\f179") {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    speak: none;
+    width: 1.5em;
+    display: inline-block;
+    text-align: right;
+    line-height: 1;
+    content: @glyph;
 }
 
 // MIXINS

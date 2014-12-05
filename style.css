@@ -1,7 +1,7 @@
 /*
 Theme Name: Definition
 Theme URI: http://www.woothemes.com/
-Version: 1.4.0
+Version: 1.5.1
 Description: Designed by <a href="http://www.woothemes.com">WooThemes</a>.
 Author: WooThemes
 Author URI: http://www.woothemes.com
@@ -733,10 +733,17 @@ ul.nav li.li.current-menu-item > a {
 }
 #header .nav-toggle:after {
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-left: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  display: inline-block;
+  text-align: right;
+  line-height: 1;
+  content: "\f179";
   content: "\f0c9";
   color: #fff;
   height: 1.5em;
@@ -888,6 +895,9 @@ ul.nav li.li.current-menu-item > a {
   border: 0.53em solid #e6e6e6;
   border-color: transparent #e6e6e6 transparent transparent;
 }
+section.entry .testimonials .quote .quote-content {
+  margin-left: 120px;
+}
 /* 2.6 Sidebar */
 #sidebar {
   overflow: hidden;
@@ -1010,10 +1020,17 @@ p.demo_store {
 .archive-header .archive-rss a:before {
   font-size: 25px!important;
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-right: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  line-height: 1;
+  content: "\f179";
   content: '\f09e';
   color: #ffa247;
 }
@@ -1067,10 +1084,17 @@ p.demo_store {
 .post .post-more .comments a:before,
 .type-page .post-more .comments a:before {
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-right: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  line-height: 1;
+  content: "\f179";
   content: '\f075';
 }
 .post p.tags,
@@ -1085,10 +1109,17 @@ p.demo_store {
 .post p.tags:before,
 .type-page p.tags:before {
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-right: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  line-height: 1;
+  content: "\f179";
   content: '\f02c';
 }
 .post img,
@@ -1566,10 +1597,17 @@ p.demo_store {
 }
 .widget_woo_embedwidget ul li.active a:before {
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-right: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  line-height: 1;
+  content: "\f179";
   content: '\f054';
 }
 /* TWITTER */
@@ -1845,10 +1883,17 @@ p.demo_store {
 }
 #comments .comment .reply a:before {
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-right: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  line-height: 1;
+  content: "\f179";
   content: '\f075';
 }
 #comments ul.children {
@@ -2287,10 +2332,17 @@ html[xmlns] .flexslider .slides {
 }
 .flex-direction-nav a:before {
   font-family: 'FontAwesome';
-  display: inline-block;
   font-size: 100%;
   margin-right: .618em;
+  font-family: "FontAwesome";
   font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  line-height: 1;
+  content: "\f179";
   font-size: 30px !important;
 }
 .flex-direction-nav .flex-next {

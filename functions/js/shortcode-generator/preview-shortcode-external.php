@@ -1,1 +1,3 @@
-<?php die( 'Please don\'t access this file directly. Thanks!' ); ?>
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly...
+?>

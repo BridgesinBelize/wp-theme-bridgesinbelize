@@ -2,13 +2,10 @@
   from {
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
-  
     -moz-transform: rotate(0);
     /* FF3.5+ */
-  
     -ms-transform: rotate(0);
     /* IE9 */
-  
     -o-transform: rotate(0);
     /* Opera 10.5 */
     transform: rotate(0);
@@ -17,13 +14,10 @@
   50% {
     -webkit-transform: rotate(180deg);
     /* Saf3.1+, Chrome */
-  
     -moz-transform: rotate(180deg);
     /* FF3.5+ */
-  
     -ms-transform: rotate(180deg);
     /* IE9 */
-  
     -o-transform: rotate(180deg);
     /* Opera 10.5 */
     transform: rotate(180deg);
@@ -32,13 +26,10 @@
   to {
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
-  
     -moz-transform: rotate(0);
     /* FF3.5+ */
-  
     -ms-transform: rotate(0);
     /* IE9 */
-  
     -o-transform: rotate(0);
     /* Opera 10.5 */
     transform: rotate(0);
@@ -73,13 +64,10 @@ body.login p.message {
   -webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
-
   -moz-box-sizing: border-box;
   /* Firefox, other Gecko */
-
   box-sizing: border-box;
   /* Opera/IE 8+ */
-
 }
 body.login #login_error {
   margin-left: 0;
@@ -113,21 +101,16 @@ body.login #loginform input[type=password] {
   background-clip: padding-box;
   font-size: 1em;
   /* Make inputs the same size as normal text */
-
   line-height: 1.618em;
   font-family: inherit;
   /* Make inputs use the correct typeface instead of the browser default */
-
   outline: none;
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
-
   -moz-box-sizing: border-box;
   /* Firefox, other Gecko */
-
   box-sizing: border-box;
   /* Opera/IE 8+ */
-
   background: #f9f9f9;
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
@@ -183,28 +166,22 @@ body.login #backtoblog a {
   text-decoration: none;
   font-size: 1em;
   /* Make inputs the same size as normal text */
-
   font-family: inherit;
   /* Make inputs use the correct typeface instead of the browser default */
-
   cursor: pointer;
   /* Inputs need pointers! */
-
   overflow: visible;
+  /* IE fix */
   width: auto;
   /* IE fix */
-
   line-height: 1.618em;
   background: #ffa247;
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
-
   -moz-box-sizing: border-box;
   /* Firefox, other Gecko */
-
   box-sizing: border-box;
   /* Opera/IE 8+ */
-
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -moz-background-clip: padding;

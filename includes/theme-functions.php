@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 TABLE OF CONTENTS
 
 - Exclude categories from displaying on the "Blog" page template.
-- Exclude categories from displaying on the homepage.
 - Register WP Menus
 - Breadcrumb display
 - Page navigation
@@ -57,33 +56,6 @@ function woo_exclude_categories_blogtemplate ( $args ) {
 	return $args;
 
 } // End woo_exclude_categories_blogtemplate()
-
-/*-----------------------------------------------------------------------------------*/
-/* Exclude categories from displaying on the homepage.
-/*-----------------------------------------------------------------------------------*/
-
-// Exclude categories on the homepage.
-add_filter( 'pre_get_posts', 'woo_exclude_categories_homepage' );
-
-function woo_exclude_categories_homepage ( $query ) {
-
-	if ( ! function_exists( 'woo_prepare_category_ids_from_option' ) ) { return $query; }
-
-	$excluded_cats = array();
-
-	// Process the category data and convert all categories to IDs.
-	$excluded_cats = woo_prepare_category_ids_from_option( 'woo_exclude_cats_home' );
-
-	// Homepage logic.
-	if ( is_home() && ( count( $excluded_cats ) > 0 ) ) {
-		$query->set( 'category__not_in', $excluded_cats );
-	}
-
-	$query->parse_query();
-
-	return $query;
-
-} // End woo_exclude_categories_homepage()
 
 /*-----------------------------------------------------------------------------------*/
 /* Register WP Menus */
@@ -177,11 +149,11 @@ if (!function_exists( 'woo_subscribe_connect')) {
 
 		//Setup default variables, overriding them if the "Theme Options" have been saved.
 		$settings = array(
-						'connect' => 'false', 
-						'connect_title' => __('Subscribe' , 'woothemes'), 
-						'connect_related' => 'true', 
+						'connect' => 'false',
+						'connect_title' => __('Subscribe' , 'woothemes'),
+						'connect_related' => 'true',
 						'connect_content' => __( 'Subscribe to our e-mail newsletter to receive updates.', 'woothemes' ),
-						'connect_newsletter_id' => '', 
+						'connect_newsletter_id' => '',
 						'connect_mailchimp_list_url' => '',
 						'feed_url' => '',
 						'connect_rss' => '',
@@ -360,18 +332,18 @@ if (!function_exists( 'woo_subscribe_connect')) {
 if ( ! function_exists( 'woo_archive_description' ) ) {
 	function woo_archive_description ( $echo = true ) {
 		do_action( 'woo_archive_description' );
-		
+
 		// Archive Description, if one is available.
 		$term_obj = get_queried_object();
 		$description = term_description( $term_obj->term_id, $term_obj->taxonomy );
-		
+
 		if ( $description != '' ) {
 			// Allow child themes/plugins to filter here ( 1: text in DIV and paragraph, 2: term object )
 			$description = apply_filters( 'woo_archive_description', '<div class="archive-description">' . $description . '</div><!--/.archive-description-->', $term_obj );
 		}
-		
+
 		if ( $echo != true ) { return $description; }
-		
+
 		echo $description;
 	} // End woo_archive_description()
 }
@@ -385,7 +357,7 @@ add_filter( 'woo_pagination_args', 'woo_pagination_html5_markup', 2 );
 function woo_pagination_html5_markup ( $args ) {
 	$args['before'] = '<nav class="pagination woo-pagination">';
 	$args['after'] = '</nav>';
-	
+
 	return $args;
 } // End woo_pagination_html5_markup()
 
@@ -397,47 +369,47 @@ function woo_pagination_html5_markup ( $args ) {
 function woo_maps_contact_output($args){
 
 	$key = get_option('woo_maps_apikey');
-	
+
 	// No More API Key needed
-	
-	if ( !is_array($args) ) 
+
+	if ( !is_array($args) )
 		parse_str( $args, $args );
-		
-	extract($args);	
+
+	extract($args);
 	$mode = '';
-	$streetview = 'off';	
+	$streetview = 'off';
 	$map_height = get_option('woo_maps_single_height');
 	$featured_w = get_option('woo_home_featured_w');
 	$featured_h = get_option('woo_home_featured_h');
 	$zoom = get_option('woo_maps_default_mapzoom');
 	$type = get_option('woo_maps_default_maptype');
 	$marker_title = get_option('woo_contact_title');
-	if ( $zoom == '' ) { $zoom = 6; }   
+	if ( $zoom == '' ) { $zoom = 6; }
 	$lang = get_option('woo_maps_directions_locale');
 	$locale = '';
 	if(!empty($lang)){
 		$locale = ',locale :"'.$lang.'"';
 	}
 	$extra_params = ',{travelMode:G_TRAVEL_MODE_WALKING,avoidHighways:true '.$locale.'}';
-	
+
 	if(empty($map_height)) { $map_height = 250;}
-	
+
 	if(is_home() && !empty($featured_h) && !empty($featured_w)){
 	?>
     <div id="single_map_canvas" style="width:<?php echo $featured_w; ?>px; height: <?php echo $featured_h; ?>px"></div>
-    <?php } else { ?> 
+    <?php } else { ?>
     <div id="single_map_canvas" style="width:100%; height: <?php echo $map_height; ?>px"></div>
     <?php } ?>
     <script type="text/javascript">
 		jQuery(document).ready(function(){
 			function initialize() {
-				
-				
+
+
 			<?php if($streetview == 'on'){ ?>
 
-				
+
 			<?php } else { ?>
-				
+
 			  	<?php switch ($type) {
 			  			case 'G_NORMAL_MAP':
 			  				$type = 'ROADMAP';
@@ -455,7 +427,7 @@ function woo_maps_contact_output($args){
 			  				$type = 'ROADMAP';
 			  				break;
 			  	} ?>
-			  	
+
 			  	var myLatlng = new google.maps.LatLng(<?php echo $geocoords; ?>);
 				var myOptions = {
 				  zoom: <?php echo $zoom; ?>,
@@ -466,14 +438,14 @@ function woo_maps_contact_output($args){
 				<?php if(get_option('woo_maps_scroll') == 'true'){ ?>
 			  	map.scrollwheel = false;
 			  	<?php } ?>
-			  	
+
 				<?php if($mode == 'directions'){ ?>
 			  	directionsPanel = document.getElementById("featured-route");
  				directions = new GDirections(map, directionsPanel);
   				directions.load("from: <?php echo $from; ?> to: <?php echo $to; ?>" <?php if($walking == 'on'){ echo $extra_params;} ?>);
 			  	<?php
 			 	} else { ?>
-			 
+
 			  		var point = new google.maps.LatLng(<?php echo $geocoords; ?>);
 	  				var root = "<?php echo esc_url( get_template_directory_uri() ); ?>";
 	  				var callout = '<?php echo preg_replace("/[\n\r]/","<br/>",get_option('woo_maps_callout_text')); ?>';
@@ -482,10 +454,10 @@ function woo_maps_contact_output($args){
 	  				<?php $title = str_replace('&#8211;','-',$title); ?>
 	  				<?php $title = str_replace('&#8217;',"`",$title); ?>
 	  				<?php $title = str_replace('&#038;','&',$title); ?>
-	  				var the_title = '<?php echo html_entity_decode($title) ?>'; 
-	  				
-	  			<?php		 	
-			 	if(is_page()){ 
+	  				var the_title = '<?php echo html_entity_decode($title) ?>';
+
+	  			<?php
+			 	if(is_page()){
 			 		$custom = get_option('woo_cat_custom_marker_pages');
 					if(!empty($custom)){
 						$color = $custom;
@@ -495,27 +467,27 @@ function woo_maps_contact_output($args){
 						if (empty($color)) {
 							$color = 'red';
 						}
-					}			 	
+					}
 			 	?>
 			 		var color = '<?php echo $color; ?>';
 			 		createMarker(map,point,root,the_link,the_title,color,callout);
 			 	<?php } else { ?>
 			 		var color = '<?php echo get_option('woo_cat_colors_pages'); ?>';
 	  				createMarker(map,point,root,the_link,the_title,color,callout);
-				<?php 
+				<?php
 				}
 					if(isset($_POST['woo_maps_directions_search'])){ ?>
-					
+
 					directionsPanel = document.getElementById("featured-route");
  					directions = new GDirections(map, directionsPanel);
   					directions.load("from: <?php echo htmlspecialchars($_POST['woo_maps_directions_search']); ?> to: <?php echo $address; ?>" <?php if($walking == 'on'){ echo $extra_params;} ?>);
-  					
-  					
-  					
+
+
+
 					directionsDisplay = new google.maps.DirectionsRenderer();
 					directionsDisplay.setMap(map);
     				directionsDisplay.setPanel(document.getElementById("featured-route"));
-					
+
 					<?php if($walking == 'on'){ ?>
 					var travelmodesetting = google.maps.DirectionsTravelMode.WALKING;
 					<?php } else { ?>
@@ -524,7 +496,7 @@ function woo_maps_contact_output($args){
 					var start = '<?php echo htmlspecialchars($_POST['woo_maps_directions_search']); ?>';
 					var end = '<?php echo $address; ?>';
 					var request = {
-       					origin:start, 
+       					origin:start,
         				destination:end,
         				travelMode: travelmodesetting
     				};
@@ -532,12 +504,12 @@ function woo_maps_contact_output($args){
       					if (status == google.maps.DirectionsStatus.OK) {
         					directionsDisplay.setDirections(response);
       					}
-      				});	
-      				
-  					<?php } ?>			
+      				});
+
+  					<?php } ?>
 				<?php } ?>
 			<?php } ?>
-			
+
 
 			  }
 			  function handleNoFlash(errorCode) {
@@ -547,19 +519,19 @@ function woo_maps_contact_output($args){
 				  }
 				 }
 
-			
-		
+
+
 		initialize();
-			
+
 		});
 	jQuery(window).load(function(){
-			
+
 		var newHeight = jQuery('#featured-content').height();
 		newHeight = newHeight - 5;
 		if(newHeight > 300){
 			jQuery('#single_map_canvas').height(newHeight);
 		}
-		
+
 	});
 
 	</script>
@@ -583,19 +555,19 @@ function woo_featured_slider_post_type () {
 		'view_item' => __( 'View Slide', 'woothemes' ),
 		'search_items' => __( 'Search Slides', 'woothemes' ),
 		'not_found' =>  __( 'No slides found', 'woothemes' ),
-		'not_found_in_trash' => __( 'No slides found in Trash', 'woothemes' ), 
+		'not_found_in_trash' => __( 'No slides found in Trash', 'woothemes' ),
 		'parent_item_colon' => __( 'Parent slide:', 'woothemes' )
 	);
 	$args = array(
 		'labels' => $labels,
 		'public' => false,
 		'publicly_queryable' => false,
-		'show_ui' => true, 
+		'show_ui' => true,
 		'query_var' => true,
 		'rewrite' => true,
 		'capability_type' => 'post',
 		'hierarchical' => false,
-		'taxonomies' => array( 'slide-page' ), 
+		'taxonomies' => array( 'slide-page' ),
 		'menu_icon' => esc_url( get_template_directory_uri() . '/includes/images/slides.png' ),
 		'menu_position' => 5,
 		'supports' => array('title','editor','thumbnail', /*'author','thumbnail','excerpt','comments'*/)
@@ -611,12 +583,12 @@ function woo_featured_slider_post_type () {
 		'all_items' => __( 'All Slide Groups', 'woothemes' ),
 		'parent_item' => __( 'Parent Slide Group', 'woothemes' ),
 		'parent_item_colon' => __( 'Parent Slide Group:', 'woothemes' ),
-		'edit_item' => __( 'Edit Slide Group', 'woothemes' ), 
+		'edit_item' => __( 'Edit Slide Group', 'woothemes' ),
 		'update_item' => __( 'Update Slide Group', 'woothemes' ),
 		'add_new_item' => __( 'Add New Slide Group', 'woothemes' ),
 		'new_item_name' => __( 'New Slide Group Name', 'woothemes' ),
 		'menu_name' => __( 'Slide Groups', 'woothemes' )
-	); 	
+	);
 
 	$args = array(
 		'hierarchical' => true,
@@ -664,8 +636,11 @@ function woo_featured_slider_get_slides ( $args ) {
 		$query_args['numberposts'] = intval( $args['limit'] );
 	}
 	if ( 0 < intval( $args['term'] ) ) {
+		if ( function_exists( 'icl_object_id' ) ) {
+			$args['term'] = icl_object_id( $args['term'], 'slide-page', true );
+		}
 		$query_args['tax_query'] = array(
-										array( 'taxonomy' => 'slide-page', 'field' => 'id', 'terms' => intval( $args['term']) )
+										array( 'taxonomy' => 'slide-page', 'field' => 'id', 'terms' => intval( $args['term'] ) )
 									);
 	}
 
@@ -707,7 +682,7 @@ if ( ! function_exists( 'is_ie' ) ) {
 		if ( in_array( $version, $supported_versions ) && 'MSIE' == $agent && ( $version == $current_version ) ) {
 			$response = true;
 		}
-	
+
 		return $response;
 	} // End is_ie()
 }
@@ -738,6 +713,22 @@ function woo_header_search() {
 		}
 	}
 } // End woo_header_search()
+
+/**
+ * Declare Sensei support
+ * Declares this theme's compatibility with Sensei.
+ */
+add_action( 'after_setup_theme', 'woo_sensei_support' );
+
+if ( ! function_exists( 'woo_sensei_support' ) ) {
+	/**
+	* Compatibility
+	* Declare Sensei support
+	*/
+	function woo_sensei_support() {
+		add_theme_support( 'sensei' );
+	}
+}
 
 /*-----------------------------------------------------------------------------------*/
 /* END */

@@ -404,13 +404,7 @@ $options[] = array( 'name' => __( 'Main Layout', 'woothemes' ),
     				'options' => array(
     					'layout-left-content' => $url . '2cl.png',
     					'layout-right-content' => $url . '2cr.png' )
-    				);					
-
-$options[] = array( 'name' => __( 'Category Exclude - Homepage', 'woothemes' ),
-    				'desc' => __( 'Specify a comma seperated list of category IDs or slugs that you\'d like to exclude from your homepage (eg: uncategorized).', 'woothemes' ),
-    				'id' => $shortname . '_exclude_cats_home',
-    				'std' => '',
-    				'type' => 'text' );
+    				);
 
 $options[] = array( 'name' => __( 'Category Exclude - Blog Page Template', 'woothemes' ),
     				'desc' => __( 'Specify a comma seperated list of category IDs or slugs that you\'d like to exclude from your \'Blog\' page template (eg: uncategorized).', 'woothemes' ),

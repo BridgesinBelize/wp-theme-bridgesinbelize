@@ -12,10 +12,10 @@
       $( '.select_wrapper').each(function () {
         $(this).prepend( '<span>' + $(this).find( '.woo-input option:selected').text() + '</span>' );
       });
-      $( 'select.woo-input').live( 'change', function () {
+      $(document).on( 'change', 'select.woo-input', function () {
         $(this).prev( 'span').replaceWith( '<span>' + $(this).find( 'option:selected').text() + '</span>' );
       });
-      $( 'select.woo-input').bind($.browser.msie ? 'click' : 'change', function(event) {
+      $(document).on('click', 'select.woo-input', function(event) {
         $(this).prev( 'span').replaceWith( '<span>' + $(this).find( 'option:selected').text() + '</span>' );
       }); 
     }

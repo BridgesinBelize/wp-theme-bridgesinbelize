@@ -1,0 +1,142 @@
+/**
+ * Our Team
+ *
+ * Styles which integrate this with with Our Team.
+ * This stylesheet is only enqueued if Our Team is activated.
+ * http://wordpress.org/plugins/our-team-by-woothemes/
+ */
+@-webkit-keyframes spin-360 {
+  from {
+    -webkit-transform: rotate(0);
+    /* Saf3.1+, Chrome */
+    -moz-transform: rotate(0);
+    /* FF3.5+ */
+    -ms-transform: rotate(0);
+    /* IE9 */
+    -o-transform: rotate(0);
+    /* Opera 10.5 */
+    transform: rotate(0);
+    zoom: 1;
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    /* Saf3.1+, Chrome */
+    -moz-transform: rotate(180deg);
+    /* FF3.5+ */
+    -ms-transform: rotate(180deg);
+    /* IE9 */
+    -o-transform: rotate(180deg);
+    /* Opera 10.5 */
+    transform: rotate(180deg);
+    zoom: 1;
+  }
+  to {
+    -webkit-transform: rotate(0);
+    /* Saf3.1+, Chrome */
+    -moz-transform: rotate(0);
+    /* FF3.5+ */
+    -ms-transform: rotate(0);
+    /* IE9 */
+    -o-transform: rotate(0);
+    /* Opera 10.5 */
+    transform: rotate(0);
+    zoom: 1;
+  }
+}
+.widget_woothemes_our_team .team-member {
+  margin-bottom: 1.618em;
+}
+.widget_woothemes_our_team .team-member .avatar {
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+  display: block;
+  margin-bottom: 1em;
+  width: 100%;
+  height: auto;
+}
+.widget_woothemes_our_team .author-details {
+  list-style: none;
+  margin-left: 0 !important;
+}
+.widget_woothemes_our_team .author-details li {
+  list-style-type: none;
+}
+.widget_woothemes_our_team h3.member a:after {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  width: 1.5em;
+  display: inline-block;
+  text-align: right;
+  line-height: 1;
+  content: "\f08e";
+}
+.widget_woothemes_our_team .role {
+  font-weight: 700;
+}
+@media only screen and (min-width: 960px) {
+  .widget_woothemes_our_team .columns-2:after,
+  .widget_woothemes_our_team .columns-3:after,
+  .widget_woothemes_our_team .columns-4:after,
+  .widget_woothemes_our_team .columns-5:after,
+  .widget_woothemes_our_team .columns-6:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+  }
+  .widget_woothemes_our_team .columns-2 .team-member,
+  .widget_woothemes_our_team .columns-3 .team-member,
+  .widget_woothemes_our_team .columns-4 .team-member,
+  .widget_woothemes_our_team .columns-5 .team-member,
+  .widget_woothemes_our_team .columns-6 .team-member {
+    float: left;
+    margin-right: 3.8%;
+  }
+  .widget_woothemes_our_team .columns-2 .team-member.first,
+  .widget_woothemes_our_team .columns-3 .team-member.first,
+  .widget_woothemes_our_team .columns-4 .team-member.first,
+  .widget_woothemes_our_team .columns-5 .team-member.first,
+  .widget_woothemes_our_team .columns-6 .team-member.first {
+    clear: both;
+  }
+  .widget_woothemes_our_team .columns-2 .team-member.last,
+  .widget_woothemes_our_team .columns-3 .team-member.last,
+  .widget_woothemes_our_team .columns-4 .team-member.last,
+  .widget_woothemes_our_team .columns-5 .team-member.last,
+  .widget_woothemes_our_team .columns-6 .team-member.last {
+    margin-right: 0;
+  }
+  .widget_woothemes_our_team .columns-2 .team-member {
+    width: 48%;
+  }
+  .widget_woothemes_our_team .columns-3 .team-member {
+    width: 30.75%;
+  }
+  .widget_woothemes_our_team .columns-4 .team-member {
+    width: 22.05%;
+  }
+  .widget_woothemes_our_team .columns-5 .team-member {
+    width: 16.9%;
+  }
+  .widget_woothemes_our_team .columns-6 .team-member {
+    width: 13.5%;
+  }
+  .sidebar .widget_woothemes_our_team .columns-2 .team-member,
+  .sidebar .widget_woothemes_our_team .columns-3 .team-member,
+  .sidebar .widget_woothemes_our_team .columns-4 .team-member,
+  .sidebar .widget_woothemes_our_team .columns-5 .team-member,
+  .sidebar .widget_woothemes_our_team .columns-6 .team-member {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+    clear: both;
+  }
+}

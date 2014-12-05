@@ -15,54 +15,34 @@ if ( ! function_exists( 'wp' ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) && base
  */
 	get_header();
 	global $woo_options;
-	
+
 	$settings = array(
-				'homepage_enable_content' => 'true', 
-				'homepage_enable_featured_products' => 'true', 
-				'homepage_content_type' => 'posts', 
-				'homepage_enable_features' => 'true', 
-				'homepage_enable_testimonials' => 'true', 
-				'homepage_features_title' => '', 
-				'homepage_testimonials_title' => '', 
-				'homepage_number_of_features' => 3, 
-				'homepage_number_of_testimonials' => 3, 
+				'homepage_enable_content' => 'true',
+				'homepage_enable_featured_products' => 'true',
+				'homepage_content_type' => 'posts',
+				'homepage_enable_features' => 'true',
+				'homepage_enable_testimonials' => 'true',
+				'homepage_features_title' => '',
+				'homepage_testimonials_title' => '',
+				'homepage_number_of_features' => 3,
+				'homepage_number_of_testimonials' => 3,
 				);
-					
+
 	$settings = woo_get_dynamic_values( $settings );
 ?>
 
     <div id="content" class="col-full">
-    
+
     	<?php woo_main_before(); ?>
+
     	<?php if ( is_home() && ! dynamic_sidebar( 'homepage' ) ) {
-			if ( 'true' == $settings['homepage_enable_content'] ) {
-				switch ( $settings['homepage_content_type'] ) {
-					case 'page':
-					get_template_part( 'includes/specific-page-content' );
-					break;
 
-					case 'posts':
-					default:
-					get_template_part( 'includes/blog-posts' );
-					break;
-				}
-			}
+    		do_action( 'homepage', $settings );
 
-			if ( 'true' == $settings['homepage_enable_features'] ) {
-				do_action( 'woothemes_features', array( 'title' => $settings['homepage_features_title'], 'limit' => $settings['homepage_number_of_features'] ) );
-			}
+		} ?>
 
-			if ( 'true' == $settings['homepage_enable_testimonials'] ) {
-				do_action( 'woothemes_testimonials', array( 'title' => $settings['homepage_testimonials_title'], 'limit' => $settings['homepage_number_of_testimonials'] ) );
-			}
-
-			if ( is_woocommerce_activated() && 'true' == $settings['homepage_enable_featured_products'] ) {
-				get_template_part( 'includes/featured-products' );
-			}
-    	?>
-		<?php } ?>
 		<?php woo_main_after(); ?>
 
     </div><!-- /#content -->
-		
+
 <?php get_footer(); ?>

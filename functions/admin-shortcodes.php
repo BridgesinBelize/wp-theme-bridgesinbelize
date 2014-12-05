@@ -52,7 +52,7 @@ TABLE OF CONTENTS
 add_filter( 'widget_text', 'do_shortcode' );
 
 // Add stylesheet for shortcodes to HEAD (added to HEAD in admin-setup.php)
-if ( ! function_exists( 'woo_shortcode_stylesheet' ) && get_option( 'framework_woo_disable_shortcodes' ) != 'true' ) {
+if ( ! function_exists( 'woo_shortcode_stylesheet' ) && 'true' != get_option( 'framework_woo_disable_shortcodes', 'false' ) ) {
 	function woo_shortcode_stylesheet() {
 		echo "\n" . "<!-- Woo Shortcodes CSS -->\n";
 		echo '<link href="'. get_template_directory_uri() . '/functions/css/shortcodes.css" rel="stylesheet" type="text/css" />'."\n";
@@ -78,18 +78,68 @@ function woo_register_shortcode_js () {
 	wp_register_script( 'woo-shortcodes', get_template_directory_uri() . '/functions/js/shortcodes.js', array( 'jquery', 'jquery-ui-tabs' ), '5.0.0' );
 } // End woo_register_shortcode_js()
 
-add_action( 'wp_footer', 'woo_enqueue_shortcode_js', 10 );
+add_action( 'wp_footer', 'woo_enqueue_shortcode_js', 50 );
 
 function woo_enqueue_shortcode_js () {
 	if ( ! is_admin() && defined( 'WOO_SHORTCODE_JS' ) ) {
 		wp_enqueue_script( 'woo-shortcodes' );
-		
+
 		global $wp_scripts;
 		$wp_scripts->to_do = array( 'woo-shortcodes' );
-		
+
 		wp_print_scripts();
 	}
 } // End woo_enqueue_shortcode_js()
+
+/*-----------------------------------------------------------------------------------*/
+/* 1.2 Ensure the Dropcap shortcode content is parsed in excerpts */
+/*-----------------------------------------------------------------------------------*/
+
+/**
+ * Remove the 'wp_trim_excerpt' filter on excerpts, at the start of the main loop, so we can parse excerpts ourselves.
+ * @since  6.0.0
+ * @return void
+ */
+function maybe_remove_trim_excerpt () {
+	if ( is_main_query() ) remove_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
+} // End maybe_remove_trim_excerpt()
+add_action( 'loop_start', 'maybe_remove_trim_excerpt' );
+
+/**
+ * Restore the 'wp_trim_excerpt' filter on excerpts, at the end of the main loop.
+ * @since  6.0.0
+ * @return void
+ */
+function maybe_restore_trim_excerpt () {
+	add_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
+} // End maybe_restore_trim_excerpt()
+add_action( 'loop_end', 'maybe_restore_trim_excerpt' );
+
+/**
+ * Remove the 'dropcap' shortcode before outputting the excerpt, to prevent missing characters in words.
+ * @since  6.0.0
+ * @param  string $text The excerpt text.
+ * @return string       The modified excerpt text.
+ */
+function woo_remove_dropcap_from_excerpts ( $text ) {
+	global $post;
+	$original_text = $text; // Make a backup of the info passed through.
+	remove_shortcode( 'dropcap' );
+	if ( '' != $post->post_excerpt ) {
+		$text = $original_text;
+	} else {
+		$text = get_the_content();
+	}
+	$text = str_replace( '[/dropcap]', '', str_replace( '[dropcap]', '', $text ) );
+	add_shortcode( 'dropcap', 'woo_shortcode_dropcap' );
+
+	if ( function_exists( 'woo_trim_excerpt' ) ) {
+		$text = woo_trim_excerpt( $text ); // We have to create our own function, as WordPress doesn't allow filtering inside wp_trim_excerpt().
+	}
+
+	return $text;
+} // End woo_remove_dropcap_from_excerpts()
+add_filter( 'get_the_excerpt', 'woo_remove_dropcap_from_excerpts' );
 
 /*-----------------------------------------------------------------------------------*/
 /* 2. Boxes - box
@@ -111,13 +161,25 @@ function woo_shortcode_box( $atts, $content = null ) {
    									'border' => '',
    									'icon' => '' ), $atts ) );
 
-   	$custom = '';
-   	if ( $icon == 'none' )
-   		$custom = ' style="padding-left:15px;background-image:none;"';
-   	elseif ( $icon )
-   		$custom = ' style="padding-left:50px;background-image:url( ' . esc_attr( esc_url( $icon ) ) . ' ); background-repeat:no-repeat; background-position:20px 45%;"';
+    // "Toggle in a box" fix
+   	$allowed_tags = wp_kses_allowed_html( 'post' );
+	$allowed_tags['input'] = array( 'type' => true,
+									'name' => true,
+									'value' => true );
 
-   	return '<div class="woo-sc-box ' . esc_attr( $type ) . ' ' . esc_attr( $size ) . ' ' . esc_attr( $style ) . ' ' . esc_attr( $border ) . '"' . $custom . '>' . wp_kses_post( do_shortcode( woo_remove_wpautop( $content ) ) ) . '</div>';
+	$allowed_protocols = wp_allowed_protocols();
+	$allowed_protocols[] = 'skype';
+
+	$class = '';
+   	$custom = '';
+   	if ( $icon == 'none' ) {
+   		$class = 'no-icon';
+   		$custom = ' style="padding-left:15px;background-image:none;"';
+   	} elseif ( $icon ) {
+   		$class = 'custom-icon';
+   		$custom = ' style="padding-left:50px;background-image:url( ' . esc_attr( esc_url( $icon ) ) . ' ); background-repeat:no-repeat; background-position:20px 45%;"';
+    }
+   	return '<div class="woo-sc-box ' . esc_attr( $class ) . ' ' . esc_attr( $type ) . ' ' . esc_attr( $size ) . ' ' . esc_attr( $style ) . ' ' . esc_attr( $border ) . '"' . $custom . '>' . wp_kses( do_shortcode( woo_remove_wpautop( $content ) ), $allowed_tags, $allowed_protocols ) . '</div>';
 } // End woo_shortcode_box()
 
 add_shortcode( 'box', 'woo_shortcode_box' );
@@ -210,114 +272,114 @@ Optional arguments:
 
 function woo_shortcode_related_posts ( $atts ) {
 	global $post, $wp_version;
-	
+
 		wp_reset_query(); // Make sure we have a fresh query before we start.
-	
+
 		$defaults = array(
-					'limit' => 5, 
-					'image' => 0, 
+					'limit' => 5,
+					'image' => 0,
 					'float' => 'none'
 				 );
-	
+
 		$atts = shortcode_atts( $defaults, $atts );
-	
+
 		// This function requires at least WordPress Version 3.1.
 		if ( $wp_version < 3.1 ) {
 			return _dep_woo_shortcode_related_posts( $atts );
 		} else {
-	
+
 		// Sanitize float attribute.
 		if ( isset( $atts['float'] ) && ! in_array( $atts['float'], array( 'none', 'left', 'right' ) ) ) { $atts['float'] = 'none'; }
-	
+
 		// Float translation array.
 		$floats = array( 'none' => '', 'left' => 'fl', 'right' => 'fr' );
-	
+
 		$css_class = 'woo-sc-related-posts';
-	
+
 		extract( $atts );
-		
+
 		if ( $float != 'none' ) { $css_class .= ' ' . $floats[$float]; }
-		
+
 		$output = '';
-		
+
 		$post_type = get_post_type( $post->ID );
-		
+
 		$post_type_obj = get_post_type_object( $post_type );
-		
+
 		$taxonomies_string = 'post_tag, category';
 		$taxonomies = array( 'post_tag', 'category' );
-		
+
 		if ( isset( $post_type_obj->taxonomies ) && count( $post_type_obj->taxonomies ) > 0 ) {
 			$taxonomies_string = join( ', ', $post_type_obj->taxonomies );
 			$taxonomies = $post_type_obj->taxonomies;
 		}
-	 	
+
 	 	// Clean up our taxonomies for use in the query.
 	 	if ( count( $taxonomies ) ) {
 	 		foreach ( $taxonomies as $k => $v ) {
 	 			$taxonomies[$k] = trim( $v );
 	 		}
 	 	}
-	 	
+
 	 	// Determine which terms we're going to relate to this entry.
 	 	$related_terms = array();
-	 	
+
 	 	foreach ( $taxonomies as $t ) {
 	 		$terms = get_the_terms( $post->ID, $t );
-	 		
+
 	 		if ( ! empty( $terms ) ) {
 	 			foreach ( $terms as $k => $v ) {
 	 				$related_terms[$t][$v->term_id] = $v->slug;
 	 			}
 	 		}
 	 	}
-		
+
 		$specific_terms = array();
 		foreach ( $related_terms as $k => $v ) {
 			foreach ( $v as $i => $j ) {
 				$specific_terms[] = $j;
 			}
 		}
-		
+
 		$query_args = array(
- 						'limit' => $atts['limit'], 
- 						'post_type' => $post_type, 
- 						'taxonomies' => $taxonomies_string, 
- 						'specific_terms' => $specific_terms, 
- 						'order' => 'DESC', 
- 						'orderby' => 'date', 
+ 						'limit' => $atts['limit'],
+ 						'post_type' => $post_type,
+ 						'taxonomies' => $taxonomies_string,
+ 						'specific_terms' => $specific_terms,
+ 						'order' => 'DESC',
+ 						'orderby' => 'date',
  						'exclude' => array( $post->ID )
  					);
-		
+
 		$posts = woo_get_posts_by_taxonomy( $query_args );
-		
+
 		if ( count( (array)$posts ) ) {
-			
+
 			$output .= '<div class="' . $css_class . '">' . "\n";
-		
+
 			$output .= '<ul>' . "\n";
-			
+
 			foreach ( $posts as $post ) {
 				setup_postdata( $post );
-				
+
 				if ( $image <= 0 ) {
 					$image_html = '';
 				} else {
 					$image_html = '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="thumbnail">' . woo_image( 'link=img&width=' . $image . '&height=' . esc_attr( $image ) . '&return=true&id=' . esc_attr( $post->ID ) ) . '</a>' . "\n";
 				}
-				
+
 				$output .= '<li class="post-id-' . esc_attr( $post->ID ) . '">' . "\n" . $image_html . "\n" . '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" title="' . the_title_attribute( array( 'echo' => 0 ) ) . '" class="related-title"><span>' . get_the_title( $post->ID )  . '</span></a>' . "\n" . '</li>' . "\n";
 			}
-			
+
 			$output .= '</ul>' . "\n";
 			$output .= '<div class="fix"></div><!--/.fix-->' . "\n";
 			$output .= '</div><!--/.woo-sc-related-posts-->';
 		}
-		
+
 		wp_reset_postdata();
-		
+
 		return apply_filters( 'woo_shortcode_related_posts', $output, $atts );
-	
+
 	} // End IF Statement (version check)
 } // End woo_shortcode_related_posts()
 
@@ -401,11 +463,11 @@ function woo_shortcode_twitter($atts, $content = null) {
    									'text' => '',
    									'related' => '',
    									'lang' => '',
-   									'float' => 'left', 
-   									'use_post_url' => 'false', 
-   									'recommend' => '', 
-   									'hashtag' => '', 
-   									'size' => '', 
+   									'float' => 'left',
+   									'use_post_url' => 'false',
+   									'recommend' => '',
+   									'hashtag' => '',
+   									'size' => '',
    									 ), $atts));
 	$output = '';
 
@@ -420,7 +482,7 @@ function woo_shortcode_twitter($atts, $content = null) {
 
 	if ( $related )
 		$output .= ' data-related="' . esc_attr( $related ) . '"';
-		
+
 	if ( $hashtag )
 		$output .= ' data-hashtags="' . esc_attr( $hashtag ) . '"';
 
@@ -429,11 +491,11 @@ function woo_shortcode_twitter($atts, $content = null) {
 
 	if ( $lang )
 		$output .= ' data-lang="' . esc_attr( $lang ) . '"';
-		
+
 	if ( $style != '' ) {
 		$output .= 'data-count="' . esc_attr( $style ) . '"';
 	}
-		
+
 	if ( $use_post_url == 'true' && $url == '' ) {
 		$output .= ' data-url="' . get_permalink( $post->ID ) . '"';
 	}
@@ -532,7 +594,7 @@ function woo_shortcode_fblike($atts, $content = null) {
    									'width' => '450',
    									'verb' => 'like',
    									'colorscheme' => 'light',
-   									'font' => 'arial', 
+   									'font' => 'arial',
    									'locale' => 'en_US' ), $atts));
 
 	global $post;
@@ -559,7 +621,7 @@ function woo_shortcode_fblike($atts, $content = null) {
 	// Set the width to "auto" if "showfaces" is off and the default width is still set.
 	$widthpx = $width . 'px';
 	if ( $width == 450 && $showfaces == 'false' ) { $widthpx = 'auto'; }
-	
+
 	// Set the height to 20 if "showfaces" is disabled and the style is either "standard" or "button_count".
 	if ( $showfaces == 'false' && ( $style != 'box_count' ) ) { $height = 25; }
 
@@ -575,11 +637,11 @@ function woo_shortcode_fblike($atts, $content = null) {
 		default:
 		break;
 	}
-	
+
 	$src_url = 'http://www.facebook.com/plugins/like.php?href=' . esc_url( $url ) . '&amp;layout=' . urlencode( $style ) . '&amp;show_faces=' . urlencode( $showfaces ) . '&amp;width=' . urlencode( $width ) . '&amp;action=' . urlencode( $verb ) . '&amp;colorscheme=' . urlencode( $colorscheme ) . '&amp;font=' . urlencode( $font ) . '&locale=' . urlencode( $locale ) . '';
 	$output = '
 <div class="woo-fblike ' . esc_attr( $float ) . '">
-<iframe src="' . esc_url( $src_url ) . '" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:' . esc_attr( $widthpx ) . '; height:' . esc_attr( $height ) . 'px;"></iframe>
+<iframe src="' . esc_url( $src_url ) . '" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:' . esc_attr( $widthpx ) . '; height:' . esc_attr( $height ) . 'px;"></iframe>
 </div>
 	';
 	return $output;
@@ -609,7 +671,7 @@ function woo_shortcode_twocol_one($atts, $content = null) {
 add_shortcode( 'twocol_one', 'woo_shortcode_twocol_one' );
 
 function woo_shortcode_twocol_one_last($atts, $content = null) {
-   return '<div class="twocol-one last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="twocol-one last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'twocol_one_last', 'woo_shortcode_twocol_one_last' );
 
@@ -622,7 +684,7 @@ function woo_shortcode_threecol_one($atts, $content = null) {
 add_shortcode( 'threecol_one', 'woo_shortcode_threecol_one' );
 
 function woo_shortcode_threecol_one_last($atts, $content = null) {
-   return '<div class="threecol-one last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="threecol-one last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'threecol_one_last', 'woo_shortcode_threecol_one_last' );
 
@@ -632,7 +694,7 @@ function woo_shortcode_threecol_two($atts, $content = null) {
 add_shortcode( 'threecol_two', 'woo_shortcode_threecol_two' );
 
 function woo_shortcode_threecol_two_last($atts, $content = null) {
-   return '<div class="threecol-two last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="threecol-two last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'threecol_two_last', 'woo_shortcode_threecol_two_last' );
 
@@ -644,7 +706,7 @@ function woo_shortcode_fourcol_one($atts, $content = null) {
 add_shortcode( 'fourcol_one', 'woo_shortcode_fourcol_one' );
 
 function woo_shortcode_fourcol_one_last($atts, $content = null) {
-   return '<div class="fourcol-one last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fourcol-one last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fourcol_one_last', 'woo_shortcode_fourcol_one_last' );
 
@@ -654,7 +716,7 @@ function woo_shortcode_fourcol_two($atts, $content = null) {
 add_shortcode( 'fourcol_two', 'woo_shortcode_fourcol_two' );
 
 function woo_shortcode_fourcol_two_last($atts, $content = null) {
-   return '<div class="fourcol-two last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fourcol-two last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fourcol_two_last', 'woo_shortcode_fourcol_two_last' );
 
@@ -664,7 +726,7 @@ function woo_shortcode_fourcol_three($atts, $content = null) {
 add_shortcode( 'fourcol_three', 'woo_shortcode_fourcol_three' );
 
 function woo_shortcode_fourcol_three_last($atts, $content = null) {
-   return '<div class="fourcol-three last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fourcol-three last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fourcol_three_last', 'woo_shortcode_fourcol_three_last' );
 
@@ -676,7 +738,7 @@ function woo_shortcode_fivecol_one($atts, $content = null) {
 add_shortcode( 'fivecol_one', 'woo_shortcode_fivecol_one' );
 
 function woo_shortcode_fivecol_one_last($atts, $content = null) {
-   return '<div class="fivecol-one last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fivecol-one last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fivecol_one_last', 'woo_shortcode_fivecol_one_last' );
 
@@ -686,7 +748,7 @@ function woo_shortcode_fivecol_two($atts, $content = null) {
 add_shortcode( 'fivecol_two', 'woo_shortcode_fivecol_two' );
 
 function woo_shortcode_fivecol_two_last($atts, $content = null) {
-   return '<div class="fivecol-two last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fivecol-two last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fivecol_two_last', 'woo_shortcode_fivecol_two_last' );
 
@@ -696,7 +758,7 @@ function woo_shortcode_fivecol_three($atts, $content = null) {
 add_shortcode( 'fivecol_three', 'woo_shortcode_fivecol_three' );
 
 function woo_shortcode_fivecol_three_last($atts, $content = null) {
-   return '<div class="fivecol-three last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fivecol-three last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fivecol_three_last', 'woo_shortcode_fivecol_three_last' );
 
@@ -706,7 +768,7 @@ function woo_shortcode_fivecol_four($atts, $content = null) {
 add_shortcode( 'fivecol_four', 'woo_shortcode_fivecol_four' );
 
 function woo_shortcode_fivecol_four_last($atts, $content = null) {
-   return '<div class="fivecol-four last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="fivecol-four last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'fivecol_four_last', 'woo_shortcode_fivecol_four_last' );
 
@@ -719,7 +781,7 @@ function woo_shortcode_sixcol_one($atts, $content = null) {
 add_shortcode( 'sixcol_one', 'woo_shortcode_sixcol_one' );
 
 function woo_shortcode_sixcol_one_last($atts, $content = null) {
-   return '<div class="sixcol-one last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="sixcol-one last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'sixcol_one_last', 'woo_shortcode_sixcol_one_last' );
 
@@ -729,7 +791,7 @@ function woo_shortcode_sixcol_two($atts, $content = null) {
 add_shortcode( 'sixcol_two', 'woo_shortcode_sixcol_two' );
 
 function woo_shortcode_sixcol_two_last($atts, $content = null) {
-   return '<div class="sixcol-two last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="sixcol-two last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'sixcol_two_last', 'woo_shortcode_sixcol_two_last' );
 
@@ -739,7 +801,7 @@ function woo_shortcode_sixcol_three($atts, $content = null) {
 add_shortcode( 'sixcol_three', 'woo_shortcode_sixcol_three' );
 
 function woo_shortcode_sixcol_three_last($atts, $content = null) {
-   return '<div class="sixcol-three last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="sixcol-three last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'sixcol_three_last', 'woo_shortcode_sixcol_three_last' );
 
@@ -749,7 +811,7 @@ function woo_shortcode_sixcol_four($atts, $content = null) {
 add_shortcode( 'sixcol_four', 'woo_shortcode_sixcol_four' );
 
 function woo_shortcode_sixcol_four_last($atts, $content = null) {
-   return '<div class="sixcol-four last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="sixcol-four last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'sixcol_four_last', 'woo_shortcode_sixcol_four_last' );
 
@@ -759,7 +821,7 @@ function woo_shortcode_sixcol_five($atts, $content = null) {
 add_shortcode( 'sixcol_five', 'woo_shortcode_sixcol_five' );
 
 function woo_shortcode_sixcol_five_last($atts, $content = null) {
-   return '<div class="sixcol-five last">' . woo_remove_wpautop($content) . '</div>';
+   return '<div class="sixcol-five last">' . woo_remove_wpautop($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'sixcol_five_last', 'woo_shortcode_sixcol_five_last' );
 
@@ -831,7 +893,7 @@ function woo_shortcode_ilink( $atts, $content = null ) {
    	if ( $title != '' ) {
    		$atts .= ' title="' . esc_attr( $title ) . '"';
    	}
-   	
+
    	return '<span class="woo-sc-ilink"><a class="' . esc_attr( $style ) . '" href="' . esc_url( $url ) . '"' . $atts . '>' . woo_remove_wpautop( $content ) . '</a></span>';
 } // End woo_shortcode_ilink()
 add_shortcode( 'ilink', 'woo_shortcode_ilink' );
@@ -930,23 +992,36 @@ Optional arguments:
 
 */
 function woo_shortcode_fbshare($atts, $content = null) {
-   	extract( shortcode_atts( array( 'url' => '', 'type' => 'button', 'float' => 'left' ), $atts ) );
+   	extract( shortcode_atts( array( 'url' => '', 'type' => 'button', 'float' => 'left', 'width' => 100 ), $atts ) );
 
 	global $post;
 
 	if ( isset( $url ) && $url == '' && isset( $post ) ) { $url = get_permalink( $post->ID ); } // End IF Statement
 
-	$output = '
-<div class="woo-fbshare ' . esc_attr( $float ) . '">
-<a name="fb_share" type="' . esc_attr(  $type ) . '" share_url="' . esc_url( $url ) . '">' . woo_remove_wpautop( $content ) . '</a>
-<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript">
-</script>
-</div>
-	';
+	$output = '<div class="woo-fbshare ' . esc_attr( $float ) . '"><div class="fb-share-button" data-href="' . esc_url( $url ) . '" data-width="' . esc_attr( $width ) . '" data-type="' . esc_attr( $type ) . '"></div></div>';
+
+	// Load the necessary JavaScript in the footer.
+	if ( ! has_action( 'wp_footer', 'woo_shortcode_fbshare_javascript' ) ) add_action( 'wp_footer', 'woo_shortcode_fbshare_javascript' );
+
 	return $output;
 } // End woo_shortcode_fbshare()
 add_shortcode( 'fbshare', 'woo_shortcode_fbshare' );
 
+/**
+ * Output the JavaScript necessary for handling the 'fbshare' shortcode.
+ * @since  6.0.0
+ * @return void
+ */
+function woo_shortcode_fbshare_javascript () {
+	echo '<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=307306569286690";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, \'script\', \'facebook-jssdk\'));</script>' . "\n";
+} // End woo_shortcode_fbshare_javascript()
 
 /*-----------------------------------------------------------------------------------*/
 /* 15. Advanced Contact Form - contact_form
@@ -971,7 +1046,7 @@ function woo_shortcode_contactform ( $atts, $content = null ) {
 		$defaults = array(
 						'email' => get_option( 'woo_contactform_email'),
 						'subject' => __( 'Message via the contact form', 'woothemes' ),
-						'button_text' => apply_filters( 'woo_contact_form_button_text', __( 'Submit', 'woothemes' ) ), 
+						'button_text' => apply_filters( 'woo_contact_form_button_text', __( 'Submit', 'woothemes' ) ),
 						'show_default_fields' => 'yes'
 						);
 
@@ -1242,6 +1317,15 @@ function woo_shortcode_contactform ( $atts, $content = null ) {
 
 			} // End FOREACH Loop
 
+			// Make sure the key is the field name, and the value is the translated label text.
+			$label_translations = apply_filters( 'woo_contact_form_label_translations', array() );
+			if ( is_array( $formatted_dynamic_atts ) && 0 < count( $formatted_dynamic_atts ) ) {
+				foreach ( $formatted_dynamic_atts as $k => $v ) {
+					if ( in_array( $k, array_keys( $label_translations ) ) && isset( $v['label'] ) ) {
+						$formatted_dynamic_atts[$k]['label'] = esc_html( $label_translations[$k] );
+					}
+				}
+			}
 		} // End IF Statement
 
 		/*--------------------------------------------------
@@ -1288,6 +1372,8 @@ function woo_shortcode_contactform ( $atts, $content = null ) {
 				$message_subject = $subject;
 				$message_body = $default_fields['contactMessage'] . "\n\r\n\r";
 
+				$default_labels = apply_filters( 'woo_contact_form_shortcode_default_labels', array( 'Name' => __( 'Name', 'woothemes' ), 'Email' => __( 'Email', 'woothemes' ), 'Message' => __( 'Message', 'woothemes' ) ) );
+
 				// Filter out skipped fields and assign default fields.
 				foreach ( $posted_data as $k => $v ) {
 					if ( in_array( $k, $fields_to_skip ) ) {
@@ -1308,7 +1394,9 @@ function woo_shortcode_contactform ( $atts, $content = null ) {
 
 				foreach ( $default_fields as $k => $v ) {
 					if ( $v == '' ) {} else {
-						$message_body .= str_replace( 'contact', '', $k ) . ': ' . $v . "\n\r";
+						$label = str_replace( 'contact', '', $k );
+						if ( isset( $default_labels[$label] ) ) $label = $default_labels[$label];
+						$message_body .= $label . ': ' . $v . "\n\r";
 					} // End IF Statement
 				} // End FOREACH Loop
 
@@ -1327,13 +1415,13 @@ function woo_shortcode_contactform ( $atts, $content = null ) {
 				} // End FOREACH Loop
 
 				// Send the e-mail.
-				$headers = __( 'From: ', 'woothemes') . $default_fields['contactName'] . ' <' . $default_fields['contactEmail'] . '>' . "\r\n" . __( 'Reply-To: ', 'woothemes' ) . $default_fields['contactEmail'];
+				$headers = 'From:' . $default_fields['contactName'] . ' <' . $default_fields['contactEmail'] . '>' . "\r\n" . 'Reply-To:' . $default_fields['contactEmail'];
 
 				$emailSent = wp_mail($email, $subject, $message_body, $headers);
 
 				// Send a copy of the e-mail to the sender, if specified.
 				if ( isset( $_POST['sendCopy'] ) && $_POST['sendCopy'] == 'true' ) {
-					$headers = __( 'From: ', 'woothemes') . $default_fields['contactName'] . ' <' . $default_fields['contactEmail'] . '>' . "\r\n" . __( 'Reply-To: ', 'woothemes' ) . $default_fields['contactEmail'];
+					$headers = 'From:' . $default_fields['contactName'] . ' <' . $default_fields['contactEmail'] . '>' . "\r\n" . 'Reply-To:' . $default_fields['contactEmail'];
 
 					$emailSent = wp_mail($default_fields['contactEmail'], $subject, $message_body, $headers);
 				} // End IF Statement
@@ -1525,7 +1613,7 @@ function woo_shortcode_contactform ( $atts, $content = null ) {
 				$checking = $_POST['checking'];
 			}
 
-			$html .= '<p class="screenReader"><label for="checking" class="screenReader">' . __('If you want to submit this form, do not enter anything in this field', 'woothemes') . '</label><input type="text" name="checking" id="checking" class="screenReader" value="' . esc_attr( $checking ) . '" /></p>' . "\n";
+			$html .= '<p class="screenReader"><label for="checking" class="screenReader">' . __( 'If you want to submit this form, do not enter anything in this field', 'woothemes' ) . '</label><input type="text" name="checking" id="checking" class="screenReader" value="' . esc_attr( $checking ) . '" /></p>' . "\n";
 			$html .= '<p class="buttons"><input type="hidden" name="submitted" id="submitted" value="true" /><input class="submit button" type="submit" value="' . esc_attr( $button_text ) . '" /></p>';
 				$html .= '</fieldset>' . "\n";
 			$html .= '</form>' . "\n";
@@ -1706,7 +1794,7 @@ function woo_shortcode_typography ( $atts, $content = null ) {
 
 	// $font = str_replace( '|', '"', $font );
 
-	return '<span class="shortcode-typography" style="font-family: ' . esc_attr( $font ) . '; font-size: ' . esc_attr( $size . $size_format ) . '; color: ' . esc_attr( $color ) . ';">' . do_shortcode( $content ) . '</span>';
+	return '<span class="shortcode-typography" style="font-family: ' . stripslashes( esc_js( $font ) ) . '; font-size: ' . esc_attr( $size . $size_format ) . '; color: ' . esc_attr( $color ) . ';">' . do_shortcode( $content ) . '</span>';
 } // End woo_shortcode_typography()
 
 add_shortcode( 'typography', 'woo_shortcode_typography' );
@@ -1795,7 +1883,7 @@ function woo_shortcode_socialicon ( $atts, $content = null ) {
 									'youtube' => 'youtube.com',
 									'delicious' => 'delicious.com',
 									'flickr' => 'flickr.com',
-									'linkedin' => 'linkedin.com', 
+									'linkedin' => 'linkedin.com',
 									'googleplus' => 'plus.google.com'
 								);
 
@@ -1955,7 +2043,7 @@ function woo_shortcode_google_plusone ( $atts, $content = null ) {
 						'count' => '',
 						'href' => '',
 						'callback' => '',
-						'float' => 'none', 
+						'float' => 'none',
 						'annotation' => 'none'
 					);
 
@@ -1967,54 +2055,54 @@ function woo_shortcode_google_plusone ( $atts, $content = null ) {
 
 	$allowed_floats = array( 'left' => ' fl', 'right' => ' fr', 'none' => '' );
 	if ( ! in_array( $float, array_keys( $allowed_floats ) ) ) { $float = 'none'; }
-	
-	if ( ! in_array( $annotation, array( 'bubble', 'inline', 'none' ) ) ) { $annotation = 'none'; } 
+
+	if ( ! in_array( $annotation, array( 'bubble', 'inline', 'none' ) ) ) { $annotation = 'none'; }
 
 	// A friendly-looking array of supported languages, along with their codes.
 	$supported_languages = array(
-		'ar' => 'Arabic', 
-		'bg' => 'Bulgarian', 
-		'ca' => 'Catalan', 
-		'zh-CN' => 'Chinese (Simplified)', 
-		'zh-TW' => 'Chinese (Traditional)', 
-		'hr' => 'Croatian', 
-		'cs' => 'Czech', 
-		'da' => 'Danish', 
-		'nl' => 'Dutch', 
-		'en-US' => 'English (US)', 
-		'en-GB' => 'English (UK)', 
-		'et' => 'Estonian', 
-		'fil' => 'Filipino', 
-		'fi' => 'Finnish', 
-		'fr' => 'French', 
-		'de' => 'German', 
-		'el' => 'Greek', 
-		'iw' => 'Hebrew', 
-		'hi' => 'Hindi', 
-		'hu' => 'Hungarian', 
-		'id' => 'Indonesian', 
-		'it' => 'Italian', 
-		'ja' => 'Japanese', 
-		'ko' => 'Korean', 
-		'lv' => 'Latvian', 
-		'lt' => 'Lithuanian', 
-		'ms' => 'Malay', 
-		'no' => 'Norwegian', 
-		'fa' => 'Persian', 
-		'pl' => 'Polish', 
-		'pt-BR' => 'Portuguese (Brazil)', 
-		'pt-PT' => 'Portuguese (Portugal)', 
-		'ro' => 'Romanian', 
-		'ru' => 'Russian', 
-		'sr' => 'Serbian', 
-		'sv' => 'Swedish', 
-		'sk' => 'Slovak', 
-		'sl' => 'Slovenian', 
-		'es' => 'Spanish', 
-		'es-419' => 'Spanish (Latin America)', 
-		'th' => 'Thai', 
-		'tr' => 'Turkish', 
-		'uk' => 'Ukrainian', 
+		'ar' => 'Arabic',
+		'bg' => 'Bulgarian',
+		'ca' => 'Catalan',
+		'zh-CN' => 'Chinese (Simplified)',
+		'zh-TW' => 'Chinese (Traditional)',
+		'hr' => 'Croatian',
+		'cs' => 'Czech',
+		'da' => 'Danish',
+		'nl' => 'Dutch',
+		'en-US' => 'English (US)',
+		'en-GB' => 'English (UK)',
+		'et' => 'Estonian',
+		'fil' => 'Filipino',
+		'fi' => 'Finnish',
+		'fr' => 'French',
+		'de' => 'German',
+		'el' => 'Greek',
+		'iw' => 'Hebrew',
+		'hi' => 'Hindi',
+		'hu' => 'Hungarian',
+		'id' => 'Indonesian',
+		'it' => 'Italian',
+		'ja' => 'Japanese',
+		'ko' => 'Korean',
+		'lv' => 'Latvian',
+		'lt' => 'Lithuanian',
+		'ms' => 'Malay',
+		'no' => 'Norwegian',
+		'fa' => 'Persian',
+		'pl' => 'Polish',
+		'pt-BR' => 'Portuguese (Brazil)',
+		'pt-PT' => 'Portuguese (Portugal)',
+		'ro' => 'Romanian',
+		'ru' => 'Russian',
+		'sr' => 'Serbian',
+		'sv' => 'Swedish',
+		'sk' => 'Slovak',
+		'sl' => 'Slovenian',
+		'es' => 'Spanish',
+		'es-419' => 'Spanish (Latin America)',
+		'th' => 'Thai',
+		'tr' => 'Turkish',
+		'uk' => 'Ukrainian',
 		'vi' => 'Vietnamese'
 	);
 
@@ -2035,18 +2123,18 @@ function woo_shortcode_google_plusone ( $atts, $content = null ) {
 	}
 
 	$output = '<div class="shortcode-google-plusone' . esc_attr( $allowed_floats[$float] ) . '"><div class="g-plusone" ' . $tag_atts . '></div></div><!--/.shortcode-google-plusone-->' . "\n";
-	
+
 	// Parameters to pass to Google PlusOne JavaScript.
 	if ( in_array( $atts['language'] , array_values( $supported_languages ) ) ) {
 		$language = '';
-		
+
 		foreach ( $supported_languages as $k => $v ) {
 			if ( $v == $atts['language'] ) {
 				$language = $k;
 				break;
 			}
 		}
-		
+
 		$params = array( 'language' => $language );
 	}
 
@@ -2082,7 +2170,7 @@ function woo_shortcode_twitter_follow ( $atts, $content = null ) {
 	if ( ! isset( $atts['username'] ) || ( $atts['username'] == '' ) ) { return; } // We can't continue without the username.
 
 	$defaults = array(
-						'username' => '', 
+						'username' => '',
 						'button_color' => 'blue',
 						'text_color' => '',
 						'link_color' => '',
@@ -2090,8 +2178,8 @@ function woo_shortcode_twitter_follow ( $atts, $content = null ) {
 						'align' => '',
 						'language' => '',
 						'count' => '',
-						'float' => 'none', 
-						'show_screen_name' => 'true', 
+						'float' => 'none',
+						'show_screen_name' => 'true',
 						'size' => 'medium'
 					);
 
@@ -2101,7 +2189,7 @@ function woo_shortcode_twitter_follow ( $atts, $content = null ) {
 
 	$allowed_floats = array( 'left' => ' fl', 'right' => ' fr', 'none' => '' );
 	if ( ! in_array( $float, array_keys( $allowed_floats ) ) ) { $float = 'none'; }
-	
+
 	$allowed_langs = array( 'en', 'fr', 'de', 'it', 'es', 'ko', 'ja' );
 	if ( ! in_array( $language, array_keys( $allowed_langs ) ) ) { $language = ''; }
 
@@ -2114,14 +2202,14 @@ function woo_shortcode_twitter_follow ( $atts, $content = null ) {
 
 	// Setup array of attributes and the value keys containing the data for each.
 	$att_keys = array(
-						'button_color' => 'data-button', 
-						'text_color' => 'data-text-color', 
-						'link_color' => 'data-link-color', 
-						'width' => 'data-width', 
-						'align' => 'data-align', 
-						'language' => 'data-lang', 
-						'count' => 'data-show-count', 
-						'show_screen_name' => 'data-show-screen-name', 
+						'button_color' => 'data-button',
+						'text_color' => 'data-text-color',
+						'link_color' => 'data-link-color',
+						'width' => 'data-width',
+						'align' => 'data-align',
+						'language' => 'data-lang',
+						'count' => 'data-show-count',
+						'show_screen_name' => 'data-show-screen-name',
 						'size' => 'data-size'
 					);
 
@@ -2156,11 +2244,11 @@ function woo_shortcode_twitter_follow_js ( $echo = true ) {
 
 function woo_shortcode_stumbleupon ( $atts, $content = null ) {
 	global $post;
-	
+
 	$defaults = array(
 						'design' => 'horizontal_large',
-						'float' => 'none', 
-						'url' => '', 
+						'float' => 'none',
+						'url' => '',
 						'use_post' => 'false'
 					);
 
@@ -2170,19 +2258,19 @@ function woo_shortcode_stumbleupon ( $atts, $content = null ) {
 
 	$allowed_floats = array( 'left' => ' fl', 'right' => ' fr', 'none' => '' );
 	if ( ! in_array( $float, array_keys( $allowed_floats ) ) ) { $float = 'none'; }
-	
+
 	$allowed_designs = array( 'horizontal_large' => '1', 'horizontal_medium' => '2', 'horizontal_small' => '3', 'icon_small' => '4', 'vertical_count' => '5', 'icon_large' => '6' );
 	if ( ! in_array( $design, array_keys( $allowed_designs ) ) ) { $design = 'horizontal_large'; }
 
 	$output = '';
-	
+
 	$url_call = '';
-	
+
 	// Use the custom URL, if it has been specified.
 	if ( $atts['url'] != '' ) {
 		$url_call = '&r=' . esc_url( $url );
 	}
-	
+
 	// Use the URL to the current $post in the loop, if no custom URL is set and if instructed to do so.
 	if ( $url_call == '' && $atts['use_post'] == 'true' ) {
 		$url_call = '&r=' . esc_url( get_permalink( $post ) );
@@ -2201,13 +2289,13 @@ add_shortcode( 'stumbleupon', 'woo_shortcode_stumbleupon' );
 
 function woo_shortcode_pinterest ( $atts, $content = null ) {
 	global $post;
-	
+
 	$defaults = array(
 						'count' => 'horizontal',
-						'float' => 'none', 
-						'url' => '', 
-						'image_url' => '', 
-						'description' => '', 
+						'float' => 'none',
+						'url' => '',
+						'image_url' => '',
+						'description' => '',
 						'use_post' => 'false'
 					);
 
@@ -2217,7 +2305,7 @@ function woo_shortcode_pinterest ( $atts, $content = null ) {
 
 	$allowed_floats = array( 'left' => ' fl', 'right' => ' fr', 'none' => '' );
 	if ( ! in_array( $float, array_keys( $allowed_floats ) ) ) { $float = 'none'; }
-	
+
 	$allowed_counts = array( 'horizontal', 'vertical', 'none' );
 	if ( ! in_array( $count, array_keys( $allowed_counts ) ) ) { $count = 'horizontal'; }
 
@@ -2230,26 +2318,26 @@ function woo_shortcode_pinterest ( $atts, $content = null ) {
 		// Use the URL to the current $post in the loop.
 		$url = esc_url( get_permalink( $post ) );
 	}
-	
+
 	// Use the custom image URL, if it has been specified.
-	if ( $atts['image_url'] != '' ) {
+	if ( '' != $atts['image_url'] ) {
 		$image_url = esc_url( $atts['image_url'] );
 	} else {
 		// Use the image of the current $post in the loop.
 		$image_url = esc_url( woo_image( 'link=url&return=true' ) );
 	}
-	
+
 	// Use the custom description, if it has been specified.
-	if ( $atts['description'] != '' ) {
+	if ( '' != $atts['description'] ) {
 		$description = esc_attr( $atts['description'] );
 	} else {
 		// Use the excerpt of the current $post in the loop, if no description is set and if instructed to do so.
-		if ( $atts['use_post'] == 'true' ) {
+		if ( 'true' == $atts['use_post'] ) {
 			$description = esc_attr( strip_shortcodes( apply_filters( 'get_the_excerpt', $post->post_excerpt ) ) );
 		}
 	}
 
-	$output = apply_filters( 'woo_shortcode_pinterest', '<div class="shortcode-pinterest' . esc_attr( $allowed_floats[$float] ) . '"><a href="' . esc_url( 'http://pinterest.com/pin/create/button/?url=' . esc_url( $url ) . '&media=' . esc_url( $image_url ) . '&description=' . $description ) . '" class="pin-it-button" count-layout="' . esc_attr( $count ) . '">' . __( 'Pin It', 'woothemes' ) . '</a></div><!--/.shortcode-pinterest-->' . "\n", $atts );
+	$output = apply_filters( 'woo_shortcode_pinterest', '<div class="shortcode-pinterest' . esc_attr( $allowed_floats[$float] ) . '"><a href="' . esc_url( 'http://pinterest.com/pin/create/button/?url=' . esc_url( $url ) . '&media=' . esc_url( $image_url ) . '&description=' . urlencode( $description ) ) . '" class="pin-it-button" count-layout="' . esc_attr( $count ) . '">' . __( 'Pin It', 'woothemes' ) . '</a></div><!--/.shortcode-pinterest-->' . "\n", $atts );
 
 	// Enqueue the Pinterest button JavaScript from their API.
 	add_action( 'wp_footer', 'woo_shortcode_pinterest_javascript' );

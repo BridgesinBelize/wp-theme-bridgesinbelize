@@ -267,7 +267,7 @@
  		});
  		
  		// Add custom link click logic to the flyout menus, due to custom logic being required.
- 		$( '.flyout-menu a' ).live( 'click', function ( e ) {
+ 		$(document).on("click", ".flyout-menu a", function ( e ) {
  			var thisObj = $( this );
  			var parentObj = $( this ).parent();
  			var parentMenu = $( this ).parents( '.top-level' );

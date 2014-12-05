@@ -12,6 +12,7 @@ Copyright 2010 (c) VisualShortcodes.com
 
 TABLE OF CONTENTS
 
+0. Icon
 1. Layout
 2. Attributes Table
 3. Validation
@@ -22,10 +23,34 @@ TABLE OF CONTENTS
 -----------------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------
+  0. Icon
+-----------------------------------------------------------------------------------*/
+
+.mceIcon.mce_woothemes_shortcodes_button::before {
+	font-family: 'wooframework' !important;
+	content: "\e601";
+	font-size: 0.9em;
+	speak: none;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	margin: 0;
+	text-indent: 0;
+	position: absolute;
+	top: 4px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 1.2;
+}
+
+/*-----------------------------------------------------------------------------------
   1. Layout
 -----------------------------------------------------------------------------------*/
 
-#woo-options-buttons { margin: -3px -15px 0; background: #EDEDED; padding: 12px 20px 8px; border-bottom: 1px solid #ddd; } 
+#woo-options-buttons { margin: -3px -15px 0; background: #EDEDED; padding: 12px 20px 8px; border-bottom: 1px solid #ddd; }
 #woo-options {float: left; width: 380px; margin-right: 20px; position: relative; z-index: 2; }
 #woo-options.shortcode-related, #woo-options.shortcode-column, #woo-options.shortcode-tab  { width: 100%; }
 #woo-options h3, #woo-preview h3, #woo-options-error h3 { border-bottom: 1px solid #E7E7E7; font-size: 13px; margin: 10px 0; padding: 7px 0; }

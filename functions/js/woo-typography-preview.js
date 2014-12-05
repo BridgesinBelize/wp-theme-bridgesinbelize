@@ -40,12 +40,12 @@
      */
     
     handleEvents: function () {
-    	$( 'a.woo-typography-preview-button' ).live( 'click', function () {
+    	$(document).on("click", 'a.woo-typography-preview-button', function () {
     		wooTypographyPreview.generatePreview( $( this ) );
     		return false;
     	});
     	
-    	$( 'a.preview_remove' ).live( 'click', function () {
+    	$(document).on( 'click', 'a.preview_remove', function () {
     		wooTypographyPreview.closePreview( $( this ) );
     		return false;
     	});

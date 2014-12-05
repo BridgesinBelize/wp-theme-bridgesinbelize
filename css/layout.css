@@ -24,13 +24,10 @@ INDEX
   from {
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
-  
     -moz-transform: rotate(0);
     /* FF3.5+ */
-  
     -ms-transform: rotate(0);
     /* IE9 */
-  
     -o-transform: rotate(0);
     /* Opera 10.5 */
     transform: rotate(0);
@@ -39,13 +36,10 @@ INDEX
   50% {
     -webkit-transform: rotate(180deg);
     /* Saf3.1+, Chrome */
-  
     -moz-transform: rotate(180deg);
     /* FF3.5+ */
-  
     -ms-transform: rotate(180deg);
     /* IE9 */
-  
     -o-transform: rotate(180deg);
     /* Opera 10.5 */
     transform: rotate(180deg);
@@ -54,13 +48,10 @@ INDEX
   to {
     -webkit-transform: rotate(0);
     /* Saf3.1+, Chrome */
-  
     -moz-transform: rotate(0);
     /* FF3.5+ */
-  
     -ms-transform: rotate(0);
     /* IE9 */
-  
     -o-transform: rotate(0);
     /* Opera 10.5 */
     transform: rotate(0);
@@ -74,9 +65,7 @@ INDEX
     position: relative;
     margin-bottom: 0;
     /* LEVEL 2 */
-  
     /* LEVEL 3 */
-  
   }
   ul.nav li {
     position: relative;
@@ -121,13 +110,10 @@ INDEX
     display: inline-block;
     -webkit-box-sizing: border-box;
     /* Safari/Chrome, other WebKit */
-  
     -moz-box-sizing: border-box;
     /* Firefox, other Gecko */
-  
     box-sizing: border-box;
     /* Opera/IE 8+ */
-  
   }
   ul.nav ul li.parent > a:after {
     top: 1.2em;
@@ -148,9 +134,7 @@ INDEX
   #top ul.nav {
     font-size: .857em;
     /* LEVEL 2 */
-  
     /* LEVEL 3 */
-  
   }
   #top ul.nav > li > a {
     -webkit-border-radius: 0;
@@ -195,9 +179,7 @@ INDEX
   }
   #navigation ul.nav {
     /* LEVEL 2 */
-  
     /* LEVEL 3 */
-  
   }
   #navigation ul.nav > li {
     margin: 0 0.53em 0 0;
@@ -390,6 +372,11 @@ INDEX
     clear: none;
     width: 30.75%;
     float: left;
+  }
+  .home .features .feature.last,
+  .home .testimonials .quote.last,
+  .home .featured-products li.product.last {
+    margin-right: 0;
   }
   #sidebar .features .feature,
   #sidebar .testimonials .quote,
