@@ -950,7 +950,7 @@ class WF_Fields {
 	 */
 	protected function render_field_textarea ( $key, $args ) {
 		// Explore how best to escape this data, as esc_textarea() strips HTML tags, it seems.
-		$html = '<textarea id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" cols="42" rows="5">' . stripslashes( $this->get_value( $key, $args['std'] ) ) . '</textarea>' . "\n";
+		$html = '<textarea id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" cols="42" rows="5">' . esc_textarea( $this->get_value( $key, $args['std'] ) ) . '</textarea>' . "\n";
 		return $html;
 	} // End render_field_textarea()
 
@@ -1224,7 +1224,7 @@ class WF_Fields {
 		if ( '' == $val ) $val = time();
 
 		$html = '<input type="hidden" name="datepicker-image" value="' . esc_url( admin_url( 'images/date-button.gif' ) ) . '" />' . "\n";
-		$html .= '<input class="woo-input-calendar" type="text" name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" value="' . esc_attr( date( 'm/d/Y', $val ) ) . '">';
+		$html .= '<input class="woo-input-calendar" type="text" name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" value="' . esc_attr( date( 'm/d/Y', strtotime( $val ) ) ) . '">';
 		return $html;
 	} // End render_field_calendar()
 
@@ -1462,6 +1462,7 @@ class WF_Fields {
 		wp_register_script( $this->_token . '-masked-input', esc_url( $this->_assets_url . 'js/masked-inputs.js' ), array( 'jquery', 'jquery-masked-input' ) );
 
 		wp_register_script( $this->_token . '-chosen', esc_url( $this->_assets_url . 'js/lib/jquery-chosen.js' ), array( 'jquery' ) );
+		wp_register_script( $this->_token . '-chosen-rtl', esc_url( $this->_assets_url . 'js/lib/jquery-chosen-rtl.js' ), array( $this->_token . '-chosen' ) );
 		wp_register_script( $this->_token . '-chosen-loader', esc_url( $this->_assets_url . 'js/chosen-selectors.js' ), array( 'jquery', $this->_token . '-chosen' ) );
 
 		wp_register_script( $this->_token . '-image-selector', esc_url( $this->_assets_url . 'js/image-selectors.js' ), array( 'jquery' ) );
@@ -1489,6 +1490,9 @@ class WF_Fields {
 			wp_enqueue_script( $this->_token . '-range-selector' );
 		}
 		if ( $this->_has_select ) {
+			if ( is_rtl() ) {
+				wp_enqueue_script( $this->_token . '-chosen-rtl' );
+			}
 			wp_enqueue_script( $this->_token . '-chosen-loader' );
 		}
 	} // End enqueue_scripts()
@@ -1592,6 +1596,10 @@ class WF_Fields {
 			}
 
 			// Cater for the "std" field in "info" field types. We prefer to use "desc" as it is more logical.
+			if ( ! isset( $v['desc'] ) ) {
+				$v['desc'] = '';
+			}
+
 			if ( 'info' == $v['type'] && '' == $v['desc'] ) {
 				$v['desc'] = $v['std'];
 			}
@@ -1665,7 +1673,7 @@ class WF_Fields {
 
 			$this->_fields[$key] = $v;
 		}
-
+		$this->_fields = (array)apply_filters( 'wf_fields_init_fields', $this->_fields, $this->_fields );
 		return $this->_fields;
 	} // End init_fields()
 

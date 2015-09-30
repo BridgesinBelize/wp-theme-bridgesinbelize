@@ -8,19 +8,19 @@ wooShortcodeMeta={
 		{
 			label:"Style",
 			id:"style",
-			help:"Values: &lt;empty&gt; or boxed.", 
-			controlType:"select-control", 
+			help:"Values: &lt;empty&gt; or boxed.",
+			controlType:"select-control",
 			selectValues:['', 'boxed'],
-			defaultValue: '', 
+			defaultValue: '',
 			defaultText: 'none (Default)'
 		},
 		{
 			label:"Float",
 			id:"float",
-			help:"Values: &lt;empty&gt;, left, right.", 
-			controlType:"select-control", 
+			help:"Values: &lt;empty&gt;, left, right.",
+			controlType:"select-control",
 			selectValues:['', 'left', 'right'],
-			defaultValue: '', 
+			defaultValue: '',
 			defaultText: 'none (Default)'
 		}
 		],

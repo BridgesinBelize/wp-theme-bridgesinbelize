@@ -140,8 +140,12 @@ class WF_Screen_Welcome extends WF_Screen_Admin_Base {
 			<li><?php printf( __( '%s Version %s', 'woothemes' ), $ct->parent()->__get( 'Name' ), '<strong>' . $ct->parent()->__get( 'Version' ) . '</strong>' ); ?></li>
 			<?php
 			}
+			if ( current_user_can( 'install_themes' ) ) {
 			?>
 			<li><?php printf( __( 'WooFramework %s - %s', 'woothemes' ), '<strong>' . $this->_theme_data['framework_version'] . '</strong>', sprintf( __( '%sUpdate%s', 'woothemes' ) . ' <span class="dashicons dashicons-update"></span>', '<a href="' . esc_url( add_query_arg( 'page', 'woothemes_framework_update', admin_url( 'admin.php' ) ) ) . '">', '</a>' ) ); ?></li>
+			<?php
+			}
+			?>
 		</ul>
 
 		<hr />

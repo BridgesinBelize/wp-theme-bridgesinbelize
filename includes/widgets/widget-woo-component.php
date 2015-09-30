@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * protected $woo_widget_description
  * protected $woo_widget_idbase
  * protected $woo_widget_title
- * 
+ *
  * - __construct()
  * - widget()
  * - update()
@@ -44,7 +44,7 @@ class Woo_Widget_Component extends WP_Widget {
 		$this->woo_widget_title = __( 'Woo - Component', 'woothemes' );
 
 		$this->woo_widget_componentslist = array(
-												'page-content' => __( 'Page Content', 'woothemes' ), 
+												'page-content' => __( 'Page Content', 'woothemes' ),
 												'blog-posts' => __( 'Blog Posts', 'woothemes' )
 												);
 
@@ -60,7 +60,7 @@ class Woo_Widget_Component extends WP_Widget {
 		$control_ops = array( 'width' => 250, 'height' => 350, 'id_base' => $this->woo_widget_idbase );
 
 		/* Create the widget. */
-		$this->WP_Widget( $this->woo_widget_idbase, $this->woo_widget_title, $widget_ops, $control_ops );	
+		parent::__construct( $this->woo_widget_idbase, $this->woo_widget_title, $widget_ops, $control_ops );
 	} // End __construct()
 
 	/**
@@ -70,22 +70,22 @@ class Woo_Widget_Component extends WP_Widget {
 	 * @param  array $instance Widget settings for this instance.
 	 * @return void
 	 */
-	public function widget( $args, $instance ) {  
+	public function widget( $args, $instance ) {
 		extract( $args, EXTR_SKIP );
-		
+
 		/* Our variables from the widget settings. */
 		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base );
-			
+
 		/* Before widget (defined by themes). */
 		echo $before_widget;
 
 		/* Display the widget title if one was input (before and after defined by themes). */
 		if ( $title ) { echo $before_title . $title . $after_title; }
-		
+
 		/* Widget content. */
 		// Add actions for plugins/themes to hook onto.
 		do_action( $this->woo_widget_cssclass . '_top' );
-		
+
 		if ( in_array( $instance['component'], array_keys( $this->woo_widget_componentslist ) ) ) {
 			$this->load_component( esc_attr( $instance['component'] ) );
 		}
@@ -106,15 +106,15 @@ class Woo_Widget_Component extends WP_Widget {
 	 * @return array               Updated settings.
 	 */
 	public function update ( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-
-		/* Strip tags for title and name to remove HTML (important for text inputs). */
-		$instance['title'] = strip_tags( $new_instance['title'] );
-
+		$settings = array();
 		/* The select box is returning a text value, so we escape it. */
-		$instance['component'] = esc_attr( $new_instance['component'] );
+		if ( in_array( $new_instance['component'], array_keys( $this->woo_widget_componentslist ) ) ) {
+			$settings['component'] = sanitize_text_field( $new_instance['component'] );
+		} else {
+			$settings['component'] = sanitize_text_field( $old_instance['component'] );
+		}
 
-		return $instance;
+		return $settings;
 	} // End update()
 
 	/**
@@ -124,15 +124,15 @@ class Woo_Widget_Component extends WP_Widget {
 	 * @param  array $instance The settings for this instance.
 	 * @return void
 	 */
-    public function form( $instance ) {       
-   
+    public function form( $instance ) {
+
 		/* Set up some default widget settings. */
 		/* Make sure all keys are added here, even with empty string values. */
 		$defaults = array(
-						'title' => '', 
+						'title' => '',
 						'component' => ''
 					);
-		
+
 		$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 		<!-- Widget Title: Text Input -->
@@ -146,7 +146,7 @@ class Woo_Widget_Component extends WP_Widget {
 			<select name="<?php echo $this->get_field_name( 'component' ); ?>" class="widefat" id="<?php echo $this->get_field_id( 'component' ); ?>">
 			<?php foreach ( $this->woo_widget_componentslist as $k => $v ) { ?>
 				<option value="<?php echo $k; ?>"<?php selected( $instance['component'], $k ); ?>><?php echo $v; ?></option>
-			<?php } ?>       
+			<?php } ?>
 			</select>
 		</p>
 		<p><small><?php printf( __( 'The settings for these components are controlled via the %sTheme Options%s screen.', 'woothemes' ), '<a href="' . esc_url( admin_url( 'admin.php?page=woothemes' ) ) . '">', '</a>' ); ?></small></p>
@@ -180,5 +180,5 @@ class Woo_Widget_Component extends WP_Widget {
 } // End Class
 
 /* Register the widget. */
-add_action( 'widgets_init', create_function( '', 'return register_widget("Woo_Widget_Component");' ), 1 ); 
+add_action( 'widgets_init', create_function( '', 'return register_widget("Woo_Widget_Component");' ), 1 );
 ?>

@@ -212,7 +212,6 @@ function woo_head_css () {
 	$text_title = get_option( 'woo_texttitle' );
 	$tagline = get_option( 'woo_tagline' );
     $custom_css = get_option( 'woo_custom_css' );
-
 	$template = get_option( 'woo_template' );
 	if ( is_array( $template ) ) {
 		foreach( $template as $option ) {
@@ -231,7 +230,10 @@ function woo_head_css () {
 		}
 	}
 
-	if ( $custom_css != '' ) {
+	if ( '' != $custom_css ) {
+		// Prepare the custom CSS code for output.
+		$custom_css = strip_tags( $custom_css );
+		$custom_css = html_entity_decode( $custom_css );
 		$output .= $custom_css . "\n";
 	}
 

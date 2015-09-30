@@ -164,7 +164,7 @@ function woothemes_admin_menu_after () {
 	do_action( 'wf_admin_menu_after_before_defaults' );
 
 	// Update Framework Menu Item
-	if( $super_user == $current_user_id || empty( $super_user ) ) {
+	if( ( $super_user == $current_user_id || empty( $super_user ) ) && current_user_can( 'install_themes' ) ) {
 		$framework_update_page = add_submenu_page( 'woothemes', 'WooFramework Update', 'Update Framework', 'manage_options', 'woothemes_framework_update', 'woothemes_framework_update_page' );
 	}
 

@@ -91,8 +91,10 @@ class WF_Screen_Framework extends WF_Screen_Admin_Base {
 		$this->_theme_meta();
 		?>
 		<p class="getting-started-buttons">
+			<?php if ( current_user_can( 'install_themes' ) ) { ?>
 			<a href="<?php echo esc_url( add_query_arg( 'page', 'woothemes_framework_update', admin_url( 'admin.php' ) ) ); ?>" class="button button-primary"><?php printf( __( 'Update WooFramework', 'woothemes' ) ); ?> <span class="dashicons dashicons-update"></span></a>
-			<a href="<?php echo esc_url( add_query_arg( 'page', 'woothemes-backup', admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php printf( __( 'Backup Your Settings', 'woothemes' ) ); ?></a>
+			<?php } ?>
+			<a href="<?php echo esc_url( add_query_arg( 'page', 'woothemes-backup', admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php printf( __( 'Backup/Import Your Settings', 'woothemes' ) ); ?></a>
 			<a href="<?php echo esc_url( get_option( 'woo_manual', 'http://docs.woothemes.com/' ) ); ?>" class="button button-secondary"><?php printf( __( 'Read the Documentation', 'woothemes' ) ); ?></a>
 		</p>
 		<?php

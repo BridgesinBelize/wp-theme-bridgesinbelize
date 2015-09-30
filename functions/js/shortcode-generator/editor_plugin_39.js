@@ -5,8 +5,8 @@
 		editor.addCommand( 'woo_open_dialog', function( ui, v ) {
 			wooSelectedShortcodeType = v;
 			selectedText = editor.selection.getContent({format: 'text'});
+            wooDialogHelper.setupShortcodeType( v );
 			wooDialogHelper.loadShortcodeDetails();
-			wooDialogHelper.setupShortcodeType( v );
 
 			jQuery( '#woo-options' ).addClass( 'shortcode-' + v );
 
@@ -45,7 +45,7 @@
                	// Typography menu.
                 {text: 'Typography', menu: [
                 	{text: 'Dropcap', onclick: function() { editor.execCommand( 'woo_insert_immediate', false, 'dropcap', { title: 'Dropcap' } ); } },
-                	{text: 'Quote', onclick: function() { editor.execCommand( 'woo_insert_immediate', false, 'quote', { title: 'Quote' } ); } },
+                	{text: 'Quote', onclick: function() { editor.execCommand( 'woo_open_dialog', false, 'quote', { title: 'Quote' } ); } },
                 	{text: 'Highlight', onclick: function() { editor.execCommand( 'woo_insert_immediate', false, 'highlight', { title: 'Highlight' } ); } },
                 	{text: 'Abbreviation', onclick: function() { editor.execCommand( 'woo_insert_immediate', false, 'abbr', { title: 'Abbreviation' } ); } },
                 	{text: 'Custom Typography', onclick: function() { editor.execCommand( 'woo_open_dialog', false, 'typography', { title: 'Custom Typography' } ); } }

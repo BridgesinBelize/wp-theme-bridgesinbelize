@@ -18,15 +18,8 @@
     $woo_framework_url = get_template_directory_uri() . '/functions/';
 
     // Check if this is a Windows server or not.
-    $_is_windows = false;
     $delimiter = '/';
-    $dirname = dirname( __FILE__ );
-    $_has_forwardslash = strpos( $dirname, $delimiter );
-
-    if ( $_has_forwardslash === false ) {
-        $_is_windows = true;
-        $delimiter = '\\';
-    }
+    $dirname = wp_normalize_path( dirname( __FILE__ ) );
 
     $woo_framework_functions_path = str_replace( 'js' . $delimiter . 'shortcode-generator' . $delimiter . 'js', '', dirname( __FILE__ ) );
 
@@ -74,10 +67,6 @@
 
     $fonts = join( '|', $fonts_whitelist );
 ?>
-
-var framework_url = '<?php echo dirname( __FILE__ ); ?>';
-
-var shortcode_generator_path = '<?php echo esc_url( $woo_framework_path ); ?>';
 var shortcode_generator_url = '<?php echo esc_url( $woo_framework_url ); ?>' + 'js/shortcode-generator/';
 
 var wooDialogHelper = {
@@ -94,7 +83,7 @@ var wooDialogHelper = {
     },
 
     setupShortcodeType: function ( shortcode ) {
-        wooSelectedShortcodeType = shortcode;
+        this.wooSelectedShortcodeType = shortcode;
     },
 
     setUpColourPicker: function () {
@@ -130,14 +119,14 @@ var wooDialogHelper = {
     },
 
     loadShortcodeDetails: function () {
-        if (wooSelectedShortcodeType) {
+        if ( typeof wooSelectedShortcodeType !== 'undefined' ) {
 
             var a = this;
-            jQuery.getScript(shortcode_generator_url + "shortcodes/" + wooSelectedShortcodeType + ".js", function () {
+            jQuery.getScript(shortcode_generator_url + "shortcodes/" + this.wooSelectedShortcodeType + ".js", function () {
                 a.initializeDialog();
 
                 // Set the default content to the highlighted text, for certain shortcode types.
-                switch ( wooSelectedShortcodeType ) {
+                switch ( this.wooSelectedShortcodeType ) {
                     case 'box':
                     case 'ilink':
                     case 'quote':
@@ -160,7 +149,7 @@ var wooDialogHelper = {
         // Clean out the table rows before applying the new ones.
         jQuery( '#woo-options-table' ).html( '' );
         if (typeof wooShortcodeMeta == "undefined") {
-            jQuery( '#woo-options' ).append( "<p>Error loading details for shortcode: " + wooSelectedShortcodeType + "</p>" );
+            jQuery( '#woo-options' ).append( "<p>Error loading details for shortcode: " + this.wooSelectedShortcodeType + "</p>" );
         } else {
             if (wooShortcodeMeta.disablePreview) {
                 jQuery( '#woo-preview' ).remove();

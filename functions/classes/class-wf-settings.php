@@ -71,6 +71,8 @@ class WF_Settings {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'register_settings_screen' ), 1 ); // Make sure this menu item is always first.
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		} else {
+			add_action( 'wf_settings_process_single_field', array( $this, 'maybe_correct_upload_field_ssl' ), 10, 3 );
 		}
 	} // End __construct()
 
@@ -118,6 +120,17 @@ class WF_Settings {
 	} // End admin_notices()
 
 	/**
+	 * Recursive stripslashes function to handle arrays within arrays
+	 * @access  public
+	 * @since   6.1.2
+	 * @return  $value object
+	 */
+	public function stripslashes_deep($value) {
+    	$value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
+    	return $value;
+	} // End stripslashes_deep()
+
+	/**
 	 * Run logic on the WooFramework settings screen.
 	 * @access  public
 	 * @since   6.0.0
@@ -126,6 +139,8 @@ class WF_Settings {
 	public function settings_screen_logic () {
 		if ( ! empty( $_POST ) && check_admin_referer( $this->_field_obj->__get( 'token' ) . '_nonce', $this->_field_obj->__get( 'token' ) . '_nonce' ) ) {
 			$data = $_POST;
+
+			$data = array_map( 'stripslashes_deep', $data );
 
 			$page = 'woothemes';
 			if ( isset( $data['page'] ) ) {
@@ -195,7 +210,7 @@ class WF_Settings {
 				$url = add_query_arg( 'some_didnt_update', 'true', $url );
 			}*/
 
-			wp_safe_redirect( $url );
+			wp_safe_redirect( esc_url_raw( $url ) );
 			exit;
 		}
 	} // End settings_screen_logic()
@@ -231,6 +246,27 @@ class WF_Settings {
 		if ( isset( $fields[$key] ) ) return $fields[$key];
 		return false;
 	} // End get_field()
+
+	/**
+	 * Add the data of a single field.
+	 * @access  public
+	 * @since   6.0.0
+	 * @param   string $key     The key for which to add the field data.
+	 * @param 	array  $data 	Data for the specified field.
+	 * @return  mixed/boolean	False if data isn't valid.
+	 */
+	public function add_field ( $key, $data = array() ) {
+		$fields = $this->get_fields();
+		$response = false;
+		if ( ! isset( $fields[$key] ) && is_array( $data ) ) {
+			// Make sure we have a supported field type.
+			if ( ! isset( $data['type'] ) || ! in_array( $data['type'], $this->get_supported_fields() ) ) continue;
+
+			$this->_fields[$key] = (array)$data;
+			$response = true;
+		}
+		return $response;
+	} // End add_field()
 
 	/**
 	 * Update the data for a single field.
@@ -328,7 +364,7 @@ class WF_Settings {
 			$value = array_map( 'esc_attr', $value );
 		}
 
-		return $value;
+		return apply_filters( 'wf_settings_process_single_field', $value, $k, $v );
 	} // End _process_single_field()
 
 	/**
@@ -351,5 +387,21 @@ class WF_Settings {
 		}
 		return $fields;
 	} // End get_fields()
+
+	/**
+	 * If we have an HTTPS page, correct the upload fields to reflect HTTPS.
+	 * @access  public
+	 * @since   6.2.0
+	 * @param   string $value Field value.
+	 * @param   string $key Field key.
+	 * @param   array $args Field arguments.
+	 * @return  string Modified field value.
+	 */
+	public function maybe_correct_upload_field_ssl ( $value, $key, $args ) {
+		if ( isset( $args['type'] ) && 'upload' == $args['type'] && is_ssl() ) {
+			$value = str_replace( 'http:', 'https:', $value );
+		}
+		return $value;
+	} // End maybe_correct_upload_field_ssl()
 } // End Class
 ?>

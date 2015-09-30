@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Woo_BlogAuthorInfo extends WP_Widget {
 	var $settings = array( 'title', 'bio', 'custom_email', 'avatar_size', 'avatar_align', 'read_more_text', 'read_more_url', 'page' );
 
-	function Woo_BlogAuthorInfo() {
+	function __construct() {
 		$widget_ops = array( 'description' => 'This is a WooThemes Blog Author Info widget.' );
-		parent::WP_Widget( false, __( 'Woo - Blog Author Info', 'woothemes' ), $widget_ops );
+		parent::__construct( false, __( 'Woo - Blog Author Info', 'woothemes' ), $widget_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -29,20 +29,38 @@ class Woo_BlogAuthorInfo extends WP_Widget {
 			<?php if ( $title ) { echo $before_title . apply_filters( 'widget_title', $title, $instance, $this->id_base ) . $after_title; } ?>
 			<span class="<?php echo $avatar_align; ?>"><?php if ( $custom_email ) echo get_avatar( $custom_email, $size = $avatar_size ); ?></span>
 			<p><?php echo $bio; ?></p>
-			<?php if ( $read_more_url ) echo '<p><a href="' . esc_url( $read_more_url ) . '">' . esc_html( $read_more_text ) . '</a></p>'; ?>
+			<?php if ( $read_more_url ) echo '<p class="readmore"><a class="button" href="' . esc_url( $read_more_url ) . '">' . esc_html( $read_more_text ) . '</a></p>'; ?>
 			<div class="fix"></div>
 			<?php echo $after_widget;
 		}
 	}
 
-	function update($new_instance, $old_instance) {
-		foreach ( array( 'read_more_text', 'read_more_url' ) as $setting )
-			$new_instance[$setting] = strip_tags( $new_instance[$setting] );
-		$new_instance['bio'] = wp_kses_post( $new_instance['bio'] );
-		$new_instance['avatar_size'] = absint( $new_instance['avatar_size'] );
-		if ( $new_instance['avatar_size'] < 1 )
-			$new_instance['avatar_size'] = '';
-		return $new_instance;
+	function update( $new_instance, $old_instance ) {
+		$settings = array();
+
+		foreach ( array( 'title', 'bio', 'custom_email', 'avatar_size', 'avatar_align', 'page', 'read_more_text', 'read_more_url' ) as $setting ) {
+			$settings[$setting] = strip_tags( $new_instance[$setting] );
+		}
+
+		$settings['bio'] = wp_kses_post( $new_instance['bio'] );
+
+		// Avatar alignment testing.
+		if ( ! in_array( $settings['avatar_align'], array( 'left', 'right' ) ) ) {
+			$settings['avatar_align'] = 'left';
+		}
+
+		// Widget display testing.
+		if ( ! in_array( $settings['page'], array( 'all', 'home', 'single' ) ) ) {
+			$settings['page'] = 'all';
+		}
+
+		$settings['avatar_size'] = absint( $new_instance['avatar_size'] );
+
+		if ( 1 > $settings['avatar_size'] ) {
+			$settings['avatar_size'] = '';
+		}
+
+		return $settings;
 	}
 
 	/**
@@ -53,8 +71,8 @@ class Woo_BlogAuthorInfo extends WP_Widget {
 		// Set the default to a blank string
 		$settings = array_fill_keys( $this->settings, '' );
 		// Now set the more specific defaults
-		$settings['avatar_size'] = 48;
-		$settings['avatar_align'] = 'left';
+		$settings['avatar_size'] 	= 48;
+		$settings['avatar_align'] 	= 'left';
 		return $settings;
 	}
 
@@ -76,13 +94,13 @@ class Woo_BlogAuthorInfo extends WP_Widget {
 		</p>
 		<p>
 		   <label for="<?php echo $this->get_field_id('avatar_size'); ?>"><?php _e('Gravatar Size:','woothemes'); ?></label>
-		   <input type="text" name="<?php echo $this->get_field_name('avatar_size'); ?>"  value="<?php echo esc_attr( $avatar_size ); ?>" class="widefat" id="<?php echo $this->get_field_id('avatar_size'); ?>" />
+		   <input type="number" name="<?php echo $this->get_field_name('avatar_size'); ?>"  value="<?php echo esc_attr( $avatar_size ); ?>" class="widefat" id="<?php echo $this->get_field_id('avatar_size'); ?>" min="1" max="512" />
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id('avatar_align'); ?>"><?php _e('Gravatar Alignment:','woothemes'); ?></label>
 			<select name="<?php echo $this->get_field_name('avatar_align'); ?>" class="widefat" id="<?php echo $this->get_field_id('avatar_align'); ?>">
 				<option value="left" <?php if($avatar_align == "left"){ echo "selected='selected'";} ?>><?php _e('Left', 'woothemes'); ?></option>
-				<option value="right" <?php if($avatar_align == "right"){ echo "selected='selected'";} ?>><?php _e('Right', 'woothemes'); ?></option>            
+				<option value="right" <?php if($avatar_align == "right"){ echo "selected='selected'";} ?>><?php _e('Right', 'woothemes'); ?></option>
 			</select>
 		</p>
 		<p>
@@ -103,6 +121,6 @@ class Woo_BlogAuthorInfo extends WP_Widget {
 		</p>
 		<?php
 	}
-} 
+}
 
 register_widget( 'Woo_BlogAuthorInfo' );

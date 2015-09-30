@@ -25,6 +25,20 @@ class WF_Fields_Settings extends WF_Fields {
 	} // End __construct()
 
 	/**
+	 * Render HTML markup for the "textarea" field type.
+	 * @access  protected
+	 * @since   6.0.0
+	 * @param   string $key  The unique ID of this field.
+	 * @param   array $args  Arguments used to construct this field.
+	 * @return  string       HTML markup for the field.
+	 */
+	protected function render_field_textarea ( $key, $args ) {
+		// Explore how best to escape this data, as esc_textarea() strips HTML tags, it seems.
+		$html = '<textarea id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" cols="42" rows="5">' . esc_textarea( html_entity_decode( $this->get_value( $key, $args['std'] ) ) ) . '</textarea>' . "\n";
+		return $html;
+	} // End render_field_textarea()
+
+	/**
 	 * Validate the given data, assuming it is from a textarea field.
 	 * @access  public
 	 * @since   6.0.0
@@ -37,9 +51,10 @@ class WF_Fields_Settings extends WF_Fields {
 		$allowed['object'] = array( 'src' => true, 'width' => true, 'height' => true, 'id' => true, 'class' => true, 'name' => true );
 		$allowed['embed'] = array( 'src' => true, 'width' => true, 'height' => true, 'id' => true, 'class' => true, 'name' => true );
 
-		// Allow script tags in the Google Analytics field.
+		// Allow script tags in the Google Analytics & Adsense code field.
 		if ( is_array( $k ) && isset( $k['id'] ) && in_array( $k['id'], $this->get_script_supported_fields() ) ) {
-			$allowed['script'] = array( 'type' => true, 'id' => true, 'class' => true );
+			$allowed['script'] = array( 'type' => true, 'id' => true, 'class' => true, 'src' => true, 'async' => true );
+			$allowed['ins'] = array( 'data-ad-client' => true, 'data-ad-slot' => true, 'class' => true, 'style'=> true );
 		}
 
 		return wp_kses( $v, $allowed );
@@ -52,7 +67,7 @@ class WF_Fields_Settings extends WF_Fields {
 	 * @return  void
 	 */
 	public function get_script_supported_fields () {
-		return (array)apply_filters( 'wf_get_script_supported_fields', array( 'woo_ad_top_adsense', 'woo_google_analytics' ) );
+		return (array)apply_filters( 'wf_get_script_supported_fields', array( 'woo_ad_top_adsense', 'woo_ad_content_adsense', 'woo_google_analytics' ) );
 	} // End get_script_supported_fields()
 
 	/**
@@ -93,7 +108,7 @@ class WF_Fields_Settings extends WF_Fields {
 			$tab = $k;
 			$tab = $this->_generate_section_token( $tab, $count );
 
-			$sections[$k] = array( 'href' => remove_query_arg( 'updated', add_query_arg( 'tab', urlencode( $tab ) ) ), 'name' => esc_attr( $v['name'] ), 'class' => $class, 'id' => esc_attr( $k ) );
+			$sections[$k] = array( 'href' => esc_url_raw( remove_query_arg( 'updated', add_query_arg( 'tab', urlencode( $tab ) ) ) ), 'name' => esc_attr( $v['name'] ), 'class' => $class, 'id' => esc_attr( $k ) );
 		}
 
 		$count = 1;

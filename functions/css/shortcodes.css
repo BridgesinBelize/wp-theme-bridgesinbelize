@@ -299,11 +299,15 @@ a.woo-sc-button.silver:hover {
 /* 9. Quote */
 /*-------------------------------------------------------------------------------------------*/
 .woo-sc-quote p { margin: 1em 20px; padding: 0 0 0 55px; background: url(../images/quote.png) no-repeat 0 3px; font-family: serif; font-size: 1.2em; font-style: italic; color:#777; min-height: 32px; }
-.woo-sc-quote.left { float:left; width:30%;}
-.woo-sc-quote.right { float:right; width:30%;}
 .woo-sc-quote.boxed { background: #f5f5f5; border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;}
 .woo-sc-quote.boxed.left { margin: 0 1.5em 1em 0;}
 .woo-sc-quote.boxed.right { margin: 0 0 1em 1.5em;}
+
+/* Desktop */
+@media screen and (min-width: 768px) {
+	.woo-sc-quote.left { float:left; width:30%;}
+	.woo-sc-quote.right { float:right; width:30%;}
+}
 
 /*-------------------------------------------------------------------------------------------*/
 /* 10. Icon Links */

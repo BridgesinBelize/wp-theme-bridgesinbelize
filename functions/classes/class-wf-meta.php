@@ -60,7 +60,7 @@ class WF_Meta {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'register_meta_boxes' ) );
 			add_action( 'admin_footer', array( $this->_field_obj, 'maybe_enqueue_field_assets' ) );
-			add_action( 'save_post', array( $this, 'meta_box_save' ) );
+			add_action( 'post_updated', array( $this, 'meta_box_save' ) );
 		}
 	} // End __construct()
 
@@ -136,62 +136,68 @@ class WF_Meta {
 	 */
 	public function meta_box_save ( $post_id ) {
 		global $post, $messages;
-		if ( empty( $_POST ) ) {
-			return;
-		}
 
-		// Verify
-		if ( ! wp_verify_nonce( $_POST[$this->_field_obj->__get( 'token' ) . '_nonce'], $this->_field_obj->__get( 'token' ) . '_nonce' ) ) {
-			return $post_id;
-		}
+		$screen = get_current_screen();
 
-		if ( 'page' == $_POST['post_type'] ) {
-			if ( ! current_user_can( 'edit_page', $post_id ) ) {
+		if ( 'nav-menus' != $screen->base ) {
+
+			if ( empty( $_POST ) ) {
+				return;
+			}
+
+			// Verify
+			if ( ! isset( $_POST[$this->_field_obj->__get( 'token' ) . '_nonce'] ) || ! wp_verify_nonce( $_POST[$this->_field_obj->__get( 'token' ) . '_nonce'], $this->_field_obj->__get( 'token' ) . '_nonce' ) ) {
 				return $post_id;
 			}
-		} else {
-			if ( ! current_user_can( 'edit_post', $post_id ) ) {
-				return $post_id;
-			}
-		}
 
-		$this->_field_obj->init_fields( $this->get_settings_template() );
-		$field_data = $this->get_fields();
-		$field_data = $this->setup_fields( $field_data );
-
-		$key_value_pairs = array();
-
-		if ( is_array( $field_data ) && 0 < count( $field_data ) ) {
-			foreach ( $field_data as $k => $v ) {
-				$value = '';
-				if ( isset( $_POST[$k] ) ) {
-					$value = $_POST[$k];
+			if ( 'page' == $_POST['post_type'] ) {
+				if ( ! current_user_can( 'edit_page', $post_id ) ) {
+					return $post_id;
 				}
-				$key_value_pairs[$k] = $value;
-			}
-		}
-
-		$key_value_pairs = $this->_field_obj->validate_fields( $key_value_pairs );
-
-		foreach ( $key_value_pairs as $k => $v ) {
-			// Escape the URLs.
-			if ( 'url' == $field_data[$k]['type'] ) {
-				$v = esc_url( $v );
+			} else {
+				if ( ! current_user_can( 'edit_post', $post_id ) ) {
+					return $post_id;
+				}
 			}
 
-			$field_key = $k;
-			if ( true == (bool)apply_filters( 'wf_meta_use_underscore_prefix', false ) ) {
-				$field_key = '_' . $k;
+			$this->_field_obj->init_fields( $this->get_settings_template() );
+			$field_data = $this->get_fields();
+			$field_data = $this->setup_fields( $field_data );
+
+			$key_value_pairs = array();
+
+			if ( is_array( $field_data ) && 0 < count( $field_data ) ) {
+				foreach ( $field_data as $k => $v ) {
+					$value = '';
+					if ( isset( $_POST[$k] ) ) {
+						$value = $_POST[$k];
+					}
+					$key_value_pairs[$k] = $value;
+				}
 			}
 
-			if ( '' == get_post_meta( $post_id, $field_key, true ) ) {
-				// add_post_meta( $post_id, $field_key, $v, true );
-				// We need to use update_post_meta(), in case there are legacy keys in the database which are empty.
-				update_post_meta( $post_id, $field_key, $v );
-			} elseif ( ! empty( $v ) && $v != get_post_meta( $post_id, $field_key, true ) ) {
-				update_post_meta( $post_id, $field_key, $v );
-			} elseif ( '' == $v ) {
-				delete_post_meta( $post_id, $field_key, get_post_meta( $post_id, $field_key, true ) );
+			$key_value_pairs = $this->_field_obj->validate_fields( $key_value_pairs );
+
+			foreach ( $key_value_pairs as $k => $v ) {
+				// Escape the URLs.
+				if ( 'url' == $field_data[$k]['type'] ) {
+					$v = esc_url( $v );
+				}
+
+				$field_key = $k;
+				if ( true == (bool)apply_filters( 'wf_meta_use_underscore_prefix', false ) ) {
+					$field_key = '_' . $k;
+				}
+
+				if ( '' == get_post_meta( $post_id, $field_key, true ) ) {
+					// add_post_meta( $post_id, $field_key, $v, true );
+					// We need to use update_post_meta(), in case there are legacy keys in the database which are empty.
+					update_post_meta( $post_id, $field_key, $v );
+				} elseif ( ! empty( $v ) && $v != get_post_meta( $post_id, $field_key, true ) ) {
+					update_post_meta( $post_id, $field_key, $v );
+				} elseif ( '' == $v ) {
+					delete_post_meta( $post_id, $field_key, get_post_meta( $post_id, $field_key, true ) );
+				}
 			}
 		}
 	} // End meta_box_save()
@@ -333,4 +339,3 @@ class WF_Meta {
 		return $field_data;
 	} // End setup_fields()
 } // End Class
-?>

@@ -1,11 +1,33 @@
 *** Definition Changelog ***
 
+2015.09.21 - version 1.5.6
+ * Fix - Fixes the widget constructor for component widget, upgrades FlexSlider and fixes fade transition duration bug.
+   /includes/widgets/widget-woo-component.php,
+   /includes/theme-js.php,
+   /includes/js/jquery.flexslider-mins.js
+
+2015.09.03 - version 1.5.5
+ * Fix - Fixes the flickr and embed widgets
+   /includes/widgets/woo-widget-flickr.php
+   /includes/widgets/woo-widget-embed.php
+
+2015.09.02 - version 1.5.4
+ * Fix - Fixes Strict Standards notices in the comments section.
+   comments.php
+
+ * Fix - Ensures all widgets correctly reference parent::__construct and have a clean update() method.
+   /includes/widgets/
+
+2015.06.04 - version 1.5.3
+ * includes/js/jquery.prettyPhoto.js - Updated prettyPhoto to version 3.1.6.
+
+2015.05.25 - version 1.5.2
+ * New - Declares Sensei support
+   /includes/theme-functions.php
+
 2014.09.12 - version 1.5.1
  * Fix - Fixes the last column margin for the homepage sections.
    /css/layout.css
-
- * New - Declares Sensei support
-   /includes/theme-functions.php
 
 2014.05.29 - version 1.5.0
  * Update - Adds Homepage Control integration

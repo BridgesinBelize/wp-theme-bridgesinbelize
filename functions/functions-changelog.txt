@@ -1,5 +1,56 @@
 *** WooThemes Framework Changelog ***
 
+2015.05.07 - version 6.2.0
+ * Fix - Ensurs woo_get_video_image() supports HTTPS.
+ * Fix - Ensurs the "Custom CSS" setting correctly interprets \ and > in CSS.
+ * Fix - Ensure the "Custom CSS" setting correctly prepares the CSS before output.
+ * Fix - Ensure select fields using chosen.js display correctly when is_rtl().
+ * Fix - Ensure the stored value of a date field in a timestamp setting is a valid timestamp prior to rendering the field.
+ * Fix - Ensure all upload fields correctly cater for HTTPS if is_ssl().
+ * Fix - Ensure the "Adsense" setting correctly supports scripts.
+ * Fix - Ensure the current user can install_themes prior to showing the "Update Framework" button and menu item.
+ * Fix - Ensure the "quote" shortcode generator correctly displays a settings screen.
+ * Tweak - Adjust the "Backup Settings" button text to read "Backup / Import Settings".
+ * Tweak - Style the "Framework" screen to add spacing above the theme name and below the navigation tabs.
+ * Tweak - Make the "quote" shortcode styling responsive on smaller screen devices.
+ * Tweak - Remove the deprecated woo_short_url() function.
+ * New - Add an add_field() method to the WF_Fields class.
+
+2015.04.21 - version 6.1.4
+ * Fix - Potential XSS vulnerability.
+   admin-functions.php
+   classes/class-wf-settings.php
+
+2015.04.21 - version 6.1.3
+ * Fix - Potential XSS vulnerability.
+   admin-functions.php
+   classes/class-wf-fields-settings.php
+   classes/class-wf-settings.php
+
+2015.02.06 - version 6.1.2
+ * Fix - Typography settings saving fixed.
+   classes/class-wf-settings.php
+
+2015.02.04 - version 6.1.1
+ * Fix - Notice on menu screen when adding pages
+   classes/class-wf-meta.php
+
+ * Fix - Shortcode generator button
+   js/shortcode-generator/editor_plugin_39.js
+
+2014.12.01 - version 6.1.0
+ * Update - Removes timthumb from the framework and converts old custom fields into Featured Images.
+   /admin-functions.php,
+   /deprecated.php,
+   /thumb.php,
+   /classes/class-wf-fields.php
+ * Fix - Open Sans font weights
+   /admin-functions.php
+ * Fix - Allow the script tag source attribute within the advertisement settings field.
+   /classes/class-wf-fields-settings.php
+ * Fix - Ensures there are no unnecessary slashes being added, when saving settings.
+   /classes/class-wf-settings.php
+
 2014.09.04 - version 6.0.4
  * Fix - Adds support for the woo_ad_top_adsense field to support <script> tags.
    /classes/class-wf-fields-settings.php

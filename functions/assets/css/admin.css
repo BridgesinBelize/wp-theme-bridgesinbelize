@@ -53,6 +53,13 @@
 }
 /* Styling for the 'useful links' section on desktop and larger screens. */
 @media screen and (min-width: 600px) {
+  .wf-wrap .nav-tab-wrapper {
+    margin-bottom: 1em;
+  }
+  .wf-wrap .theme-name {
+      display: block;
+      padding-top: 0.618em;
+    }
   .wf-wrap #settings-sections.subsubsub {
     position: relative;
     margin-right: 140px;
@@ -67,6 +74,17 @@
     display: block;
     padding: 0;
   }
+
+  body.rtl .wf-wrap #settings-sections.subsubsub {
+    margin-right: 0;
+    margin-left: 140px;
+  }
+
+  body.rtl .wf-wrap .useful-links {
+    margin-left: 0;
+    left: 20px;
+  }
+
 }
 span.logo img {
   height: auto;
